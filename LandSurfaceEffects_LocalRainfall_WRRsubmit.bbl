@@ -1,0 +1,516 @@
+\begin{thebibliography}{89}
+\providecommand{\natexlab}[1]{#1}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem[{\textit{ABARES}(2010)}]{ABARES2010}
+ABARES (2010), {L}and use of {A}ustralia, {V}ersion 4, 2005/2006.
+
+\bibitem[{\textit{{ABC News}}(2003)}]{ABC2003}
+{ABC News} (2003), Kosciuszko slow to recover from bushfires, 30 {O}ct, 2003.
+  {A}vailable online at
+  url{http://www.abc.net.au/news/2003-10-30/kosciuszko-slow-to-recover-from-bushfires/1501722},
+  viewed on 06/06/2012.
+
+\bibitem[{\textit{{Australian Bureau of Statistics}}(2012)}]{ABS2012}
+{Australian Bureau of Statistics} (2012), Geography and climate - {A}ustralia's
+  climate.
+
+\bibitem[{\textit{Ben-Gai et~al.}(1998)\textit{Ben-Gai, Bitan, Manes, Alpert,
+  and Rubin}}]{Ben-Gai1998}
+Ben-Gai, T., A.~Bitan, A.~Manes, P.~Alpert, and S.~Rubin (1998), {S}patial and
+  temporal changes in rainfall frequency distribution patterns in {I}srael,
+  \textit{Theoretical and Applied Climatology}, \textit{61}(3-4), 177--190.
+
+\bibitem[{\textit{{BoM}}(2009)}]{BoM2009}
+{BoM} (2009), {G}ridded {M}onthly {R}ainfall {M}etadata, Australian Bureau of
+  Meteorology.
+
+\bibitem[{\textit{{BoM}}(2012{\natexlab{a}})}]{BoM2012c}
+{BoM} (2012{\natexlab{a}}), Background information, {N}ational rainfall
+  outlook, {A}vailable online at
+  \url{http://www.bom.gov.au/climate/ahead/rain_ahead.shtml}, viewed on
+  03/01/2012.
+
+\bibitem[{\textit{{BoM}}(2012{\natexlab{b}})}]{BoM2012}
+{BoM} (2012{\natexlab{b}}), Australian climate influence, {A}vailable online at
+  \url{http://www.bom.gov.au/watl/about-weather-and-climate/australian-climate-influences.shtml},
+  viewed on 17/01/2012.
+
+\bibitem[{\textit{{BoM}}(2012{\natexlab{c}})}]{BoM2012a}
+{BoM} (2012{\natexlab{c}}), Australia - climate of our continent, {A}vailable
+  online at
+  \url{http://www.bom.gov.au/lam/climate/levelthree/ausclim/zones.htm}, viewed
+  on 12/03/2012.
+
+\bibitem[{\textit{{BoM}}(2008)}]{Mla2008}
+{BoM}, m. (2008), Weather drivers in {W}estern {A}ustralia, {A}vailable online
+  at \url{http://www.mla.com.au/files/1c39e89d-f3fa-4915-b72b-9d66008ab4bf/},
+  viewed on 03/02/2012.
+
+\bibitem[{\textit{Bosilovich and Chern}(2006)}]{Bosilovich2006}
+Bosilovich, M.~G., and J.-D. Chern (2006), {S}imulation of water sources and
+  precipitation recycling for the {M}ac{K}enzie, {M}ississippi, and {A}mazon
+  {R}iver {B}asins, \textit{Journal of Hydrometeorology}, \textit{7}(3),
+  312--329.
+
+\bibitem[{\textit{Burton et~al.}(2010)\textit{Burton, Fowler, Blenkinsop, and
+  Kilsby}}]{Burton2010}
+Burton, A., H.~Fowler, S.~Blenkinsop, and C.~Kilsby (2010), Downscaling
+  transient climate change using a neyman–scott rectangular pulses stochastic
+  rainfall model, \textit{Journal of Hydrology}, \textit{381}(1), 18--32.
+
+\bibitem[{\textit{Cai et~al.}(2014)\textit{Cai, Purich, Cowan, van Rensch, and
+  Weller}}]{cai_did_2014}
+Cai, W., A.~Purich, T.~Cowan, P.~van Rensch, and E.~Weller (2014), Did
+  {Climate} {Change}–{Induced} {Rainfall} {Trends} {Contribute} to the
+  {Australian} {Millennium} {Drought}?, \textit{Journal of Climate},
+  \textit{27}(9), 3145--3168, \doi{10.1175/JCLI-D-13-00322.1}.
+
+\bibitem[{\textit{Chagnon and Bras}(2005)}]{Chagnon2005}
+Chagnon, F. J.~F., and R.~L. Bras (2005), {C}ontemporary climate change in the
+  {A}mazon, \textit{Geophysical Research Letters}, \textit{32}(13).
+
+\bibitem[{\textit{Chowdhury and Beecham}(2010)}]{Chowdhury2010}
+Chowdhury, R.~K., and S.~Beecham (2010), {A}ustralian rainfall trends and their
+  relation to the {S}outhern {O}scillation {I}ndex, \textit{Hydrological
+  Processes}, \textit{24}(4), 504--514.
+
+\bibitem[{\textit{Cowpertwait et~al.}(2009)\textit{Cowpertwait, Salinger, and
+  Mullen}}]{Cowpertwait2009}
+Cowpertwait, P., J.~Salinger, and B.~Mullen (2009), A spatial-temporal
+  stochastic rainfall model for {A}uckland {C}ity: {S}cenarios for current and
+  future climates, \textit{Journal of Hydrology (NZ)}, \textit{48}, 95--109.
+
+\bibitem[{\textit{DeAngelis et~al.}(2010)\textit{DeAngelis, Dominguez, Fan,
+  Robock, Kustu, and Robinson}}]{DeAngelis2010}
+DeAngelis, A., F.~Dominguez, Y.~Fan, A.~Robock, M.~D. Kustu, and D.~Robinson
+  (2010), {E}vidence of enhanced precipitation due to irrigation over the
+  {G}reat {P}lains of the {U}nited {S}tates, \textit{Journal of Geophysical
+  Research-Atmospheres}, \textit{115}(D15).
+
+\bibitem[{\textit{Delworth and Zeng}(2014)}]{Delworth_regional_2014}
+Delworth, T.~L., and F.~Zeng (2014), Regional rainfall decline in {Australia}
+  attributed to anthropogenic greenhouse gases and ozone levels, \textit{Nature
+  Geoscience}, \textit{7}(8), 583--587, \doi{10.1038/ngeo2201}.
+
+\bibitem[{\textit{Deo et~al.}(2009)\textit{Deo, Syktus, McAlpine, and
+  Wong}}]{Deo2009}
+Deo, R., J.~Syktus, C.~McAlpine, and K.~Wong (2009), The simulated impact of
+  land cover change on climate extremes in eastern australia, in
+  \textit{Proceedings of the 18th World IMACS Congress and MODSIM09
+  International Congress on Modelling and Simulation}, pp. 2035--2041,
+  Modelling and Simulation Society of Australia and New Zealand Inc. and
+  International Association for Mathematics and Computers in Simulation.
+
+\bibitem[{\textit{{Department of Natural Resources and
+  Mines}}(2005)}]{SLATS2001}
+{Department of Natural Resources and Mines} (2005), {L}and cover change in
+  {Q}ueensland 2001-2003, incorporating 2001-2002 adn 2002-2003 change periods:
+  {A} statewide landcover and trees study ({SLATS}) report, \textit{Tech.
+  rep.}, Department of Natural Resources and Mines, Brisbane, {F}eb, 2005.
+
+\bibitem[{\textit{{Department of Natural Resources and
+  Mines}}(2006)}]{SLATS2003}
+{Department of Natural Resources and Mines} (2006), {L}and cover change in
+  {Q}ueensland 2003-2004: {A} statewide landcover and trees study ({SLATS})
+  report, \textit{Tech. rep.}, Department of Natural Resources and Mines,
+  Brisbane, {F}eb, 2006.
+
+\bibitem[{\textit{{Department of Natural Resources and
+  Water}}(2007)}]{SLATS2004}
+{Department of Natural Resources and Water} (2007), {L}and cover change in
+  {Q}ueensland 2004-2005: {A} statewide landcover and trees study ({SLATS})
+  report, \textit{Tech. rep.}, Department of Natural Resources and Water,
+  Brisbane, {F}eb, 2007.
+
+\bibitem[{\textit{{Department of Natural Resources and
+  Water}}(2008)}]{SLATS2005}
+{Department of Natural Resources and Water} (2008), {L}and cover change in
+  {Q}ueensland 2005-06: {A} statewide landcover and trees study ({SLATS})
+  report, \textit{Tech. rep.}, Department of Natural Resources and Water,
+  Brisbane, {F}eb, 2008.
+
+\bibitem[{\textit{Dirmeyer et~al.}(2009)\textit{Dirmeyer, Brubaker, and
+  DelSole}}]{Dirmeyer2009}
+Dirmeyer, P.~A., K.~L. Brubaker, and T.~DelSole (2009), {I}mport and export of
+  atmospheric water vapor between nations, \textit{Journal of Hydrology},
+  \textit{365}(1-2), 11--22.
+
+\bibitem[{\textit{Durieux et~al.}(2003)\textit{Durieux, Machado, and
+  Laurent}}]{Durieux2003}
+Durieux, L., L.~A.~T. Machado, and H.~Laurent (2003), {T}he impact of
+  deforestation on cloud cover over the {A}mazon arc of deforestation,
+  \textit{Remote Sensing of Environment}, \textit{86}(1), 132--140.
+
+\bibitem[{\textit{Eltahir and Bras}(1996)}]{Eltahir1996}
+Eltahir, E. A.~B., and R.~L. Bras (1996), {P}recipitation recycling,
+  \textit{Reviews of Geophysics}, \textit{34}(3), 367--378.
+
+\bibitem[{\textit{Fowler et~al.}(2005)\textit{Fowler, Kilsby, O'connell, and
+  Burton}}]{Fowler2005}
+Fowler, H., C.~Kilsby, P.~O'connell, and A.~Burton (2005), A weather-type
+  conditioned multi-site stochastic rainfall model for the generation of
+  scenarios of climatic variability and change, \textit{Journal of Hydrology},
+  \textit{308}(1), 50--66.
+
+\bibitem[{\textit{Gaertner et~al.}(2001)\textit{Gaertner, Christensen, Prego,
+  Polcher, Gallardo, and Castro}}]{Gaertner2001}
+Gaertner, M.~A., O.~B. Christensen, J.~A. Prego, J.~Polcher, C.~Gallardo, and
+  M.~Castro (2001), {T}he impact of deforestation on the hydrological cycle in
+  the western {M}editerranean: {A}n ensemble study with two regional climate
+  models, \textit{Climate Dynamics}, \textit{17}(11), 857--873.
+
+\bibitem[{\textit{Gallant et~al.}(2007)\textit{Gallant, Hennessy, and
+  Risbey}}]{Gallant2007}
+Gallant, A. J.~E., K.~J. Hennessy, and J.~Risbey (2007), {T}rends in rainfall
+  indices for six {A}ustralian regions: 1910 - 2005, \textit{Australian
+  Meteorological Magazine}, \textit{56}, 223 -- 239.
+
+\bibitem[{\textit{Gimeno et~al.}(2010)\textit{Gimeno, Drumond, Nieto, Trigo,
+  and Stohl}}]{Gimeno2010}
+Gimeno, L., A.~Drumond, R.~Nieto, R.~M. Trigo, and A.~Stohl (2010), {O}n the
+  origin of continental precipitation, \textit{Geophysical Research Letters},
+  \textit{37}(13).
+
+\bibitem[{\textit{Görgen et~al.}(2006)\textit{Görgen, Lynch, Marshall, and
+  Beringer}}]{Gorgen2006}
+Görgen, K., A.~H. Lynch, A.~G. Marshall, and J.~Beringer (2006), Impact of
+  abrupt land cover changes by savanna fire on northern {A}ustralian climate,
+  \textit{Journal of Geophysical Research-Atmospheres}, \textit{111}(D19),
+  D19,106.
+
+\bibitem[{\textit{Hastie and Tibshirani}(1986)}]{Hastie1986}
+Hastie, T., and R.~Tibshirani (1986), Generalized additive models,
+  \textit{Statistical science}, pp. 297--310.
+
+\bibitem[{\textit{Hipel and McLeod}(1994)}]{Hipel1994}
+Hipel, K., and A.~McLeod (1994), \textit{{T}ime series modelling of water
+  resources and environmental systems}, vol.~45, Elsevier Science Ltd.
+
+\bibitem[{\textit{Hirsch and Gilroy}(1985)}]{Hirsch1985}
+Hirsch, R.~M., and E.~J. Gilroy (1985), {D}etectability of step trends in the
+  rate of atmospheric deposition of sulfate, \textit{JAWRA Journal of the
+  American Water Resources Association}, \textit{21}(5), 773--784.
+
+\bibitem[{\textit{Holper}(2011)}]{Holper2011}
+Holper, P.~N. (2011), Climate change, science information paper: Australian
+  rainfall-past, present and future, Canberra: CSIRO.
+
+\bibitem[{\textit{Howden}(2012)}]{Howden2012}
+Howden, S. (2012), It's official: Australia no longer in drought,
+  \textit{Brisbane Times}, 27 April, 2012. {A}vailable online at
+  \url{http://www.brisbanetimes.com.au/environment/weather/its-official-australia-no-longer-in-drought-20120427-1xpsp.html},
+  viewed on 23/08/2013.
+
+\bibitem[{\textit{Hughes}(2003)}]{Hughes2003}
+Hughes, L. (2003), {C}limate change and {A}ustralia: {T}rends, projections and
+  impacts, \textit{Austral Ecology}, \textit{28}(4), 423--443.
+
+\bibitem[{\textit{Jones et~al.}(2009)\textit{Jones, Wang, and
+  Fawcett}}]{Jones2009}
+Jones, D., W.~Wang, and R.~Fawcett (2009), High-quality spatial climate
+  data-sets for australia, \textit{Australian Meteorological and Oceanographic
+  Journal}, \textit{58}(4), 233–248.
+
+\bibitem[{\textit{Junkermann et~al.}(2009)\textit{Junkermann, Hacker, Lyons,
+  and Nair}}]{Junkermann2009}
+Junkermann, W., J.~Hacker, T.~Lyons, and U.~Nair (2009), {L}and use change
+  suppresses precipitation, \textit{Atmospheric Chemistry and Physics},
+  \textit{9}(17), 6531--6539.
+
+\bibitem[{\textit{Kamruzzaman et~al.}(2011)\textit{Kamruzzaman, Beecham, and
+  Metcalfe}}]{Kamruzzaman2011}
+Kamruzzaman, M., S.~Beecham, and A.~V. Metcalfe (2011), {N}on-stationarity in
+  rainfall and temperature in the {M}urray {D}arling {B}asin,
+  \textit{Hydrological Processes}, \textit{25}(10), 1659--1675.
+
+\bibitem[{\textit{Karoly}(2014)}]{karoly_climate_2014}
+Karoly, D.~J. (2014), Climate change: {Human}-induced rainfall changes,
+  \textit{Nature Geoscience; London}, \textit{7}(8), 551--552,
+  \doi{http://dx.doi.org/10.1038/ngeo2207}.
+
+\bibitem[{\textit{Kucharski et~al.}(2013)\textit{Kucharski, Zeng, and
+  Kalnay}}]{kucharski_further_2013}
+Kucharski, F., N.~Zeng, and E.~Kalnay (2013), A further assessment of
+  vegetation feedback on decadal {Sahel} rainfall variability, \textit{Climate
+  dynamics}, \textit{40}(5-6), 1453--1466.
+
+\bibitem[{\textit{Kundzewicz and Robson}(2004)}]{Kundzewicz2004}
+Kundzewicz, Z., and A.~Robson (2004), Change detection in hydrological
+  records—a review of the methodology/revue méthodologique de la détection
+  de changements dans les chroniques hydrologiques, \textit{Hydrological
+  sciences journal}, \textit{49}(1).
+
+\bibitem[{\textit{Lymburner et~al.}(2010)\textit{Lymburner, Tan, Mueller,
+  Thackway, Lewis, Thankappan, Randall, Islam, and Senarath}}]{Lymburner2010}
+Lymburner, L., P.~Tan, N.~Mueller, R.~Thackway, A.~Lewis, M.~Thankappan,
+  L.~Randall, A.~Islam, and U.~Senarath (2010), 250 metre {D}ynamic {L}and
+  {C}over {D}ataset, Geoscience Australia, Canberra, digital data access on
+  28/12/2011 from \url{www.ga.gov.au/earth-observation/landcover}.
+
+\bibitem[{\textit{Ma et~al.}(2011)\textit{Ma, Mechoso, Xue, Xiao, Wu, Li, and
+  De~Sales}}]{Ma2011}
+Ma, H.~Y., C.~R. Mechoso, Y.~Xue, H.~Xiao, C.~M. Wu, J.~L. Li, and F.~De~Sales
+  (2011), {I}mpact of land surface processes on the {S}outh {A}merican warm
+  season climate, \textit{Climate Dynamics}, \textit{37}(1-2), 187--203.
+
+\bibitem[{\textit{MacDonald and Case}(2005)}]{MacDonald2005}
+MacDonald, G.~M., and R.~A. Case (2005), Variations in the pacific decadal
+  oscillation over the past millennium, \textit{Geophysical Research Letters},
+  \textit{32}(8), L08,703.
+
+\bibitem[{\textit{Maynard and Polcher}(2003)}]{Maynard2003}
+Maynard, K., and J.~Polcher (2003), {I}mpact of land-surface processes on the
+  interannual variability of tropical climate in the {LMD} {GCM},
+  \textit{Climate Dynamics}, \textit{20}(6), 613--633.
+
+\bibitem[{\textit{McAlpine et~al.}(2007)\textit{McAlpine, Syktus, Deo,
+  Lawrence, McGowan, Watterson, and Phinn}}]{McAlpine2007}
+McAlpine, C.~A., J.~Syktus, R.~C. Deo, P.~J. Lawrence, H.~A. McGowan, I.~G.
+  Watterson, and S.~R. Phinn (2007), {M}odeling the impact of historical land
+  cover change on {A}ustralia's regional climate, \textit{Geophysical Research
+  Letters}, \textit{34}(22).
+
+\bibitem[{\textit{Mei and Wang}(2010)}]{Mei2010}
+Mei, R., and G.~L. Wang (2010), {R}ain follows logging in the {A}mazon?
+  {R}esults from {CAM}3-{CLM}3, \textit{Climate Dynamics}, \textit{34}(7-8),
+  983--996.
+
+\bibitem[{\textit{Meneghini et~al.}(2007)\textit{Meneghini, Simmonds, and
+  Smith}}]{Meneghini2007}
+Meneghini, B., I.~Simmonds, and I.~N. Smith (2007), {A}ssociation between
+  {A}ustralian rainfall and the {S}outhern {A}nnular {M}ode,
+  \textit{International Journal of Climatology}, \textit{27}(1), 109--121.
+
+\bibitem[{\textit{Murphy and Timbal}(2008)}]{Murphy2008}
+Murphy, B.~F., and B.~Timbal (2008), {A} review of recent climate variability
+  and climate change in southeastern {A}ustralia, \textit{International Journal
+  of Climatology}, \textit{28}(7), 859--879.
+
+\bibitem[{\textit{Nair et~al.}(2011)\textit{Nair, Wu, Kala, Lyons, Pielke, and
+  Hacker}}]{Nair2011}
+Nair, U.~S., Y.~Wu, J.~Kala, T.~J. Lyons, S.~Pielke, R.~A., and J.~M. Hacker
+  (2011), {T}he role of land use change on the development and evolution of the
+  west coast trough, convective clouds, and precipitation in southwest
+  {A}ustralia, \textit{Journal of Geophysical Research-Atmospheres},
+  \textit{116}(D7), D07,103.
+
+\bibitem[{\textit{Narisma et~al.}(2007)\textit{Narisma, Foley, Licker, and
+  Ramankutty}}]{Narisma2007}
+Narisma, G., J.~Foley, R.~Licker, and N.~Ramankutty (2007), Abrupt changes in
+  rainfall during the twentieth century, \textit{Geophysical Research Letters},
+  \textit{34}(6), L06,710.
+
+\bibitem[{\textit{Narisma and Pitman}(2003)}]{Narisma2003}
+Narisma, G.~T., and A.~J. Pitman (2003), {T}he impact of 200 years of land
+  cover change on the {A}ustralian near-surface climate, \textit{Journal of
+  Hydrometeorology}, \textit{4}(2), 424--436.
+
+\bibitem[{\textit{Negri et~al.}(2004)\textit{Negri, Adler, Xu, and
+  Surratt}}]{Negri2004}
+Negri, A.~J., R.~F. Adler, L.~M. Xu, and J.~Surratt (2004), {T}he impact of
+  {A}mazonian deforestation on dry season rainfall, \textit{Journal of
+  Climate}, \textit{17}(6), 1306--1319.
+
+\bibitem[{\textit{Nicholls}(2004)}]{Nicholls2004}
+Nicholls, N. (2004), The changing nature of australian droughts,
+  \textit{Climatic Change}, \textit{63}(3), 323--336.
+
+\bibitem[{\textit{Nicholls}(2006)}]{Nicholls2006}
+Nicholls, N. (2006), {D}etecting and attributing {A}ustralian climate change:
+  {A} review, \textit{Australian Meteorological Magazine}, \textit{55}(3),
+  199--211.
+
+\bibitem[{\textit{Oleson et~al.}(2004)\textit{Oleson, Bonan, Levis, and
+  Vertenstein}}]{Oleson2004}
+Oleson, K.~W., G.~B. Bonan, S.~Levis, and M.~Vertenstein (2004), {E}ffects of
+  land use change on {N}orth {A}merican climate: impact of surface datasets and
+  model biogeophysics, \textit{Climate Dynamics}, \textit{23}(2), 117--132.
+
+\bibitem[{\textit{Onoz and Bayazit}(2003)}]{Onoz2003}
+Onoz, B., and M.~Bayazit (2003), The power of statistical tests for trend
+  detection, \textit{Turkish Journal of Engineering and Environmental
+  Sciences}, \textit{27}(4), 247--251.
+
+\bibitem[{\textit{Otterman et~al.}(1990)\textit{Otterman, Manes, Rubin, Alpert,
+  and Starr}}]{Otterman1990}
+Otterman, J., A.~Manes, S.~Rubin, P.~Alpert, and D.~Starr (1990), {A}n increase
+  of early rains in {S}outhern {I}srael following land-use change?,
+  \textit{Boundary-Layer Meteorology}, \textit{53}(4), 333--351.
+
+\bibitem[{\textit{Pinto et~al.}(2009)\textit{Pinto, Shin, Cowling, and
+  Jones}}]{Pinto2009}
+Pinto, E., Y.~Shin, S.~A. Cowling, and C.~D. Jones (2009), {P}ast, present and
+  future vegetation-cloud feedbacks in the {A}mazon {B}asin, \textit{Climate
+  Dynamics}, \textit{32}(6), 741--751.
+
+\bibitem[{\textit{Pitman and Hesse}(2007)}]{Pitman2007}
+Pitman, A.~J., and P.~P. Hesse (2007), The significance of large-scale land
+  cover change on the {A}ustralian palaeomonsoon, \textit{Quaternary Science
+  Reviews}, \textit{26}(1-2), 189--200.
+
+\bibitem[{\textit{Pitman and Lorenz}(2016)}]{pitman_scale_2016}
+Pitman, A.~J., and R.~Lorenz (2016), Scale dependence of the simulated impact
+  of {Amazonian} deforestation on regional climate, \textit{Environmental
+  Research Letters}, \textit{11}(9), 094,025,
+  \doi{10.1088/1748-9326/11/9/094025}.
+
+\bibitem[{\textit{Pitman et~al.}(2004)\textit{Pitman, Narisma, Pielke, and
+  Holbrook}}]{Pitman2004}
+Pitman, A.~J., G.~T. Narisma, R.~A. Pielke, and N.~J. Holbrook (2004), {I}mpact
+  of land cover change on the climate of southwest {W}estern {A}ustralia,
+  \textit{Journal of Geophysical Research-Atmospheres}, \textit{109}(D18).
+
+\bibitem[{\textit{{R Development Core Team,}}(2011)}]{Rstats2011}
+{R Development Core Team,} (2011), \textit{{R}: {A} {L}anguage and
+  {E}nvironment for {S}tatistical {C}omputing}, R Foundation for Statistical
+  Computing, Vienna, Austria, {ISBN} 3-900051-07-0.
+
+\bibitem[{\textit{Risbey et~al.}(2009)\textit{Risbey, Pook, McIntosh, Wheeler,
+  and Hendon}}]{Risbey2009}
+Risbey, J.~S., M.~J. Pook, P.~C. McIntosh, M.~C. Wheeler, and H.~H. Hendon
+  (2009), {O}n the remote drivers of rainfall variability in {A}ustralia,
+  \textit{Monthly Weather Review}, \textit{137}(10), 3233--3253.
+
+\bibitem[{\textit{Roy et~al.}(2002)\textit{Roy, Lewis, and Justice}}]{Roy2002}
+Roy, D., P.~Lewis, and C.~Justice (2002), Burned area mapping using
+  multi-temporal moderate spatial resolution data—a bi-directional
+  reflectance model-based expectation approach, \textit{Remote Sensing of
+  Environment}, \textit{83}(1), 263--286.
+
+\bibitem[{\textit{Roy et~al.}(2005)\textit{Roy, Jin, Lewis, and
+  Justice}}]{Roy2005}
+Roy, D., Y.~Jin, P.~Lewis, and C.~Justice (2005), Prototyping a global
+  algorithm for systematic fire-affected area mapping using modis time series
+  data, \textit{Remote sensing of environment}, \textit{97}(2), 137--162.
+
+\bibitem[{\textit{Roy et~al.}(2008)\textit{Roy, Boschetti, Justice, and
+  Ju}}]{Roy2008}
+Roy, D.~P., L.~Boschetti, C.~O. Justice, and J.~Ju (2008), The collection 5
+  modis burned area product—global evaluation by comparison with the modis
+  active fire product, \textit{Remote Sensing of Environment}, \textit{112}(9),
+  3690--3707.
+
+\bibitem[{\textit{Saha et~al.}(2016)\textit{Saha, Dirmeyer, and
+  Chase}}]{saha_investigating_2016}
+Saha, S.~K., P.~A. Dirmeyer, and T.~N. Chase (2016), Investigating the impact
+  of land-use land-cover change on {Indian} summer monsoon daily rainfall and
+  temperature during 1951-2005 using a regional climate model,
+  \textit{Hydrology and Earth System Sciences}, \textit{20}(5), 1765.
+
+\bibitem[{\textit{Saji et~al.}(1999)\textit{Saji, Goswami, Vinayachandran, and
+  Yamagata}}]{Saji1999}
+Saji, N., B.~Goswami, P.~Vinayachandran, and T.~Yamagata (1999), {A} dipole
+  mode in the tropical {I}ndian {O}cean, \textit{Nature}, \textit{401}(6751),
+  360--363.
+
+\bibitem[{\textit{Sato et~al.}(2007)\textit{Sato, Kimura, and
+  Hasegawa}}]{Sato2007}
+Sato, T., F.~Kimura, and A.~S. Hasegawa (2007), {V}egetation and topographic
+  control of cloud activity over arid/semiarid {A}sia, \textit{Journal of
+  Geophysical Research-Atmospheres}, \textit{112}(D24).
+
+\bibitem[{\textit{Schepen et~al.}(2012)\textit{Schepen, Wang, and
+  Robertson}}]{Schepen2012}
+Schepen, A., Q.~J. Wang, and D.~Robertson (2012), Evidence for using lagged
+  climate indices to forecast australian seasonal rainfall, \textit{Journal of
+  Climate}, \textit{25}(4), 1230--1246.
+
+\bibitem[{\textit{Semazzi and Song}(2001)}]{Semazzi2001}
+Semazzi, F. H.~M., and Y.~Song (2001), {A} {GCM} study of climate change
+  induced by deforestation in {A}frica, \textit{Climate Research},
+  \textit{17}(2), 169--182.
+
+\bibitem[{\textit{Smith and Timbal}(2012)}]{Smith2012}
+Smith, I.~N., and B.~Timbal (2012), {L}inks between tropical indices and
+  southern {A}ustralian rainfall, \textit{International Journal of
+  Climatology}, \textit{32}(1), 33--40.
+
+\bibitem[{\textit{Speer et~al.}(2011)\textit{Speer, Leslie, and
+  Fierro}}]{Speer2011}
+Speer, M., L.~Leslie, and A.~Fierro (2011), {A}ustralian east coast rainfall
+  decline related to large scale climate drivers, \textit{Climate Dynamics},
+  \textit{36}(7), 1419--1429.
+
+\bibitem[{\textit{{The State Government of Victoria}}(2011)}]{Fire2011}
+{The State Government of Victoria} (2011), Bushfire history, {A}vailable online
+  at \url{http://www.dse.vic.gov.au/fire-and-other-emergencies/
+  major-bushfires-in-victoria}, viewed on 12/12/2011.
+
+\bibitem[{\textit{Timbal and Arblaster}(2006)}]{Timbal2006}
+Timbal, B., and J.~Arblaster (2006), {L}and cover change as an additional
+  forcing to explain the rainfall decline in the south west of {A}ustralia,
+  \textit{Geophysical Research Letters}, \textit{33}(7), L07,717.
+
+\bibitem[{\textit{Townshend et~al.}(2011)\textit{Townshend, Carroll, Dimiceli,
+  Sohlberg, Hansen, and DeFries}}]{Townshend2011}
+Townshend, J., M.~Carroll, C.~Dimiceli, R.~Sohlberg, M.~Hansen, and R.~DeFries
+  (2011), {V}egetation continuous fields {MOD}44{B}, 2001 {P}ercent tree cover,
+  {C}ollection 5, University of Maryland, College Park, Maryland, 2001, digital
+  data accessed on 10/02/2012 from
+  \url{https://lpdaac.usgs.gov/products/modis_products_table/vegetation_continuous_fields/yearly_l3_global_500m/mod44b}.
+
+\bibitem[{\textit{Trenberth}(1999)}]{Trenberth1999}
+Trenberth, K.~E. (1999), {A}tmospheric moisture recycling: {R}ole of advection
+  and local evaporation, \textit{Journal of Climate}, \textit{12}(5),
+  1368--1381.
+
+\bibitem[{\textit{Verdon et~al.}(2004)\textit{Verdon, Wyatt, Kiem, and
+  Franks}}]{Verdon2004}
+Verdon, D.~C., A.~M. Wyatt, A.~S. Kiem, and S.~W. Franks (2004), {M}ultidecadal
+  variability of rainfall and streamflow: {E}astern {A}ustralia, \textit{Water
+  Resources Research}, \textit{40}(10), W10,201.
+
+\bibitem[{\textit{Wang et~al.}(2009)\textit{Wang, Chagnon, Williams, Betts,
+  Renno, Machado, Bisht, Knox, and Bras}}]{Wang2009}
+Wang, J., F.~Chagnon, E.~Williams, A.~Betts, N.~Renno, L.~Machado, G.~Bisht,
+  R.~Knox, and R.~Bras (2009), {I}mpact of deforestation in the {A}mazon basin
+  on cloud climatology, \textit{Proceedings of the National Academy of Sciences
+  of the United States of America}, \textit{106}(10), 3670.
+
+\bibitem[{\textit{Westra and Sharma}(2010)}]{Westra2010}
+Westra, S., and A.~Sharma (2010), {A}n upper limit to seasonal rainfall
+  predictability?, \textit{Journal of Climate}, \textit{23}(12), 3332--3351.
+
+\bibitem[{\textit{Westra et~al.}(2013)\textit{Westra, Alexander, and
+  Zwiers}}]{Westra2013}
+Westra, S., L.~V. Alexander, and F.~W. Zwiers (2013), Global increasing trends
+  in annual maximum daily precipitation, \textit{Journal of Climate},
+  \textit{26}(11), 3904--3918.
+
+\bibitem[{\textit{Whitley and Ball}(2002)}]{Whitley2002}
+Whitley, E., and J.~Ball (2002), Statistics review 6: Nonparametric methods,
+  \textit{Critical Care, London}, \textit{6}(6), 509--513.
+
+\bibitem[{\textit{Wilks}(1997)}]{Wilks1997}
+Wilks, D. (1997), Resampling hypothesis tests for autocorrelated fields,
+  \textit{Journal of Climate}, \textit{10}(1), 65--82.
+
+\bibitem[{\textit{Wilks}(2006)}]{Wilks2006}
+Wilks, D.~S. (2006), On "field significance" and the false discovery rate,
+  \textit{Journal of Applied Meteorology and Climatology}, \textit{45}(9),
+  1181--1189.
+
+\bibitem[{\textit{Wood}(2011)}]{Wood2011}
+Wood, S.~N. (2011), {F}ast stable restricted maximum likelihood and marginal
+  likelihood estimation of semiparametric generalized linear models,
+  \textit{Journal of the Royal Statistical Society (B)}, \textit{73}(1), 3--36.
+
+\bibitem[{\textit{Zanchettin et~al.}(2008)\textit{Zanchettin, Franks, Traverso,
+  and Tomasino}}]{Zanchettin2008}
+Zanchettin, D., S.~W. Franks, P.~Traverso, and M.~Tomasino (2008), On enso
+  impacts on european wintertime rainfalls and their modulation by the nao and
+  the pacific multi-decadal variability described through the pdo index,
+  \textit{International Journal of Climatology}, \textit{28}(8), 995--1006.
+
+\bibitem[{\textit{Zeng et~al.}(2012)\textit{Zeng, Wu, Song, Xiong, Zheng, Zhou,
+  and Liu}}]{Zeng2012}
+Zeng, X.~M., Z.~H. Wu, S.~Song, S.~Y. Xiong, Y.~Q. Zheng, Z.~G. Zhou, and H.~Q.
+  Liu (2012), {E}ffects of land surface schemes on the simulation of a heavy
+  rainfall event by {WRF}, \textit{Chinese Journal of Geophysics-Chinese
+  Edition}, \textit{55}(1), 16--28.
+
+\end{thebibliography}

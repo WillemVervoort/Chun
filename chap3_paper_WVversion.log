@@ -1,0 +1,2280 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6400 64-bit) (preloaded format=pdflatex 2017.9.14)  15 SEP 2017 06:53
+entering extended mode
+**./chap3_paper_WVversion.tex
+(chap3_paper_WVversion.tex
+LaTeX2e <2017-04-15>
+Babel <3.12> and hyphenation patterns for 75 language(s) loaded.
+(agujournal.cls
+Document Class: agujournal 08/06/2016
+(C:\Users\rver4657\AppData\Roaming\MiKTeX\2.9\tex\latex\newtx\newtxtext.sty
+Package: newtxtext 2017/08/18 v1.526
+
+`newtxtext' v1.526, 2017/08/18 Text macros taking advantage of TeX-Gyre Termes 
+fonts (msharpe) ("C:\Program Files\MiKTeX 2.9\tex\latex\fontaxes\fontaxes.sty"
+Package: fontaxes 2014/03/23 v1.0d Font selection axes
+LaTeX Info: Redefining \upshape on input line 29.
+LaTeX Info: Redefining \itshape on input line 31.
+LaTeX Info: Redefining \slshape on input line 33.
+LaTeX Info: Redefining \scshape on input line 37.
+)
+\ntx@fs=\dimen102
+("C:\Program Files\MiKTeX 2.9\tex\latex\xkeyval\xkeyval.sty"
+Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\xkeyval\xkeyval.tex"
+("C:\Program Files\MiKTeX 2.9\tex\generic\xkeyval\xkvutils.tex"
+\XKV@toks=\toks14
+\XKV@tempa@toks=\toks15
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\xkeyval\keyval.tex"))
+\XKV@depth=\count79
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\etoolbox\etoolbox.sty"
+Package: etoolbox 2017/01/02 v2.4 e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count80
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\fontenc.sty"
+Package: fontenc 2017/04/05 v2.0i Standard LaTeX package
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1enc.def"
+File: t1enc.def 2017/04/05 v2.0i Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\textcomp.sty"
+Package: textcomp 2017/04/05 v2.0i Standard LaTeX package
+Package textcomp Info: Sub-encoding information:
+(textcomp)               5 = only ISO-Adobe without \textcurrency
+(textcomp)               4 = 5 + \texteuro
+(textcomp)               3 = 4 + \textohm
+(textcomp)               2 = 3 + \textestimated + \textcurrency
+(textcomp)               1 = TS1 - \textcircled - \t
+(textcomp)               0 = TS1 (full)
+(textcomp)             Font families with sub-encoding setting implement
+(textcomp)             only a restricted character set as indicated.
+(textcomp)             Family '?' is the default used for unknown fonts.
+(textcomp)             See the documentation for details.
+Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 79.
+Package textcomp Info: Changing ? sub-encoding to TS1/0 on input line 80.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1enc.def"
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+)
+LaTeX Info: Redefining \oldstylenums on input line 334.
+Package textcomp Info: Setting cmr sub-encoding to TS1/0 on input line 349.
+Package textcomp Info: Setting cmss sub-encoding to TS1/0 on input line 350.
+Package textcomp Info: Setting cmtt sub-encoding to TS1/0 on input line 351.
+Package textcomp Info: Setting cmvtt sub-encoding to TS1/0 on input line 352.
+Package textcomp Info: Setting cmbr sub-encoding to TS1/0 on input line 353.
+Package textcomp Info: Setting cmtl sub-encoding to TS1/0 on input line 354.
+Package textcomp Info: Setting ccr sub-encoding to TS1/0 on input line 355.
+Package textcomp Info: Setting ptm sub-encoding to TS1/4 on input line 356.
+Package textcomp Info: Setting pcr sub-encoding to TS1/4 on input line 357.
+Package textcomp Info: Setting phv sub-encoding to TS1/4 on input line 358.
+Package textcomp Info: Setting ppl sub-encoding to TS1/3 on input line 359.
+Package textcomp Info: Setting pag sub-encoding to TS1/4 on input line 360.
+Package textcomp Info: Setting pbk sub-encoding to TS1/4 on input line 361.
+Package textcomp Info: Setting pnc sub-encoding to TS1/4 on input line 362.
+Package textcomp Info: Setting pzc sub-encoding to TS1/4 on input line 363.
+Package textcomp Info: Setting bch sub-encoding to TS1/4 on input line 364.
+Package textcomp Info: Setting put sub-encoding to TS1/5 on input line 365.
+Package textcomp Info: Setting uag sub-encoding to TS1/5 on input line 366.
+Package textcomp Info: Setting ugq sub-encoding to TS1/5 on input line 367.
+Package textcomp Info: Setting ul8 sub-encoding to TS1/4 on input line 368.
+Package textcomp Info: Setting ul9 sub-encoding to TS1/4 on input line 369.
+Package textcomp Info: Setting augie sub-encoding to TS1/5 on input line 370.
+Package textcomp Info: Setting dayrom sub-encoding to TS1/3 on input line 371.
+Package textcomp Info: Setting dayroms sub-encoding to TS1/3 on input line 372.
+
+Package textcomp Info: Setting pxr sub-encoding to TS1/0 on input line 373.
+Package textcomp Info: Setting pxss sub-encoding to TS1/0 on input line 374.
+Package textcomp Info: Setting pxtt sub-encoding to TS1/0 on input line 375.
+Package textcomp Info: Setting txr sub-encoding to TS1/0 on input line 376.
+Package textcomp Info: Setting txss sub-encoding to TS1/0 on input line 377.
+Package textcomp Info: Setting txtt sub-encoding to TS1/0 on input line 378.
+Package textcomp Info: Setting lmr sub-encoding to TS1/0 on input line 379.
+Package textcomp Info: Setting lmdh sub-encoding to TS1/0 on input line 380.
+Package textcomp Info: Setting lmss sub-encoding to TS1/0 on input line 381.
+Package textcomp Info: Setting lmssq sub-encoding to TS1/0 on input line 382.
+Package textcomp Info: Setting lmvtt sub-encoding to TS1/0 on input line 383.
+Package textcomp Info: Setting lmtt sub-encoding to TS1/0 on input line 384.
+Package textcomp Info: Setting qhv sub-encoding to TS1/0 on input line 385.
+Package textcomp Info: Setting qag sub-encoding to TS1/0 on input line 386.
+Package textcomp Info: Setting qbk sub-encoding to TS1/0 on input line 387.
+Package textcomp Info: Setting qcr sub-encoding to TS1/0 on input line 388.
+Package textcomp Info: Setting qcs sub-encoding to TS1/0 on input line 389.
+Package textcomp Info: Setting qpl sub-encoding to TS1/0 on input line 390.
+Package textcomp Info: Setting qtm sub-encoding to TS1/0 on input line 391.
+Package textcomp Info: Setting qzc sub-encoding to TS1/0 on input line 392.
+Package textcomp Info: Setting qhvc sub-encoding to TS1/0 on input line 393.
+Package textcomp Info: Setting futs sub-encoding to TS1/4 on input line 394.
+Package textcomp Info: Setting futx sub-encoding to TS1/4 on input line 395.
+Package textcomp Info: Setting futj sub-encoding to TS1/4 on input line 396.
+Package textcomp Info: Setting hlh sub-encoding to TS1/3 on input line 397.
+Package textcomp Info: Setting hls sub-encoding to TS1/3 on input line 398.
+Package textcomp Info: Setting hlst sub-encoding to TS1/3 on input line 399.
+Package textcomp Info: Setting hlct sub-encoding to TS1/5 on input line 400.
+Package textcomp Info: Setting hlx sub-encoding to TS1/5 on input line 401.
+Package textcomp Info: Setting hlce sub-encoding to TS1/5 on input line 402.
+Package textcomp Info: Setting hlcn sub-encoding to TS1/5 on input line 403.
+Package textcomp Info: Setting hlcw sub-encoding to TS1/5 on input line 404.
+Package textcomp Info: Setting hlcf sub-encoding to TS1/5 on input line 405.
+Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 406.
+Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 407.
+Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 408.
+Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
+))
+(C:\Users\rver4657\AppData\Roaming\MiKTeX\2.9\tex\latex\newtx\newtxmath.sty
+Package: newtxmath 2017/05/31 v1.524
+
+`newtxmath' v1.524, 2017/05/31 Math macros based on txfonts (msharpe)
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
+Package: amsmath 2017/09/02 v2.17a AMS math features
+\@mathmargin=\skip41
+
+For additional information on amsmath, use the `?' option.
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
+Package: amstext 2000/06/29 v2.01 AMS text
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks16
+\ex@=\dimen103
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen104
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count81
+LaTeX Info: Redefining \frac on input line 213.
+\uproot@=\count82
+\leftroot@=\count83
+LaTeX Info: Redefining \overline on input line 375.
+\classnum@=\count84
+\DOTSCASE@=\count85
+LaTeX Info: Redefining \ldots on input line 472.
+LaTeX Info: Redefining \dots on input line 475.
+LaTeX Info: Redefining \cdots on input line 596.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen105
+LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
+\macc@depth=\count86
+\c@MaxMatrixCols=\count87
+\dotsspace@=\muskip10
+\c@parentequation=\count88
+\dspbrk@lvl=\count89
+\tag@help=\toks17
+\row@=\count90
+\column@=\count91
+\maxfields@=\count92
+\andhelp@=\toks18
+\eqnshift@=\dimen106
+\alignsep@=\dimen107
+\tagshift@=\dimen108
+\tagwidth@=\dimen109
+\totwidth@=\dimen110
+\lineht@=\dimen111
+\@envbody=\toks19
+\multlinegap=\skip42
+\multlinetaggap=\skip43
+\mathdisplay@stack=\toks20
+LaTeX Info: Redefining \[ on input line 2817.
+LaTeX Info: Redefining \] on input line 2818.
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty"
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
+Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\binhex\binhex.tex")
+\tx@Isdigit=\count93
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 153.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/ntxtlf/m/n on input line 153.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/ntxtlf/m/n on input line 153.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/ntxtlf/m/n --> OT1/ntxtlf/b/n on input line 154.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 160.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> T1/qhv/m/n on input line 160.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> T1/qhv/m/n on input line 160.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 161.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/ntxtlf/m/it on input line 161.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/ntxtlf/m/it on input line 161.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 162.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> T1/ntxtt/m/n on input line 162.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> T1/ntxtt/m/n on input line 162.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 164.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/ntxtlf/b/n on input line 164.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/ntxtlf/b/n on input line 164.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/ntxtlf/m/it --> OT1/ntxtlf/b/it on input line 165.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  T1/qhv/m/n --> T1/qhv/b/n on input line 166.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  T1/ntxtt/m/n --> T1/ntxtt/b/n on input line 167.
+LaTeX Font Info:    Redeclaring symbol font `letters' on input line 218.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/ntxmi/m/it on input line 218.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/ntxmi/m/it on input line 218.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/ntxmi/m/it --> OML/ntxmi/b/it on input line 219.
+\symlettersA=\mathgroup4
+LaTeX Font Info:    Overwriting symbol font `lettersA' in version `bold'
+(Font)                  U/ntxmia/m/it --> U/ntxmia/b/it on input line 235.
+LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 256.
+LaTeX Font Info:    Encoding `OMS' has changed to `LMS' for symbol font
+(Font)              `symbols' in the math version `normal' on input line 256.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> LMS/ntxsy/m/n on input line 256.
+LaTeX Font Info:    Encoding `OMS' has changed to `LMS' for symbol font
+(Font)              `symbols' in the math version `bold' on input line 256.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> LMS/ntxsy/m/n on input line 256.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  LMS/ntxsy/m/n --> LMS/ntxsy/b/n on input line 257.
+\symAMSm=\mathgroup5
+LaTeX Font Info:    Overwriting symbol font `AMSm' in version `bold'
+(Font)                  U/ntxsym/m/n --> U/ntxsym/b/n on input line 280.
+\symsymbolsC=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `symbolsC' in version `bold'
+(Font)                  U/ntxsyc/m/n --> U/ntxsyc/b/n on input line 301.
+LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 314.
+LaTeX Font Info:    Encoding `OMX' has changed to `LMX' for symbol font
+(Font)              `largesymbols' in the math version `normal' on input line 3
+14.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> LMX/ntxexx/m/n on input line 314.
+LaTeX Font Info:    Encoding `OMX' has changed to `LMX' for symbol font
+(Font)              `largesymbols' in the math version `bold' on input line 314
+.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> LMX/ntxexx/m/n on input line 314.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  LMX/ntxexx/m/n --> LMX/ntxexx/b/n on input line 315.
+\symlargesymbolsTXA=\mathgroup7
+LaTeX Font Info:    Overwriting symbol font `largesymbolsTXA' in version `bold'
+
+(Font)                  U/ntxexa/m/n --> U/ntxexa/b/n on input line 329.
+LaTeX Font Info:    Redeclaring math delimiter \lgroup on input line 500.
+LaTeX Font Info:    Redeclaring math delimiter \rgroup on input line 501.
+LaTeX Font Info:    Redeclaring math delimiter \lmoustache on input line 502.
+LaTeX Font Info:    Redeclaring math delimiter \rmoustache on input line 503.
+LaTeX Font Info:    Redeclaring math delimiter \lfloor on input line 509.
+LaTeX Font Info:    Redeclaring math delimiter \rfloor on input line 510.
+LaTeX Font Info:    Redeclaring math delimiter \lceil on input line 511.
+LaTeX Font Info:    Redeclaring math delimiter \rceil on input line 512.
+LaTeX Font Info:    Redeclaring math delimiter \lbrace on input line 513.
+LaTeX Font Info:    Redeclaring math delimiter \rbrace on input line 514.
+LaTeX Font Info:    Redeclaring math delimiter \langle on input line 515.
+LaTeX Font Info:    Redeclaring math delimiter \rangle on input line 517.
+LaTeX Font Info:    Redeclaring math symbol \mid on input line 519.
+LaTeX Font Info:    Redeclaring math delimiter \arrowvert on input line 521.
+LaTeX Font Info:    Redeclaring math delimiter \vert on input line 522.
+LaTeX Font Info:    Redeclaring math symbol \parallel on input line 523.
+LaTeX Font Info:    Redeclaring math delimiter \Arrowvert on input line 524.
+LaTeX Font Info:    Redeclaring math delimiter \Vert on input line 525.
+LaTeX Font Info:    Redeclaring math delimiter \updownarrow on input line 527.
+LaTeX Font Info:    Redeclaring math delimiter \Updownarrow on input line 528.
+LaTeX Font Info:    Redeclaring math delimiter \lvert on input line 533.
+LaTeX Font Info:    Redeclaring math delimiter \rvert on input line 534.
+LaTeX Font Info:    Redeclaring math delimiter \lVert on input line 535.
+LaTeX Font Info:    Redeclaring math delimiter \rVert on input line 536.
+LaTeX Info: Redefining \not on input line 2100.
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\graphics.cfg"
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-def\pdftex.def"
+File: pdftex.def 2017/06/24 v1.0g Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen112
+\Gin@req@width=\dimen113
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty"
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics-cfg\color.cfg"
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\lineno\lineno.sty"
+Package: lineno 2005/11/02 line numbers on paragraphs v4.41
+\linenopenalty=\count94
+\output=\toks21
+\linenoprevgraf=\count95
+\linenumbersep=\dimen114
+\linenumberwidth=\dimen115
+\c@linenumber=\count96
+\c@pagewiselinenumber=\count97
+\c@LN@truepage=\count98
+\c@internallinenumber=\count99
+\c@internallinenumbers=\count100
+\quotelinenumbersep=\dimen116
+\bframerule=\dimen117
+\bframesep=\dimen118
+\bframebox=\box28
+LaTeX Info: Redefining \\ on input line 3056.
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\indentfirst.sty"
+Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\ms\ragged2e.sty"
+Package: ragged2e 2009/05/21 v2.1 ragged2e Package (MS)
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\ms\everysel.sty"
+Package: everysel 2011/10/28 v1.2 EverySelectfont Package (MS)
+)
+\CenteringLeftskip=\skip44
+\RaggedLeftLeftskip=\skip45
+\RaggedRightLeftskip=\skip46
+\CenteringRightskip=\skip47
+\RaggedLeftRightskip=\skip48
+\RaggedRightRightskip=\skip49
+\CenteringParfillskip=\skip50
+\RaggedLeftParfillskip=\skip51
+\RaggedRightParfillskip=\skip52
+\JustifyingParfillskip=\skip53
+\CenteringParindent=\skip54
+\RaggedLeftParindent=\skip55
+\RaggedRightParindent=\skip56
+\JustifyingParindent=\skip57
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\rotating.sty"
+Package: rotating 2016/08/11 v2.16d rotated objects in LaTeX
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\ifthen.sty"
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\c@r@tfl@t=\count101
+\rotFPtop=\skip58
+\rotFPbot=\skip59
+\rot@float@box=\box29
+\rot@mess@toks=\toks22
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\ulem\ulem.sty"
+\UL@box=\box30
+\UL@hyphenbox=\box31
+\UL@skip=\skip60
+\UL@hook=\toks23
+\UL@height=\dimen119
+\UL@pe=\count102
+\UL@pixel=\dimen120
+\ULC@box=\box32
+Package: ulem 2012/05/18
+\ULdepth=\dimen121
+)
+\draftskip=\count103
+\c@section=\count104
+\c@subsection=\count105
+\c@subsubsection=\count106
+\c@paragraph=\count107
+\c@subparagraph=\count108
+\c@figure=\count109
+\c@table=\count110
+\abovecaptionskip=\skip61
+\belowcaptionskip=\skip62
+\c@appendnum=\count111
+\bibindent=\dimen122
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\natbib\natbib.sty"
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip63
+\bibsep=\skip64
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count112
+)
+\refchangenumber=\count113
+\listchangenum=\count114
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\url\url.sty"
+\Urlmuskip=\muskip11
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\upquote\upquote.sty"
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\bm.sty"
+Package: bm 2017/01/16 v1.2c Bold Symbol Support (DPC/FMi)
+\symboldoperators=\mathgroup8
+\symboldletters=\mathgroup9
+\symboldsymbols=\mathgroup10
+\symboldlargesymbols=\mathgroup11
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 141.
+LaTeX Info: Redefining \bm on input line 207.
+)
+! Undefined control sequence.
+l.23 \authorrunninghead
+                       {LIANG ET AL.}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.23 \authorrunninghead{L
+                         IANG ET AL.}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Undefined control sequence.
+l.24 \titlerunninghead
+                      {EMPIRICAL LAND COVER-RAINFALL STUDY}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (80.70035pt too wide) in paragraph at lines 23--25
+[]\T1/cmr/m/n/10 LIANG 
+ []
+
+
+Overfull \hbox (38.02435pt too wide) in paragraph at lines 23--25
+\T1/cmr/m/n/10 ET 
+ []
+
+
+Overfull \hbox (40.52374pt too wide) in paragraph at lines 23--25
+\T1/cmr/m/n/10 AL. 
+ []
+
+
+Overfull \hbox (43.30084pt too wide) in paragraph at lines 23--25
+\T1/cmr/m/n/10 EM- 
+ []
+
+
+Overfull \hbox (45.10596pt too wide) in paragraph at lines 23--25
+\T1/cmr/m/n/10 PIR- 
+ []
+
+
+Overfull \hbox (30.94275pt too wide) in paragraph at lines 23--25
+\T1/cmr/m/n/10 I- 
+ []
+
+
+Overfull \hbox (44.9671pt too wide) in paragraph at lines 23--25
+\T1/cmr/m/n/10 CAL 
+ []
+
+
+Overfull \hbox (52.88184pt too wide) in paragraph at lines 23--25
+\T1/cmr/m/n/10 LAND 
+ []
+
+
+Overfull \hbox (63.71252pt too wide) in paragraph at lines 23--25
+\T1/cmr/m/n/10 COVER- 
+ []
+
+
+Overfull \hbox (75.37634pt too wide) in paragraph at lines 23--25
+\T1/cmr/m/n/10 RAINFALL 
+ []
+
+
+Overfull \hbox (59.13031pt too wide) in paragraph at lines 23--25
+\T1/cmr/m/n/10 STUDY  
+ []
+
+LaTeX Font Info:    Try loading font information for T1+ntxtlf on input line 25
+.
+(C:\Users\rver4657\AppData\Roaming\MiKTeX\2.9\tex\latex\newtx\t1ntxtlf.fd
+File: t1ntxtlf.fd 2015/01/17 v1.0 font definition file for T1/ntx/tlf
+)
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 10.0pt on input line 25.
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 5.0pt on input line 25.
+LaTeX Font Info:    Try loading font information for T1+qhv on input line 25.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\tex-gyre\t1qhv.fd"
+File: t1qhv.fd 2009/09/25 v1.2 font definition file for T1/qhv
+)
+LaTeX Font Info:    Font shape `T1/qhv/m/n' will be
+(Font)              scaled to size 4.49997pt on input line 25.
+
+! Undefined control sequence.
+l.27 \authoraddr
+                {Corresponding author: R.W. Vervoort, Sydney Institute of Ag...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.27 \authoraddr{C
+                  orresponding author: R.W. Vervoort, Sydney Institute of Ag...
+
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (111.70667pt too wide) in paragraph at lines 27--30
+[]\T1/cmr/m/n/10 Corresponding 
+ []
+
+
+Overfull \hbox (37.8855pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 au- 
+ []
+
+
+Overfull \hbox (45.13373pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 thor: 
+ []
+
+
+Overfull \hbox (47.18878pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 R.W. 
+ []
+
+
+Overfull \hbox (42.35663pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 Ver- 
+ []
+
+
+Overfull \hbox (49.8548pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 voort, 
+ []
+
+
+Overfull \hbox (43.7174pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 Syd- 
+ []
+
+
+Overfull \hbox (39.27405pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 ney 
+ []
+
+
+Overfull \hbox (36.49695pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 In- 
+ []
+
+
+Overfull \hbox (37.94104pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 sti- 
+ []
+
+
+Overfull \hbox (41.77344pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 tute 
+ []
+
+
+Overfull \hbox (32.05359pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 of 
+ []
+
+
+Overfull \hbox (46.52228pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 Agri- 
+ []
+
+
+Overfull \hbox (40.10718pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 cul- 
+ []
+
+
+Overfull \hbox (44.57831pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 ture, 
+ []
+
+
+Overfull \hbox (52.32642pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 School 
+ []
+
+
+Overfull \hbox (32.05359pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 of 
+ []
+
+
+Overfull \hbox (40.52374pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 Life 
+ []
+
+
+Overfull \hbox (40.10718pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 and 
+ []
+
+
+Overfull \hbox (39.69061pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 En- 
+ []
+
+
+Overfull \hbox (35.38611pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 vi- 
+ []
+
+
+Overfull \hbox (41.80121pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 ron- 
+ []
+
+
+Overfull \hbox (45.66138pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 men- 
+ []
+
+
+Overfull \hbox (35.66382pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 tal 
+ []
+
+
+Overfull \hbox (40.10718pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 Sci- 
+ []
+
+
+Overfull \hbox (49.60486pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 ences, 
+ []
+
+
+Overfull \hbox (41.21802pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 The 
+ []
+
+
+Overfull \hbox (43.16199pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 Uni- 
+ []
+
+
+Overfull \hbox (40.69037pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 ver- 
+ []
+
+
+Overfull \hbox (39.6073pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 sity 
+ []
+
+
+Overfull \hbox (32.05359pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 of 
+ []
+
+
+Overfull \hbox (43.7174pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 Syd- 
+ []
+
+
+Overfull \hbox (41.21802pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 ney, 
+ []
+
+
+Overfull \hbox (28.99878pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 1 
+ []
+
+
+Overfull \hbox (44.55054pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 Cen- 
+ []
+
+
+Overfull \hbox (39.57953pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 tral 
+ []
+
+
+Overfull \hbox (38.99634pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 Av- 
+ []
+
+
+Overfull \hbox (46.4945pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 enue, 
+ []
+
+
+Overfull \hbox (60.79657pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 Eveleigh 
+ []
+
+
+Overfull \hbox (47.32764pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 NSW 
+ []
+
+
+Overfull \hbox (46.77222pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 2015, 
+ []
+
+
+Overfull \hbox (44.32837pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 Aus- 
+ []
+
+
+Overfull \hbox (50.1325pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 tralia. 
+ []
+
+
+Overfull \hbox (167.96484pt too wide) in paragraph at lines 27--30
+\T1/cmr/m/n/10 (willem.vervoort@sydney.edu.au)  
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+! Undefined control sequence.
+\set@color ...\@pdfcolorstack push{\current@color 
+                                                  }\aftergroup \reset@color 
+l.30 
+     
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 9.0pt on input line 30.
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
+(Font)              scaled to size 9.0pt on input line 30.
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+! Undefined control sequence.
+\set@color ...\@pdfcolorstack push{\current@color 
+                                                  }\aftergroup \reset@color 
+l.30 
+     
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[1{C:/Users/rver4657/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+(C:/PROGRA~1/R/R-34~1.1/share/texmf/tex/latex\Sweave.sty
+Package: Sweave 
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\fancyvrb\fancyvrb.sty"
+Package: fancyvrb 2008/02/07
+
+Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
+<2008/02/07> (tvz)
+\FV@CodeLineNo=\count115
+\FV@InFile=\read1
+\FV@TabBox=\box33
+\c@FancyVerbLine=\count116
+\FV@StepNumber=\count117
+\FV@OutFile=\write3
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\base\fontenc.sty"
+Package: fontenc 2017/04/05 v2.0i Standard LaTeX package
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1enc.def"
+File: t1enc.def 2017/04/05 v2.0i Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\ae\ae.sty"
+Package: ae 2001/02/12 1.3 Almost European Computer Modern
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\fontenc.sty"
+Package: fontenc 2017/04/05 v2.0i Standard LaTeX package
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1enc.def"
+File: t1enc.def 2017/04/05 v2.0i Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
+)
+LaTeX Font Info:    Try loading font information for T1+aer on input line 105.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\ae\t1aer.fd"
+File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
+))))
+No file chap3_paper_WVversion.aux.
+\openout1 = `chap3_paper_WVversion.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 33.
+LaTeX Font Info:    Try loading font information for OML+ntxmi on input line 33
+.
+(C:\Users\rver4657\AppData\Roaming\MiKTeX\2.9\tex\latex\newtx\omlntxmi.fd
+File: omlntxmi.fd 2015/08/25 Fontinst v1.933 font definitions for OML/ntxmi.
+)
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 33.
+LaTeX Font Info:    Try loading font information for U+ntxexa on input line 33.
+
+
+(C:\Users\rver4657\AppData\Roaming\MiKTeX\2.9\tex\latex\newtx\untxexa.fd
+File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
+)
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 33.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 33.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
+File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 33.
+LaTeX Font Info:    Try loading font information for LMS+ntxsy on input line 33
+.
+
+(C:\Users\rver4657\AppData\Roaming\MiKTeX\2.9\tex\latex\newtx\lmsntxsy.fd
+File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
+)
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 33.
+LaTeX Font Info:    Try loading font information for LMX+ntxexx on input line 3
+3.
+
+(C:\Users\rver4657\AppData\Roaming\MiKTeX\2.9\tex\latex\newtx\lmxntxexx.fd
+File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
+)
+LaTeX Font Info:    ... okay on input line 33.
+\c@mv@tabular=\count118
+\c@mv@boldtabular=\count119
+
+("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count120
+\scratchdimen=\dimen123
+\scratchbox=\box34
+\nofMPsegments=\count121
+\nofMParguments=\count122
+\everyMPshowfont=\toks24
+\MPscratchCnt=\count123
+\MPscratchDim=\dimen124
+\MPnumerator=\count124
+\makeMPintoPDFobject=\count125
+\everyMPtoPDFconversion=\toks25
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
+)
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty"
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\kvdefinekeys.sty"
+Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
+)))
+("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
+Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\kvsetkeys.sty"
+Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\etexcmds.sty"
+Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
+Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+)
+ABD: EverySelectfont initializing macros
+LaTeX Info: Redefining \selectfont on input line 33.
+ (chap3_paper_WVversion-concordance.tex)
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 14.4pt on input line 36.
+LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <14.4> not available
+(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 36.
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 14.4pt on input line 36.
+LaTeX Font Info:    Try loading font information for T1+aess on input line 36.
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\ae\t1aess.fd"
+File: t1aess.fd 1997/11/16 Font definitions for T1/aess.
+)
+LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <10> not available
+(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 38.
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 10.0pt on input line 38.
+
+! Undefined control sequence.
+<argument> C. Liang, F. Van Ogtrop, \altaffilmark 
+                                                  {1} R.W. Vervoort, \altaff...
+l.38 ...ilmark{1} R.W. Vervoort, \altaffilmark{1}}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...rk {1} R.W. Vervoort, \altaffilmark 
+                                                  {1}
+l.38 ...ilmark{1} R.W. Vervoort, \altaffilmark{1}}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.40 \altaffiltext
+                  {1}{ Sydney Institute of Agriculture, School of Life and E...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[2]
+
+! LaTeX Error: Environment article undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.66 \begin{article}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 10.5pt on input line 68.
+LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <10.5> not available
+(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 68.
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 10.5pt on input line 68.
+LaTeX Font Info:    Try loading font information for OT1+ntxtlf on input line 6
+8.
+(C:\Users\rver4657\AppData\Roaming\MiKTeX\2.9\tex\latex\newtx\ot1ntxtlf.fd
+File: ot1ntxtlf.fd 2015/01/17 v1.0 font definition file for OT1/ntx/tlf
+)
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 10.0pt on input line 68.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 7.3pt on input line 68.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 5.5pt on input line 68.
+LaTeX Font Info:    Try loading font information for U+ntxmia on input line 68.
+
+
+(C:\Users\rver4657\AppData\Roaming\MiKTeX\2.9\tex\latex\newtx\untxmia.fd
+File: untxmia.fd 2016/01/31 Fontinst v1.933 font definitions for U/ntxmia.
+)
+LaTeX Font Info:    Try loading font information for U+ntxsym on input line 68.
+
+
+(C:\Users\rver4657\AppData\Roaming\MiKTeX\2.9\tex\latex\newtx\untxsym.fd
+File: untxsym.fd 2015/03/20 Fontinst v1.933 font definitions for U/ntxsym.
+)
+LaTeX Font Info:    Try loading font information for U+ntxsyc on input line 68.
+
+
+(C:\Users\rver4657\AppData\Roaming\MiKTeX\2.9\tex\latex\newtx\untxsyc.fd
+File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
+)
+LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
+(Font)              scaled to size 10.0pt on input line 68.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
+(Font)              scaled to size 7.3pt on input line 68.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
+(Font)              scaled to size 5.5pt on input line 68.
+
+
+Package natbib Warning: Citation `Chagnon2005' on page 3 undefined on input lin
+e 70.
+
+
+Package natbib Warning: Citation `Pinto2009' on page 3 undefined on input line 
+70.
+
+
+Package natbib Warning: Citation `Wang2009' on page 3 undefined on input line 7
+0.
+
+
+Package natbib Warning: Citation `Mei2010' on page 3 undefined on input line 70
+.
+
+
+Package natbib Warning: Citation `kucharski_further_2013' on page 3 undefined o
+n input line 70.
+
+
+Package natbib Warning: Citation `pitman_scale_2016' on page 3 undefined on inp
+ut line 70.
+
+
+Package natbib Warning: Citation `Otterman1990' on page 3 undefined on input li
+ne 70.
+
+
+Package natbib Warning: Citation `Ben-Gai1998' on page 3 undefined on input lin
+e 70.
+
+
+Package natbib Warning: Citation `Junkermann2009' on page 3 undefined on input 
+line 70.
+
+
+Package natbib Warning: Citation `Nair2011' on page 3 undefined on input line 7
+0.
+
+
+Package natbib Warning: Citation `McAlpine2007' on page 3 undefined on input li
+ne 70.
+
+
+Package natbib Warning: Citation `Eltahir1996' on page 3 undefined on input lin
+e 72.
+
+
+Package natbib Warning: Citation `Bosilovich2006' on page 3 undefined on input 
+line 72.
+
+
+Package natbib Warning: Citation `Dirmeyer2009' on page 3 undefined on input li
+ne 72.
+
+
+Package natbib Warning: Citation `Gimeno2010' on page 3 undefined on input line
+ 72.
+
+
+Package natbib Warning: Citation `Trenberth1999' on page 3 undefined on input l
+ine 72.
+
+
+Package natbib Warning: Citation `Verdon2004' on page 3 undefined on input line
+ 72.
+
+
+Package natbib Warning: Citation `Risbey2009' on page 3 undefined on input line
+ 72.
+
+
+Package natbib Warning: Citation `Speer2011' on page 3 undefined on input line 
+72.
+
+
+Package natbib Warning: Citation `BoM2012c' on page 3 undefined on input line 7
+4.
+
+
+Package natbib Warning: Citation `Mla2008' on page 3 undefined on input line 76
+.
+
+
+Package natbib Warning: Citation `Kamruzzaman2011' on page 3 undefined on input
+ line 76.
+
+
+Package natbib Warning: Citation `Speer2011' on page 3 undefined on input line 
+76.
+
+
+Package natbib Warning: Citation `Smith2012' on page 3 undefined on input line 
+76.
+
+
+Package natbib Warning: Citation `Westra2010' on page 3 undefined on input line
+ 78.
+
+
+Package natbib Warning: Citation `Ma2011' on page 3 undefined on input line 78.
+
+
+
+Package natbib Warning: Citation `Zeng2012' on page 3 undefined on input line 7
+8.
+
+
+Package natbib Warning: Citation `pitman_scale_2016' on page 3 undefined on inp
+ut line 78.
+
+
+Package natbib Warning: Citation `saha_investigating_2016' on page 3 undefined 
+on input line 78.
+
+
+Package natbib Warning: Citation `Pitman2004' on page 3 undefined on input line
+ 78.
+
+
+Package natbib Warning: Citation `Timbal2006' on page 3 undefined on input line
+ 78.
+
+
+Package natbib Warning: Citation `Nicholls2006' on page 3 undefined on input li
+ne 78.
+
+
+Overfull \hbox (0.20027pt too wide) in paragraph at lines 80--81
+\T1/ntxtlf/m/n/10 fires based on tree cover data. Sta-tis-ti-cal ap-proaches we
+re used to iden-tify the step changes 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [3]
+
+Package natbib Warning: Citation `Lymburner2010' on page 4 undefined on input l
+ine 86.
+
+File: map_selreg.jpg Graphic file (type jpg)
+<use map_selreg.jpg>
+Package pdftex.def Info: map_selreg.jpg  used on input line 91. on input line 9
+1.
+Package pdftex.def Info: Requested size: 397.485pt x 300.62312pt on input line 
+91.
+LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <9> not available
+(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 92.
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 9.0pt on input line 92.
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]\T1/ntxtlf/b/n/9 Figure  1. \T1/ntxtlf/m/n/9 Se-lected study re-gions are hig
+h-lighted by red rect-an-gles in the main map (the red rect-an-gle in
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+\T1/ntxtlf/m/n/9 the in-sert in-di-cates the lo-ca-tion of the main map). The t
+ypes of tree cover in 2008 from the DLCD prod-uct is
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+\T1/ntxtlf/m/n/9 shown at the back-ground. In site 1 (the QLD re-gion), the tre
+e cover is mostly sparse. In site 2 (the NSW/VIC
+ []
+
+
+LaTeX Warning: Reference `fig:sel_reg' on page 4 undefined on input line 96.
+
+
+Package natbib Warning: Citation `SLATS2004' on page 4 undefined on input line 
+96.
+
+
+LaTeX Warning: Reference `fig:sel_reg' on page 4 undefined on input line 96.
+
+
+LaTeX Warning: Reference `fig:bushfire' on page 4 undefined on input line 96.
+
+
+Package natbib Warning: Citation `Fire2011' on page 4 undefined on input line 9
+6.
+
+
+Package natbib Warning: Citation `ABC2003' on page 4 undefined on input line 96
+.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [4]
+File: bushfire_nswvic.jpg Graphic file (type jpg)
+<use bushfire_nswvic.jpg>
+Package pdftex.def Info: bushfire_nswvic.jpg  used on input line 103. on input 
+line 103.
+Package pdftex.def Info: Requested size: 300.5258pt x 300.5258pt on input line 
+103.
+
+Underfull \hbox (badness 10000) in paragraph at lines 104--104
+[]\T1/ntxtlf/b/n/9 Figure  2. \T1/ntxtlf/m/n/9 Lo-ca-tion of bush-fires oc-cur-
+ring in Jan-uary 2003, in and around the NSW/VIC study re-gion, as
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 104--104
+\T1/ntxtlf/m/n/9 shown by the red pix-els. The map shows large area in the Kosc
+iuszko na-tional park has been burned. Some
+ []
+
+
+Package natbib Warning: Citation `ABARES2010' on page 5 undefined on input line
+ 110.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [5]
+
+Package natbib Warning: Citation `SLATS2001' on page 6 undefined on input line 
+112.
+
+
+Package natbib Warning: Citation `SLATS2003' on page 6 undefined on input line 
+112.
+
+
+Package natbib Warning: Citation `Roy2002' on page 6 undefined on input line 11
+2.
+
+
+Package natbib Warning: Citation `Roy2005' on page 6 undefined on input line 11
+2.
+
+
+Package natbib Warning: Citation `Roy2008' on page 6 undefined on input line 11
+2.
+
+
+LaTeX Warning: Reference `fig:tc_simple' on page 6 undefined on input line 112.
+
+
+
+Overfull \hbox (7.51776pt too wide) in paragraph at lines 112--113
+[]\T1/ntxtlf/m/n/10 Therefore two types of land cover changes were stud-ied. Th
+e re-ports from the Queens- 
+ []
+
+File: tc_simple.jpg Graphic file (type jpg)
+<use tc_simple.jpg>
+Package pdftex.def Info: tc_simple.jpg  used on input line 117. on input line 1
+17.
+Package pdftex.def Info: Requested size: 645.90706pt x 182.68079pt on input lin
+e 117.
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--118
+[]\T1/ntxtlf/b/n/9 Figure  3. \T1/ntxtlf/m/n/9 The ex-pected evo-lu-tion of the
+ land sur-face af-ter trees have been re-moved in (a) the QLD re-gion
+ []
+
+
+Package natbib Warning: Citation `Townshend2011' on page 6 undefined on input l
+ine 130.
+
+
+Package natbib Warning: Citation `Townshend2011' on page 6 undefined on input l
+ine 130.
+
+
+Package natbib Warning: Citation `Lymburner2010' on page 6 undefined on input l
+ine 130.
+
+
+Overfull \hbox (9.17282pt too wide) in paragraph at lines 130--131
+[]\T1/ntxtlf/m/n/10 Several land sur-face data sets were used in this study. Th
+e main one was the MOD44B 
+ []
+
+[6]
+
+Package natbib Warning: Citation `Jones2009' on page 7 undefined on input line 
+139.
+
+LaTeX Font Info:    Try loading font information for TS1+ntxtlf on input line 1
+39.
+(C:\Users\rver4657\AppData\Roaming\MiKTeX\2.9\tex\latex\newtx\ts1ntxtlf.fd
+File: ts1ntxtlf.fd 2015/01/18 v1.0 fd file for TS1/ntxtlf
+)
+LaTeX Font Info:    Font shape `TS1/ntxtlf/m/n' will be
+(Font)              scaled to size 10.0pt on input line 139.
+
+
+Package natbib Warning: Citation `BoM2009' on page 7 undefined on input line 13
+9.
+
+
+Package natbib Warning: Citation `Otterman1990' on page 7 undefined on input li
+ne 139.
+
+
+Package natbib Warning: Citation `Gaertner2001' on page 7 undefined on input li
+ne 139.
+
+
+Package natbib Warning: Citation `Semazzi2001' on page 7 undefined on input lin
+e 139.
+
+
+Package natbib Warning: Citation `Oleson2004' on page 7 undefined on input line
+ 139.
+
+
+Package natbib Warning: Citation `Deo2009' on page 7 undefined on input line 13
+9.
+
+
+Package natbib Warning: Citation `Risbey2009' on page 7 undefined on input line
+ 143.
+
+
+Package natbib Warning: Citation `Chowdhury2010' on page 7 undefined on input l
+ine 143.
+
+
+Package natbib Warning: Citation `Westra2010' on page 7 undefined on input line
+ 143.
+
+
+Package natbib Warning: Citation `Meneghini2007' on page 7 undefined on input l
+ine 143.
+
+
+LaTeX Warning: Reference `sec:reg_model' on page 7 undefined on input line 143.
+
+
+LaTeX Font Info:    Try loading font information for T1+aett on input line 145.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\ae\t1aett.fd"
+File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
+)
+LaTeX Font Info:    Try loading font information for T1+ntxsups on input line 1
+47.
+
+(C:\Users\rver4657\AppData\Roaming\MiKTeX\2.9\tex\latex\newtx\t1ntxsups.fd
+File: t1ntxsups.fd 2015/01/17 v1.0
+)
+LaTeX Font Info:    Font shape `T1/ntxsups/m/n' will be
+(Font)              scaled to size 10.0pt on input line 147.
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/n' will be
+(Font)              scaled to size 8.0pt on input line 147.
+LaTeX Font Info:    Font shape `T1/ntxsups/m/n' will be
+(Font)              scaled to size 8.0pt on input line 147.
+
+
+Package natbib Warning: Citation `Kamruzzaman2011' on page 7 undefined on input
+ line 148.
+
+LaTeX Font Info:    Font shape `TS1/ntxtlf/m/n' will be
+(Font)              scaled to size 8.0pt on input line 150.
+LaTeX Font Info:    Font shape `T1/ntxtlf/bx/n' in size <8> not available
+(Font)              Font shape `T1/ntxtlf/b/n' tried instead on input line 150.
+
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/n' will be
+(Font)              scaled to size 8.0pt on input line 150.
+
+Package natbib Warning: Citation `Saji1999' on page 7 undefined on input line 1
+50.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 150--150
+| [][]\T1/ntxtlf/m/n/8 Indian Ocean dipole is com-monly mea-sured by the dif-fe
+r-ence be-tween SST anomaly in the west-ern (50 - 70\TS1/ntxtlf/m/n/8 °\T1/ntxt
+lf/m/n/8 E and
+ []
+
+
+LaTeX Warning: Reference `fig:ts_mean' on page 7 undefined on input line 160.
+
+
+Underfull \vbox (badness 3029) has occurred while \output is active []
+
+ [7]
+<mean_ts.jpg, id=38, 722.7pt x 542.025pt>
+File: mean_ts.jpg Graphic file (type jpg)
+<use mean_ts.jpg>
+Package pdftex.def Info: mean_ts.jpg  used on input line 165. on input line 165
+.
+Package pdftex.def Info: Requested size: 433.62334pt x 325.2175pt on input line
+ 165.
+
+Underfull \hbox (badness 10000) in paragraph at lines 166--166
+[]\T1/ntxtlf/b/n/9 Figure  4. \T1/ntxtlf/m/n/9 The de-sea-son-alised and de-tre
+nded rain-fall over the 30 years pe-riod in (a) the QLD re-gion and (b)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 166--166
+\T1/ntxtlf/m/n/9 the NSW/VIC re-gion. The ver-ti-cal red lines in-di-cate the y
+ear of 2003, in which the stud-ied land cover changes
+ []
+
+
+Package natbib Warning: Citation `Maynard2003' on page 8 undefined on input lin
+e 173.
+
+
+Package natbib Warning: Citation `DeAngelis2010' on page 8 undefined on input l
+ine 173.
+
+
+Package natbib Warning: Citation `Holper2011' on page 8 undefined on input line
+ 173.
+
+
+Package natbib Warning: Citation `Smith2012' on page 8 undefined on input line 
+173.
+
+
+Package natbib Warning: Citation `Wardle2004' on page 8 undefined on input line
+ 173.
+
+
+Package natbib Warning: Citation `Nicholls2006' on page 8 undefined on input li
+ne 173.
+
+
+Package natbib Warning: Citation `Holper2011' on page 8 undefined on input line
+ 173.
+
+
+Package natbib Warning: Citation `BoM2012' on page 8 undefined on input line 17
+6.
+
+
+Package natbib Warning: Citation `Risbey2009' on page 8 undefined on input line
+ 176.
+
+
+Package natbib Warning: Citation `Risbey2009' on page 8 undefined on input line
+ 176.
+
+
+LaTeX Warning: Reference `sec:Data' on page 8 undefined on input line 176.
+
+
+Package natbib Warning: Citation `Rstats2011' on page 8 undefined on input line
+ 180.
+
+
+Package natbib Warning: Citation `Smith2012' on page 8 undefined on input line 
+180.
+
+
+Package natbib Warning: Citation `Risbey2009' on page 8 undefined on input line
+ 181.
+
+
+Package natbib Warning: Citation `MacDonald2005' on page 8 undefined on input l
+ine 181.
+
+
+Package natbib Warning: Citation `Zanchettin2008' on page 8 undefined on input 
+line 181.
+
+
+Package natbib Warning: Citation `Kamruzzaman2011' on page 8 undefined on input
+ line 181.
+
+[8 <./mean_ts.jpg>]
+File: cor_qld.jpg Graphic file (type jpg)
+<use cor_qld.jpg>
+Package pdftex.def Info: cor_qld.jpg  used on input line 186. on input line 186
+.
+Package pdftex.def Info: Requested size: 300.5258pt x 210.1874pt on input line 
+186.
+
+Underfull \hbox (badness 10000) in paragraph at lines 187--187
+[]\T1/ntxtlf/b/n/9 Figure  5. \T1/ntxtlf/m/n/9 Cross-correlation of the six in-
+dices and rain-fall in QLD study re-gion. Where the cor-re-la-tions
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 187--187
+\T1/ntxtlf/m/n/9 with PDO are sought, 108-year rain-fall data (1900 - 2008) are
+ used. Oth-er-wise, 30-year rain-fall data are used.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 187--187
+\T1/ntxtlf/m/n/9 The cor-re-la-tion with NINO 3 is not shown as it is very sim-
+i-lar to but weaker than the case of NINO 3.4. The
+ []
+
+File: cor_nswvic.jpg Graphic file (type jpg)
+<use cor_nswvic.jpg>
+Package pdftex.def Info: cor_nswvic.jpg  used on input line 194. on input line 
+194.
+Package pdftex.def Info: Requested size: 300.5258pt x 330.63861pt on input line
+ 194.
+
+LaTeX Warning: Reference `fig:cor_rain_qld' on page 9 undefined on input line 2
+00.
+
+
+LaTeX Warning: Reference `fig:cor_rain_nsw' on page 9 undefined on input line 2
+00.
+
+
+Package natbib Warning: Citation `Risbey2009' on page 9 undefined on input line
+ 207.
+
+
+Package natbib Warning: Citation `Kamruzzaman2011' on page 9 undefined on input
+ line 207.
+
+
+Package natbib Warning: Citation `Holper2011' on page 9 undefined on input line
+ 211.
+
+
+Package natbib Warning: Citation `ABS2012' on page 9 undefined on input line 21
+1.
+
+
+Package natbib Warning: Citation `BoM2012a' on page 9 undefined on input line 2
+11.
+
+
+Package natbib Warning: Citation `Wood2011' on page 9 undefined on input line 2
+11.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [9]
+[10]
+
+Package natbib Warning: Citation `Hughes2003' on page 11 undefined on input lin
+e 213.
+
+
+Package natbib Warning: Citation `Gallant2007' on page 11 undefined on input li
+ne 213.
+
+
+Package natbib Warning: Citation `Chowdhury2010' on page 11 undefined on input 
+line 213.
+
+
+Package natbib Warning: Citation `Hughes2003' on page 11 undefined on input lin
+e 213.
+
+
+Package natbib Warning: Citation `Kamruzzaman2011' on page 11 undefined on inpu
+t line 215.
+
+
+Package natbib Warning: Citation `Hastie1986' on page 11 undefined on input lin
+e 215.
+
+
+LaTeX Warning: Reference `fig:hist_rain' on page 11 undefined on input line 215
+.
+
+
+Package natbib Warning: Citation `Murphy2008' on page 11 undefined on input lin
+e 237.
+
+
+Package natbib Warning: Citation `Schepen2012' on page 11 undefined on input li
+ne 237.
+
+File: hist_rain.jpg Graphic file (type jpg)
+<use hist_rain.jpg>
+Package pdftex.def Info: hist_rain.jpg  used on input line 242. on input line 2
+42.
+Package pdftex.def Info: Requested size: 361.35367pt x 192.72195pt on input lin
+e 242.
+
+Underfull \hbox (badness 10000) in paragraph at lines 243--243
+[]\T1/ntxtlf/b/n/9 Figure  7. \T1/ntxtlf/m/n/9 Dis-tri-bu-tion of monthly rain-
+fall in (a) QLD and (b) NSW/VIC. By us-ing a Kolmogorov-Smirnov
+ []
+
+
+LaTeX Warning: Reference `eqn:model2' on page 11 undefined on input line 249.
+
+
+LaTeX Warning: Reference `eqn:model2' on page 11 undefined on input line 251.
+
+[11]
+
+Package natbib Warning: Citation `Hirsch1985' on page 12 undefined on input lin
+e 281.
+
+
+Package natbib Warning: Citation `Hirsch1985' on page 12 undefined on input lin
+e 281.
+
+LaTeX Font Info:    Font shape `T1/ntxtlf/m/it' will be
+(Font)              scaled to size 10.0pt on input line 283.
+LaTeX Font Info:    Font shape `T1/ntxtlf/bx/it' in size <10> not available
+(Font)              Font shape `T1/ntxtlf/b/it' tried instead on input line 283
+.
+LaTeX Font Info:    Font shape `T1/ntxtlf/b/it' will be
+(Font)              scaled to size 10.0pt on input line 283.
+
+LaTeX Warning: Reference `eqn:model' on page 12 undefined on input line 285.
+
+
+Package natbib Warning: Citation `Hirsch1985' on page 12 undefined on input lin
+e 285.
+
+
+Overfull \hbox (9.46776pt too wide) in paragraph at lines 285--288
+\T1/ntxtlf/m/n/10 vari-a-tion in the resid-u-als. The test, de-scribed in the f
+ol-low-ing sub sec-tion, as-so-ciates changes 
+ []
+
+[12]
+
+Package natbib Warning: Citation `Hirsch1985' on page 13 undefined on input lin
+e 293.
+
+
+Package natbib Warning: Citation `Hirsch1985' on page 13 undefined on input lin
+e 305.
+
+
+Package natbib Warning: Citation `Hirsch1985' on page 13 undefined on input lin
+e 307.
+
+
+Package natbib Warning: Citation `Hirsch1985' on page 13 undefined on input lin
+e 326.
+
+[13]
+
+Package natbib Warning: Citation `Hirsch1985' on page 14 undefined on input lin
+e 342.
+
+
+LaTeX Warning: Reference `tab:Zscore' on page 14 undefined on input line 356.
+
+
+Package natbib Warning: Citation `Hipel1994' on page 14 undefined on input line
+ 359.
+
+
+Package natbib Warning: Citation `Hipel1994' on page 14 undefined on input line
+ 359.
+
+
+LaTeX Warning: Reference `fig:tc_trend' on page 14 undefined on input line 383.
+
+
+[14]
+<tc.jpg, id=73, 722.7pt x 542.025pt>
+File: tc.jpg Graphic file (type jpg)
+<use tc.jpg>
+Package pdftex.def Info: tc.jpg  used on input line 388. on input line 388.
+Package pdftex.def Info: Requested size: 469.74944pt x 352.31207pt on input lin
+e 388.
+
+Underfull \hbox (badness 10000) in paragraph at lines 389--389
+[]\T1/ntxtlf/b/n/9 Figure  8. \T1/ntxtlf/m/n/9 The maps show the ar-eas with si
+g-nif-i-cant changes in tree cov-ers in (a) the QLD re-gion and (b) the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 389--389
+\T1/ntxtlf/m/n/9 NSW/VIC re-gion. The amount of changes was cal-cu-lated as the
+ dif-fer-ence in tree cov-ers be-fore and af-ter the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 389--389
+\T1/ntxtlf/m/n/9 spec-i-fied land cover in-ter-ven-tion and it is shown as the 
+per-cent-age of the ground area. Green colour in-di-cates
+ []
+
+
+LaTeX Warning: Reference `eqn:model2' on page 15 undefined on input line 395.
+
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 8.0pt on input line 395.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 6.2pt on input line 395.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
+(Font)              scaled to size 8.0pt on input line 395.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
+(Font)              scaled to size 6.2pt on input line 395.
+
+Underfull \hbox (badness 10000) in paragraph at lines 395--395
+| [][]\T1/ntxtlf/m/n/8 Here the ad-justed $\OML/ntxmi/m/it/8 R[]$ \T1/ntxtlf/m/
+n/8 was re-ported. Ad-justed $\OML/ntxmi/m/it/8 R[]$ \T1/ntxtlf/m/n/8 is the co
+-ef-fi-cient of de-ter-mi-na-tion, a mea-sure-ment of the amount of
+ []
+
+
+LaTeX Warning: Reference `fig:residuals_qld' on page 15 undefined on input line
+ 395.
+
+
+LaTeX Warning: Reference `fig:residuals_nswvic' on page 15 undefined on input l
+ine 395.
+
+
+LaTeX Warning: Reference `fig:rsq' on page 15 undefined on input line 400.
+
+
+Package natbib Warning: Citation `Westra2010' on page 15 undefined on input lin
+e 400.
+
+File: qld_check.jpg Graphic file (type jpg)
+<use qld_check.jpg>
+Package pdftex.def Info: qld_check.jpg  used on input line 405. on input line 4
+05.
+Package pdftex.def Info: Requested size: 521.95198pt x 401.50153pt on input lin
+e 405.
+File: nswvic_check.jpg Graphic file (type jpg)
+<use nswvic_check.jpg>
+Package pdftex.def Info: nswvic_check.jpg  used on input line 413. on input lin
+e 413.
+Package pdftex.def Info: Requested size: 521.95198pt x 401.50153pt on input lin
+e 413.
+File: soi.jpg Graphic file (type jpg)
+<use soi.jpg>
+Package pdftex.def Info: soi.jpg  used on input line 421. on input line 421.
+Package pdftex.def Info: Requested size: 626.3341pt x 260.97255pt on input line
+ 421.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
+(Font)              scaled to size 9.0pt on input line 422.
+LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
+(Font)              scaled to size 9.0pt on input line 422.
+
+Underfull \hbox (badness 10000) in paragraph at lines 422--422
+[]\T1/ntxtlf/b/n/9 Figure  11. \T1/ntxtlf/m/n/9 The dis-tri-bu-tion of $\OML/nt
+xmi/m/it/9 R[]$ \T1/ntxtlf/m/n/9 when rain-fall is only mod-elled by the cli-ma
+te drivers. It shows the per-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 422--422
+\T1/ntxtlf/m/n/9 cent-age of rain-fall vari-abil-ity that can be ex-plained by 
+the cli-mate drivers. In the case of (a) the QLD re-gion,
+ []
+
+[15 <./tc.jpg>] [16]
+File: Cp_30yrs.jpg Graphic file (type jpg)
+<use Cp_30yrs.jpg>
+Package pdftex.def Info: Cp_30yrs.jpg  used on input line 431. on input line 43
+1.
+Package pdftex.def Info: Requested size: 572.14331pt x 271.01524pt on input lin
+e 431.
+
+Underfull \hbox (badness 10000) in paragraph at lines 432--432
+[]\T1/ntxtlf/b/n/9 Figure  12. \T1/ntxtlf/m/n/9 The spa-tial dis-tri-bu-tion of
+ sig-nif-i-cance of veg-e-ta-tion cover changes in the two study re-gions.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 432--432
+\T1/ntxtlf/m/n/9 The sig-nif-i-cance of veg-e-ta-tion cover changes is as-sesse
+d in the re-gres-sion model. The fig-ures re-port the p
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 432--432
+\T1/ntxtlf/m/n/9 val-ues of the co-ef-fi-cient of the land cover vari-able in t
+he model at dif-fer-ent sig-nif-i-cance level. The plot of the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 432--432
+\T1/ntxtlf/m/n/9 QLD re-gion is for the sce-nario that the af-ter change pe-rio
+d started from Jan-uary 2005, as the other sce-nar-ios
+ []
+
+
+LaTeX Warning: Reference `fig:LC_p' on page 17 undefined on input line 436.
+
+
+LaTeX Warning: Reference `fig:LC_p' on page 17 undefined on input line 436.
+
+
+LaTeX Warning: Reference `fig:LC_p' on page 17 undefined on input line 438.
+
+
+LaTeX Warning: Reference `fig:tc_trend' on page 17 undefined on input line 438.
+
+
+
+LaTeX Warning: Reference `fig:bushfire' on page 17 undefined on input line 438.
+
+
+
+LaTeX Warning: Reference `fig:LC_p' on page 17 undefined on input line 438.
+
+[17]
+File: step_new.jpg Graphic file (type jpg)
+<use step_new.jpg>
+Package pdftex.def Info: step_new.jpg  used on input line 449. on input line 44
+9.
+Package pdftex.def Info: Requested size: 674.51704pt x 295.10121pt on input lin
+e 449.
+
+Underfull \hbox (badness 10000) in paragraph at lines 450--450
+[]\T1/ntxtlf/b/n/9 Figure  13. \T1/ntxtlf/m/n/9 Spa-tial dis-tri-bu-tion of the
+ step trend test Z' statis-tics in the two study sites. The test was con-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 450--450
+\T1/ntxtlf/m/n/9 ducted on the 30-year rain-fall data from 1979 to 2009. Warm c
+olours (yel-low, or-ange and red) are for pos-i-tive
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 450--450
+\T1/ntxtlf/m/n/9 Z' val-ues which in-di-cate de-creas-ing rain-fall trend due t
+o the land sur-face in-ter-ven-tion. Cold colours (light
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 450--450
+\T1/ntxtlf/m/n/9 blue to blue) are for neg-a-tive Z' val-ues which in-di-cate i
+n-creas-ing rain-fall trend. The deeper the colour, the
+ []
+
+
+LaTeX Warning: Reference `fig:steptest30' on page 18 undefined on input line 45
+4.
+
+
+LaTeX Warning: Reference `tab:Zscore' on page 18 undefined on input line 454.
+
+
+LaTeX Warning: Reference `fig:slat' on page 18 undefined on input line 454.
+
+
+LaTeX Warning: Reference `fig:tc_trend' on page 18 undefined on input line 454.
+
+
+<slat.jpg, id=83, 722.7pt x 542.025pt>
+File: slat.jpg Graphic file (type jpg)
+<use slat.jpg>
+Package pdftex.def Info: slat.jpg  used on input line 461. on input line 461.
+Package pdftex.def Info: Requested size: 433.62334pt x 325.2175pt on input line
+ 461.
+
+Package natbib Warning: Citation `SLATS2004' on page 18 undefined on input line
+ 462.
+
+
+Package natbib Warning: Citation `SLATS2004' on page 18 undefined on input line
+ 462.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 462--462
+[]\T1/ntxtlf/b/n/9 Figure  14. \T1/ntxtlf/m/n/9 Woody veg-e-ta-tion clear-ing r
+ate in QLD. The maps and fig-ures are ob-tained from \T1/ntxtlf/b/n/9 ?\T1/ntxt
+lf/m/n/9 . The red
+ []
+
+File: compare_mean.jpg Graphic file (type jpg)
+<use compare_mean.jpg>
+Package pdftex.def Info: compare_mean.jpg  used on input line 469. on input lin
+e 469.
+Package pdftex.def Info: Requested size: 521.95198pt x 401.50153pt on input lin
+e 469.
+
+LaTeX Warning: Reference `eqn:model' on page 18 undefined on input line 470.
+
+
+LaTeX Warning: Reference `eqn:model' on page 18 undefined on input line 470.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 470--470
+[]\T1/ntxtlf/b/n/9 Figure  15. \T1/ntxtlf/m/n/9 Box-plots of an-nual rain-fall 
+(es-ti-mated based on rain-fall resid-u-als from Equa-tion []) be-fore and
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 470--470
+\T1/ntxtlf/m/n/9 af-ter the land cover in-ter-ven-tion dur-ing 1998 - 2008 in t
+he study re-gions. On av-er-age, the af-ter pe-riod has a
+ []
+
+
+LaTeX Warning: Reference `fig:mean_diff' on page 18 undefined on input line 474
+.
+
+[18] [19 <./slat.jpg>]
+
+Package natbib Warning: Citation `Hirsch1985' on page 20 undefined on input lin
+e 479.
+
+
+Package natbib Warning: Citation `Hirsch1985' on page 20 undefined on input lin
+e 479.
+
+
+Package natbib Warning: Citation `Wilks2006' on page 20 undefined on input line
+ 481.
+
+
+Package natbib Warning: Citation `Westra2013' on page 20 undefined on input lin
+e 481.
+
+
+Package natbib Warning: Citation `Westra2013' on page 20 undefined on input lin
+e 481.
+
+
+LaTeX Warning: Reference `fig:boot_qld' on page 20 undefined on input line 483.
+
+
+
+LaTeX Warning: Reference `fig:boot_nsw' on page 20 undefined on input line 483.
+
+
+<bt1_qld.jpg, id=91, 722.7pt x 542.025pt>
+File: bt1_qld.jpg Graphic file (type jpg)
+<use bt1_qld.jpg>
+Package pdftex.def Info: bt1_qld.jpg  used on input line 489. on input line 489
+.
+Package pdftex.def Info: Requested size: 469.75499pt x 352.32034pt on input lin
+e 489.
+
+Overfull \hbox (72.27pt too wide) in paragraph at lines 489--490
+ [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 490--490
+[]\T1/ntxtlf/b/n/9 Figure  16. \T1/ntxtlf/m/n/9 Per-cent-age of pix-els show-in
+g sta-tis-ti-cally sig-nif-i-cant pos-i-tive Z' val-ues (left) and neg-a-tive Z
+'
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 490--490
+\T1/ntxtlf/m/n/9 val-ues (right) in QLD. The his-togram shows the dis-tri-bu-ti
+on of re-sults from 1000 boot-strap re-sam-pling of the
+ []
+
+<bt1_nsw.jpg, id=92, 722.7pt x 542.025pt>
+File: bt1_nsw.jpg Graphic file (type jpg)
+<use bt1_nsw.jpg>
+Package pdftex.def Info: bt1_nsw.jpg  used on input line 497. on input line 497
+.
+Package pdftex.def Info: Requested size: 469.75499pt x 352.32034pt on input lin
+e 497.
+
+Overfull \hbox (72.27pt too wide) in paragraph at lines 497--498
+ [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 498--498
+[]\T1/ntxtlf/b/n/9 Figure  17. \T1/ntxtlf/m/n/9 Per-cent-age of pix-els show-in
+g sta-tis-ti-cally sig-nif-i-cant pos-i-tive Z' val-ues (left) and neg-a-tive Z
+'
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 498--498
+\T1/ntxtlf/m/n/9 val-ues (right) in NSW/VIC. The his-togram shows the dis-tri-b
+u-tion of re-sults from 1000 boot-strap re-sam-pling
+ []
+
+
+Package natbib Warning: Citation `Otterman1990' on page 20 undefined on input l
+ine 507.
+
+
+Package natbib Warning: Citation `Durieux2003' on page 20 undefined on input li
+ne 507.
+
+
+Package natbib Warning: Citation `Negri2004' on page 20 undefined on input line
+ 507.
+
+
+Package natbib Warning: Citation `Sato2007' on page 20 undefined on input line 
+507.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [20]
+
+Package natbib Warning: Citation `Onoz2003' on page 21 undefined on input line 
+509.
+
+
+Package natbib Warning: Citation `Kundzewicz2004' on page 21 undefined on input
+ line 509.
+
+
+Package natbib Warning: Citation `Hirsch1985' on page 21 undefined on input lin
+e 509.
+
+
+Package natbib Warning: Citation `Whitley2002' on page 21 undefined on input li
+ne 509.
+
+
+Package natbib Warning: Citation `Westra2010' on page 21 undefined on input lin
+e 511.
+
+
+Package natbib Warning: Citation `Fowler2005' on page 21 undefined on input lin
+e 511.
+
+
+Package natbib Warning: Citation `Cowpertwait2009' on page 21 undefined on inpu
+t line 511.
+
+
+Package natbib Warning: Citation `Burton2010' on page 21 undefined on input lin
+e 511.
+
+
+Underfull \vbox (badness 6944) has occurred while \output is active []
+
+ [21 <./bt1_qld.jpg>]
+
+Package natbib Warning: Citation `SLATS2005' on page 22 undefined on input line
+ 513.
+
+
+Package natbib Warning: Citation `Narisma2003' on page 22 undefined on input li
+ne 513.
+
+
+Package natbib Warning: Citation `McAlpine2007' on page 22 undefined on input l
+ine 513.
+
+
+Package natbib Warning: Citation `Hirsch1985' on page 22 undefined on input lin
+e 515.
+
+[22 <./bt1_nsw.jpg>]
+
+Package natbib Warning: Citation `Nicholls2004' on page 23 undefined on input l
+ine 519.
+
+
+Package natbib Warning: Citation `Howden2012' on page 23 undefined on input lin
+e 521.
+
+
+Package natbib Warning: Citation `Narisma2007' on page 23 undefined on input li
+ne 523.
+
+
+Package natbib Warning: Citation `Wilks1997' on page 23 undefined on input line
+ 523.
+
+
+Package natbib Warning: Citation `Kundzewicz2004' on page 23 undefined on input
+ line 523.
+
+
+Package natbib Warning: Citation `Westra2013' on page 23 undefined on input lin
+e 523.
+
+
+Package natbib Warning: Citation `Jones2009' on page 23 undefined on input line
+ 523.
+
+
+Package natbib Warning: Citation `Holper2011' on page 23 undefined on input lin
+e 525.
+
+
+Package natbib Warning: Citation `Gorgen2006' on page 23 undefined on input lin
+e 525.
+
+
+Package natbib Warning: Citation `McAlpine2007' on page 23 undefined on input l
+ine 525.
+
+
+Package natbib Warning: Citation `Hirsch1985' on page 23 undefined on input lin
+e 525.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [23]
+Overfull \hbox (2.15024pt too wide) in paragraph at lines 535--536
+\T1/ntxtlf/m/n/10 change has changed lo-cal rain-fall. The semi-parametric meth
+od and non-parametric method 
+ []
+
+
+Package natbib Warning: Citation `Gorgen2006' on page 24 undefined on input lin
+e 537.
+
+
+Package natbib Warning: Citation `Pitman2007' on page 24 undefined on input lin
+e 537.
+
+(chap3_paper_WVversion.bbl [24] [25]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [26]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [27]
+Underfull \hbox (badness 10000) in paragraph at lines 422--425
+[]\T1/ntxtlf/m/n/10 The State Gov-ern-ment of Vic-to-ria (2011), Bush-fire his-
+ 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 422--425
+\T1/ntxtlf/m/n/10 tory, Avail-able on-line at $\T1/aett/m/n/10 http : / / www .
+ dse . vic . gov . au / 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [28])
+
+! LaTeX Error: \begin{document} ended by \end{article}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.593 \end{article}
+                   
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Package natbib Warning: There were undefined citations.
+
+[29] (chap3_paper_WVversion.aux
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 7281 strings out of 493318
+ 98522 string characters out of 3138989
+ 152870 words of memory out of 3000000
+ 10566 multiletter control sequences out of 15000+200000
+ 104886 words of font info for 161 fonts, out of 3000000 for 9000
+ 1147 hyphenation exceptions out of 8191
+ 41i,11n,37p,1757b,623s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/rver4657/AppData/Roaming/MiKTeX/2.9/fonts/enc/dvips/newtx/ntx-ec-tl
+f.enc}{C:/Users/rver4657/AppData/Roaming/MiKTeX/2.9/fonts/enc/dvips/newtx/ntx-o
+t1-tlf.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}{C:/Program
+ Files/MiKTeX 2.9/fonts/enc/dvips/base/ec.enc}{C:/Program Files/MiKTeX 2.9/font
+s/enc/dvips/tex-gyre/q-ts1.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/tex
+-gyre/q-ec.enc} <C:\Users\rver4657\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jkn
+appen\ec\dpi600\ecrm1000.pk><C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
+fonts/cm/cmss8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmtt10.pfb><C:/Users/rver4657/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/new
+tx/ntxsups-Regular.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre
+/qhvr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmb.pfb><C:
+/Program Files/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmbi.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/tex-gyre/qtmr.pfb><C:/Program Files/MiKTeX 2.9
+/fonts/type1/public/tex-gyre/qtmri.pfb><C:/Users/rver4657/AppData/Roaming/MiKTe
+X/2.9/fonts/type1/public/newtx/rntxmi.pfb><C:/Users/rver4657/AppData/Roaming/Mi
+KTeX/2.9/fonts/type1/public/newtx/rntxmi7.pfb><C:/Users/rver4657/AppData/Roamin
+g/MiKTeX/2.9/fonts/type1/public/newtx/rtxbmi-rev.pfb><C:/Program Files/MiKTeX 2
+.9/fonts/type1/public/txfonts/rtxmi.pfb><C:/Users/rver4657/AppData/Roaming/MiKT
+eX/2.9/fonts/type1/public/newtx/rtxmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
+ype1/public/txfonts/rtxr.pfb><C:/Users/rver4657/AppData/Roaming/MiKTeX/2.9/font
+s/type1/public/newtx/txbsys.pfb><C:/Users/rver4657/AppData/Roaming/MiKTeX/2.9/f
+onts/type1/public/newtx/txexs.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/txfonts/txsyc.pfb><C:/Users/rver4657/AppData/Roaming/MiKTeX/2.9/fonts/type1/
+public/newtx/txsys.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri
+8a.pfb>
+Output written on chap3_paper_WVversion.pdf (29 pages, 560923 bytes).
+PDF statistics:
+ 245 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+
