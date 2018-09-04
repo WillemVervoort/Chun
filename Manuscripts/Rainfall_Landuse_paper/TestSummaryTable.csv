@@ -1,0 +1,5 @@
+State,Year,LC variable,t-test regression \& model residuals,t-test residuals \& excluding 2006 and 2010,Z' score,t-test pixels positive Z' score,t-test other pixels
+Qld,2009,small area on west side,not significant,slightly more rain after,21% of pixels at p < 0.1,significantly less rain after,no difference
+,2015,no pixels significant,less rain before,no significant difference,1 pixel at p < 0.1,,
+NSW/VIC,2009,Large area,less rain after,significantly less rain after,2.6% of pixels at p < 0.1,100 mm/month less rain after (p < 0.05),24 mm/month less rain after (p < 0.05)
+,2015,Smaller area than 2009,slightly less rain after,slightly more rain after,no pixels at p < 0.1,,

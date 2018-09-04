@@ -1,0 +1,53 @@
+Look up Nair 2011, and check whether there is really a measured rainfall decrease.
+No, their owrk is really looking at afine temporal scale (event based) but they find no conclusive evidence
+
+Rewrote the intro and shortened to make it more focussed on the idea of methodology and not just Australia
+
+We need a reference for EVI for biomass: Guernschman et al (2009); Glenn et al. (2008); Zhou et al. (2016)
+
+Need to reanalyse the NSW series for shorter and longer timeseries to study the effect of the tree regrowth
+This does have an effect and I think I need to show at least 5 year and full time period.
+
+
+DCLD data set, check length. Is this now until 2017? 
+DCLD data set, check length. Is this now until 2017? 
+Check data lengths of all data sets and describe and use correctly
+I think all data lengths are 2000 - 2015 for the spatial data. 
+Rainfall = 1979 - 2015
+
+Rerun the analysis for landcover in the model and there is still no real significant effect of the landcover factor in the GAM in Queensland. Underlying trend is also not significant in QLD, but some indication of a long term trend in NSW/VIC. All values are small and positive (10E-4 to 10E-3
+Figure of the R2 histogram of the full GAM model for QLD and NSW
+p-values of other smooth variables shows: month, IOD and SOI only real significant values in NSW/VIC; month, SOI, NINO3.4 and NINO4 significant in QLD
+
+So results show that there are positive and negative z values, but most are not significant. However in the shorter period (- 2009) There is a significant difference in the rainfall, but how much of this is due to the drought?? Should also run to 2010.
+
+So the bootstrapping really becomes irrelevant, except maybe to show that you can get similar Z values randomly.
+At the moment, the length of analysis is more important than the actual question of what is "significant"
+
+It also depends how you define "significant"
+
+Major differences in whether you run the analysis on 7 or 8 years or to 2015
+
+High vegetation queensland 2015:
+https://www.stateoftheenvironment.des.qld.gov.au/2015/biodiversity/terrestrial-ecosystems/land-clearing-impact-on-woody-native-vegetation
+need to make an argument why there is soo much greening.
+Download overview timeseries and plot to show strong decrease in clearing.
+Then cite papers to talk about regrowth
+
+Residual analysis
+Residuals of regression model:
+For the Queensland locations: No significant difference if measured to 2009 and slightly less rain (p < 0.05) before if measured to 2015 (~ 2 mm/month) 
+For the NSW/VIC locations: slightly more rain (p < 0.05) after the change if measured to 2015 (~ 1 mm/month), significantly less rain (p < 0.05) after the change (~ 9 mm/month) if measured to 2009
+
+Monthly rainfall difference excluding 2006 and 2010
+For the Queensland locations: No difference for the full period, but for the period to 2009, there is slightly more rain (p < 0.05, ~ 2mm/month) before than after
+For the NSW/VIC locations: For the full period, there is slightly more rain (p < 0.05) after the change if measured to 2015 (~ 2 mm/month), and for the period to 2009 there is still significantly less rain (p < 0.05, ~ 5 mm).
+
+For pixels where Z pos and excluding 2006 & 2010
+Qld for the full period (only 1 pixel) so not really relevant
+Qld for the period to 2009: Significantly more rain before than after at p < 0.05
+NSW/VIC for the period to 2009: Significantly more rain before than after at p < 0.05: 100mm/month
+
+For pixels where Z is not significant (p < 0.1 and Z negative):
+Qld for the period to 2009: no difference before and after
+NSW/VIC: signifcantly less rain after, but difference in rain smaller than for positive and signifcant Z: 24 mm/month

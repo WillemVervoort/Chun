@@ -1,3 +1,4 @@
+/Data/*.* filter=lfs diff=lfs merge=lfs -text
 C:\Program Files\Git\DATA filter=lfs diff=lfs merge=lfs -text
 .RDS filter=lfs diff=lfs merge=lfs -text
 DATA filter=lfs diff=lfs merge=lfs -text
