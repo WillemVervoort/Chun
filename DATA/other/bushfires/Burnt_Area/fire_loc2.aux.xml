@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:6ec7136ceee8aec7913fcdd50739d0ec1666900a69050c3581c7999378b75d48
-size 333
+<PAMDataset>
+  <SRS>GEOGCS[&quot;GCS_WGS_1984&quot;,DATUM[&quot;D_unknown&quot;,SPHEROID[&quot;WGS84&quot;,6378137.0,298.257223563]],PRIMEM[&quot;Greenwich&quot;,0.0],UNIT[&quot;Degree&quot;,0.017453292519943295]]</SRS>
+  <PAMRasterBand band="1">
+    <NoDataValue>2.55000000000000E+002</NoDataValue>
+  </PAMRasterBand>
+</PAMDataset>

@@ -1,5 +1,5 @@
 ---
-title: Detecting influences of changes in land cover on observed rainfall.
+title: Detecting the impact of land cover change on observed rainfall.
 author:
   - name: Chun X. Liang
     email: summer.chunliang@gmail.com 

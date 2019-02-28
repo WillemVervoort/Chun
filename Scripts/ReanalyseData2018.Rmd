@@ -1,0 +1,1290 @@
+---
+title: "Chun's paper restart analysis"
+author: "Willem Vervoort, Chun Liang, Floris van Ogtrop"
+date: "`r format(Sys.Date(),'%d-%m-%Y')`"
+output: 
+    pdf_document:
+      fig_width: 7
+      fig_height: 6
+      fig_caption: true
+---
+```{r setup, warning=F, message=F, echo=F}
+# root dir
+knitr::opts_knit$set(root.dir =  
+"E:/Cloudstor/Chun/Chun")
+
+library(knitr)
+require(tidyverse)
+require(lubridate)
+require(raster)
+require(lme4)
+## ----rcurl----------------------------------------------------------
+require(curl)
+require(ncdf4)
+require(maptools)
+require(mgcv)
+require(fields)
+require(gridExtra)
+require(RColorBrewer)
+require(rgeos)
+```
+
+
+```{r mapping, echo = F, eval=T}
+  
+## define the boundary of sub-regions
+   e1 <- extent(c(1324304.091,1723901.773,-222556.668,80451.265))
+   e2 <- extent(c(1346395.141,1534425.527,-1169402.246,-607644.171))
+  # 
+   e11 <- extent(c(145.425, 149.025, -28.475, -25.175))
+   e22 <- extent(c(146.675, 149.325, -37.075, -34.675))
+
+  e111 <- extent(c(145.825, 148.625, -28.075, -25.575)) 
+  e222 <- extent(c(147.075, 148.925, -36.675, -35.075)) 
+
+## the selected regions for mapping
+root_dir <- "e:/cloudstor/chun/chun/data"
+aus_reg <- readShapePoly(paste(root_dir,
+                               "Geo\\aus_state2011\\STE11aAust.shp",sep="/"),
+                         proj4string=CRS("+proj=lcc +lat_1=-18 +lat_2=-36 +lat_0=-27 +lon_0=132 +x_0=0 +y_0=0"))
+aus_reg2 <- gSimplify(aus_reg,0.01,topologyPreserve=T)
+
+mdb_reg <- readShapePoly(paste(root_dir,
+                               "Geo\\MDB\\mdb_boundary.shp", sep="/"),
+                               proj4string=CRS("+proj=lcc +lat_1=-18 +lat_2=-36 +lat_0=-27 +lon_0=132 +x_0=0 +y_0=0"))
+mdb_reg2 <- gSimplify(mdb_reg,0.01,topologyPreserve=TRUE)
+
+#remove(list=c("aus_reg","mdb_reg"))
+
+
+ 
+```
+
+# Introduction
+
+This is a rewrite of the paper to tackle the issues that are still remaining. 
+
+Here is the general approach proposed:
+
+1. Run a regression model on the tree cover data (mixed model): $Tree_cover ~ time(years) + AR1(error)$. The H_0 would be that the tree cover has not changed in time. This model would also more clearly identify those years where change in tree cover is likely (but cannot confirm this).  
+2. Run a regression model that removes the variation in monthly rainfall and tests the significance of a "tree_cover" variable. This model also includes the monthly rainfall averaged over the Murray Darling Basin, which might mean that variables such as "season" is no longer needed. $Rainfall ~ Monthly_{MDBRain} +  SST + trend_{treecover} + trend_{time} + AR1(error)$    
+3. Calculate monthly rainfall residuals using a regression model (based on the above model, but dropping the tree cover trend term): $RainfallResiduals ~ Rainfall - Monthly_{MDBRain} + SST + trend_{time}$  
+4. Running Mann-Whitney or Pettitt tests on the rainfall residuals. However, Serinaldi et al argue that the MK and Pettitt tests are equivalent on timeseries data (give very similar results).  
+
+# Step 1, Tree cover change
+
+First we load the data, using the older code
+```{r treeCover,eval=T , echo = F}
+
+rootdir <-"E:/cloudstor/chun2/data/satellite/MOD44/B"
+
+# read in the file list from the directory
+x <- dir(path=rootdir,pattern="Percent_Tree_Cover.tif")
+# Identify the different states in the images
+# NSW
+NSW <- x[grep("NSW",x)]
+# Qld
+Qld <- x[grep("Qld",x)]
+
+img <- list()
+# raster and brick
+for(i in 1:length(NSW)) {
+  img[[i]] <- raster(paste(rootdir,NSW[i],sep="/"))
+}
+
+imgQ <- list()
+# raster and brick
+for(i in 1:length(Qld)) {
+  imgQ[[i]] <- raster(paste(rootdir,Qld[i],sep="/"))
+}
+
+NSW_b <- do.call(brick,img)
+Qld_b <- do.call(brick, imgQ)
+
+# NSW
+tm <- seq(as.Date("2000-03-06"), as.Date("2016-03-06"), "year")
+mod_tc_r22 <- setZ(NSW_b, tm, "year")
+# Qld
+mod_tc_r11 <- setZ(Qld_b, tm, "year")
+
+
+
+```
+
+### plot for NSW
+
+```{r tree_coverNSW}
+
+NSW_data <- as.tibble(rasterToPoints(mod_tc_r22))
+colnames(NSW_data)[3:19] <- as.character(tm)
+
+NSWdata <- NSW_data %>%
+  gather(key="Year", value="Tree_cover", `2000-03-06`:`2016-03-06`) %>%
+  filter(Tree_cover < 200)
+NSWdata %>%
+  ggplot(aes(as.factor(Year),Tree_cover)) + geom_boxplot() +
+  xlab("Year") + ylab("Tree cover %") +
+  ggtitle("Percent tree cover change NSW") +
+  theme(axis.text.x = element_text(angle=45, size=rel(1.5)),
+        axis.text.y = element_text(size=rel(1.5)),
+        axis.title = element_text(size=rel(2), face = "bold"))
+
+mod_NSW <- lmer(Tree_cover ~ as.factor(Year) + (1|Year),
+               data = NSWdata)
+summary(mod_NSW)
+
+
+```
+
+This shows that in NSW the years 2003 and 2004 were likley to be different from the mean at p < 0.10, and they were less than the mean. all the other years had higher p values (and are thus less likely to be different from the mean). These would coincide with the bushfire.
+
+### plot for QLD
+
+```{r tree_coverQLD}
+
+QLD_data <- as.tibble(rasterToPoints(mod_tc_r11))
+colnames(QLD_data)[3:19] <- as.character(tm)
+
+QLDdata <- QLD_data %>%
+  gather(key="Year", value="Tree_cover", `2000-03-06`:`2016-03-06`) %>%
+  mutate(Tree_cover = replace(Tree_cover,Tree_cover == 200, NA))
+QLDdata %>%
+  ggplot(aes(as.factor(Year),Tree_cover)) + geom_boxplot() +
+  xlab("Year") + ylab("Tree cover %") +
+  ggtitle("Percent tree cover change QLD") +
+  theme(axis.text.x = element_text(angle=45, size=rel(1.5)),
+        axis.text.y = element_text(size=rel(1.5)),
+        axis.title = element_text(size=rel(2), face = "bold"))
+
+mod_QLD <- lmer(Tree_cover ~ as.factor(Year) + (1|Year),
+               data = QLDdata)
+summary(mod_QLD)
+
+```
+
+For Qld only the years 2010 and 2012 are likely to be different from the mean (p < 0.10) and were consistently higher than the mean in % cover, they were also two very wet years.
+
+# Step 2 Rainfall regression model
+
+This mainly repeats the analysis that has been done in the earlier versions of the paper.  But there are some changes:
+
+- the correlation analysis is done in another script "CorrelationClimateRainfall2018.Rmd"  
+- We have decided to use SILO data as the ANUCLIM (finer grid data) only extends to 2014 and therefore we cannot capture 2016  
+
+## load the data
+
+All the older climate index data
+
+```{r climaticIndex,eval=T , echo = F}
+
+# climate indicator data
+file1 <- "Data\\BoM\\SOI\\SOI.csv"
+SOI <- read_csv(file1)
+SOI <- gather(SOI,key="Month", value="SOI",Jan:Dec)
+SOI <- SOI[order(as.Date(paste(SOI$Year,SOI$Month,
+                                        "01",sep="-"), "%Y-%b-%d")),]
+SOI_37Y <- SOI %>%
+  filter(Year > 1978 & Year <= 2016)
+#SST34
+file2 <- "Data\\BoM\\SST\\SST34_anomaly.nc"
+SST34 <- nc_open(file2)
+SST34_var <- ncvar_get(SST34,SST34$var[[1]])
+nc_close(SST34)
+SST34_df <- tibble(Date = seq.Date(as.Date("1856-01-01"),
+                                   as.Date("2018-04-01"),
+                                   by="month"),
+                   SST34 = SST34_var)
+SST34_37Y <- SST34_df %>%
+  filter(Date >= "1979-01-01" & Date < "2017-01-01")
+
+# SST3
+file3 <- "Data\\BoM\\SST\\SST3_anomaly.nc"
+SST3 <- nc_open(file3)
+SST3_var <- ncvar_get(SST3,SST3$var[[1]])
+nc_close(SST3)
+SST3_df <- tibble(Date = seq.Date(as.Date("1856-01-01"),
+                                   as.Date("2018-04-01"),
+                                   by="month"),
+                   SST3 = SST3_var)
+SST3_37Y <- SST3_df %>%
+  filter(Date >= "1979-01-01" & Date < "2017-01-01")
+
+#SST4
+file4 <- "Data\\BoM\\SST\\SST4_anomaly.nc"
+SST4 <- nc_open(file4)
+SST4_var <- ncvar_get(SST4,SST4$var[[1]])
+nc_close(SST4)
+SST4_df <- tibble(Date = seq.Date(as.Date("1856-01-01"),
+                                   as.Date("2018-04-01"),
+                                   by="month"),
+                   SST4 = SST4_var)
+SST4_37Y <- SST4_df %>%
+  filter(Date >= "1979-01-01" & Date < "2017-01-01")
+
+# PDO
+file5 <- "Data\\BoM\\PDO\\PDO.latest_1900-.txt"
+pdo_mth <- read_table(file5)
+pdo_mth <- gather(pdo_mth,key="Month", value="PDO", JAN:DEC)
+pdo_mth$YEAR <- substr(pdo_mth$YEAR,1,4)
+pdo_mth <- pdo_mth[order(as.Date(paste(pdo_mth$YEAR,pdo_mth$Month,
+                                        "01",sep="-"), "%Y-%b-%d")),]
+PDO_37Y <- pdo_mth %>%
+  filter(YEAR > 1978 & YEAR <= 2016)
+## deseasonalised PDO
+# PDO_100 <- ds(PDO_100a$PDO,ic = "AIC", type = "monthly",
+#               standardizeQ=F)$z
+
+#IOD
+file7 <- "Data\\BoM\\IOD\\iod_jamstec.txt"
+IOD <- read_table2(file7)
+IOD <- tibble(Date = seq.Date(as.Date("1870-01-16"),
+                                   as.Date("2018-03-16"),
+                                   by="month"),
+              IOD = IOD$`DMI(=West-East)`)
+IOD_37Y <- IOD %>%
+  filter(Date > "1979-01-01" & Date < "2017-01-01")
+# end of read data
+# should write out useful data
+#save.image("../../data/data_environment.Rdata")
+```
+
+### Rainfall
+
+Downloading from SILO. Can be replaced by ANUCLIM if the data to 2016 becomes available
+
+```{r Rainfall}
+
+# SILO data
+
+## ----extract_Silo-----------------------------------------------------
+years <- seq(1979,2016,by=1)
+
+SILOdata <- list()
+
+# run a loop
+for (i in 1:length(years)) {
+   # url <- paste("https://s3-ap-southeast-2.amazonaws.com/silo-open-data/annual/monthly_rain/",
+   #              years[i],
+   #              ".monthly_rain.nc",sep="")
+   # curl_download(url,
+   #               paste("data/monthly_rainfall_",years[i],".nc",sep=""))
+  SILOdata[[i]] <- brick(paste("data/monthly_rainfall_",years[i],".nc",
+                          sep=""),varname="monthly_rain")
+}
+
+SILOdata__b <- do.call(stack, SILOdata)
+
+#crop to extents
+e111 <- extent(c(145.825, 148.625, -28.075, -25.575)) 
+e222 <- extent(c(147.075, 148.925, -36.675, -35.075)) 
+
+#  NSW
+SILOdata.NSW <- crop(SILOdata__b, extent(e222)) 
+#QLD
+SILOdata.QLD <- crop(SILOdata__b, extent(e111))
+# MDB
+mdb_reg <- readShapePoly("data/Geo\\MDB\\mdb_boundary.shp",
+                               proj4string=CRS("+proj=lcc +lat_1=-18 +lat_2=-36 +lat_0=-27 +lon_0=132 +x_0=0 +y_0=0"))
+SILOdata.MDB <- crop(SILOdata__b, extent(mdb_reg))
+
+aus_reg <- readShapePoly("data/Geo\\aus_state2011\\STE11aAust.shp",
+                         proj4string=CRS("+proj=lcc +lat_1=-18 +lat_2=-36")) 
+
+
+# remove orig
+rm(SILOdata)
+rm(SILOdata__b)
+# test -----------------------------
+# require(rasterVis)
+# gplot(SILOdata.NSW[[1]])  + geom_tile(aes(fill = value)) + coord_equal() +
+#   facet_wrap(~variable) + scale_fill_gradient(low="darksalmon", high="blue",
+#                                         guide="colorbar",na.value="white") +
+#   xlab("Longitude") + ylab("Latitude")
+# ------------------------
+
+# rewrite as a monthly dataframe
+# NSW
+rainNSW_t <- as.tibble(data.frame(Date =  seq.Date(as.Date("1979-01-01"),
+                                   as.Date("2016-12-31"),by="month"),
+                                  rain=t(SILOdata.NSW@data@values))) 
+
+# calculate mean by row
+nsw_mean <- rainNSW_t %>%
+  mutate(Means = rowMeans(.[,-1], na.rm = T)) %>%
+  dplyr::select(Date,Means)
+
+rm(SILOdata.NSW)
+
+# Qld
+rainQld_t <- as.tibble(data.frame(Date =  seq.Date(as.Date("1979-01-01"),
+                                   as.Date("2016-12-31"),by="month"),
+                                  rain=t(SILOdata.QLD@data@values))) 
+
+# calculate mean by row
+qld_mean <- rainQld_t %>%
+  mutate(Means = rowMeans(.[,-1], na.rm = T)) %>%
+  dplyr::select(Date,Means)
+
+rm(SILOdata.QLD)
+
+# MDB
+rainMDB_t <- as.tibble(data.frame(Date =  seq.Date(as.Date("1979-01-01"),
+                                   as.Date("2016-12-31"),by="month"),
+                                  rain=t(SILOdata.MDB@data@values))) 
+
+# calculate mean by row
+MDB_mean <- rainMDB_t %>%
+  mutate(MDBrain = rowMeans(.[,-1], na.rm = T)) %>%
+  dplyr::select(Date,MDBrain)
+
+rm(SILOdata.MDB)
+```
+
+# Regression model
+
+This regression model now includes the mean monthly MDB rainfall as an additional variable to take out the seasonal trend and the overall possible long term trends.
+
+
+```{r fullRegression}
+## predicting model: land cover is category variable
+rain.trend <- function(x,y,var.data) {
+  # add a very small number to take out 0 values
+  var.data$rain <- as.vector(unlist(y[x]))[1:nrow(var.data)]+0.0001
+
+      rain_fit <- gam(rain ~ MDB
+                  + s(SOI, k=3, bs="cs")
+                  + s(IOD, k=3, bs="cs")
+                  #+ s(PDO, k=3, bs="cs")
+                  + s(NINO3.4, k=3, bs="cs")
+                  + s(NINO4, k=3, bs="cs")
+                  + cover
+                  + trd
+                  , data=var.data,#family=Gamma(link=log),
+                  na.action = na.omit)
+    #
+  return(rain_fit)
+
+}
+
+## generate variables for the model
+trd <- seq(1:456)
+
+LC <- c(rep("tree",288),rep("clear",168))
+# different QLD scenarios
+LC_qld1 <- c(rep("tree",294),rep("clear",162)) ## after-change: from Jun 2003
+LC_qld2 <- c(rep("tree",300),rep("clear",156)) ## after- : from Jan 2004
+LC_qld3 <- c(rep("tree",306),rep("clear",150)) ## after- : from Jun 2004
+LC_qld4 <- c(rep("tree",312),rep("clear",144)) ## after- : from Jan 2005
+
+# NSW
+var.data <- data.frame(trd, MDB = MDB_mean$MDBrain, 
+                       SOI = SOI_37Y$SOI,
+                       IOD = IOD_37Y$IOD,
+                       PDO = PDO_37Y$PDO,
+                       NINO3.4 = SST34_37Y$SST34,
+                       NINO4 = SST4_37Y$SST4,
+                       cover = LC)
+
+# QLD
+# test different scenarios
+#
+var.qld2 <- data.frame(trd, MDB = MDB_mean$MDBrain, 
+                       SOI = SOI_37Y$SOI,
+                       IOD = IOD_37Y$IOD,
+                       PDO = PDO_37Y$PDO,
+                       NINO3.4 = SST34_37Y$SST34,
+                       NINO4 = SST4_37Y$SST4,
+                       cover = LC_qld2)
+
+var.qld4 <- data.frame(trd, MDB = MDB_mean$MDBrain,
+                       SOI = SOI_37Y$SOI,
+                       IOD = IOD_37Y$IOD,
+                       PDO = PDO_37Y$PDO,
+                       NINO3.4 = SST34_37Y$SST34,
+                       NINO4 = SST4_37Y$SST4,
+                       cover = LC_qld4)
+
+## run model for all periods
+## QLD
+coef.rain30.qld2 <- lapply(2:ncol(rainQld_t),
+                    function(x) rain.trend(x,rainQld_t,var.qld2))
+coef.rain30.qld4 <- lapply(2:ncol(rainQld_t),
+                       function(x) rain.trend(x,rainQld_t,var.qld4))
+# NSW/VIC
+coef.rain30.nswvic <- lapply(2:ncol(rainNSW_t),
+                   function(x) rain.trend(x,rainNSW_t,var.data))
+```
+
+Extract the sign and significance of the MDB variable. This is just to show that this variable is significant and has a consistent value across the area
+
+```{r}
+## extract sign of MDB, which is assumed to have a linear relationship with
+## the rainfall in the area
+# Qld
+MDB_qld <- unlist(lapply(1:length(coef.rain30.qld4),function(x) ifelse(summary(coef.rain30.qld4)[x,2]=="gam",summary(coef.rain30.qld4[[x]])$p.coeff[2],NA)))
+# NSW/VIC
+MDB_nswvic <- unlist(lapply(1:length(coef.rain30.nswvic),function(x) ifelse(summary(coef.rain30.nswvic)[x,2]=="gam",summary(coef.rain30.nswvic[[x]])$p.coeff[2],NA)))
+
+par(mfrow=c(2,1))
+hist(MDB_nswvic, xlab = "value of MDB rainfall estimate", main="NSW full data period")
+hist(MDB_qld, xlab = "value of MDB rainfall estimate", main="Qld full data period")
+
+```
+
+The value of the linear effect of the MDB rainfall is all positive and ranges from 0.8 - 2. Interestingly, in both locations, the rainfall is generally above the average monthly MDB rainfall.
+
+### Extract the sign of C, which is the tree cover effect.
+
+```{r}
+## extract sign of C (the tree cover effect)
+C30_qld <- unlist(lapply(1:length(coef.rain30.qld4),function(x) ifelse(summary(coef.rain30.qld4)[x,2]=="gam",summary(coef.rain30.qld4[[x]])$p.coeff[3],NA)))
+# NSW/VIC
+C30_nswvic <- unlist(lapply(1:length(coef.rain30.nswvic),function(x) ifelse(summary(coef.rain30.nswvic)[x,2]=="gam",summary(coef.rain30.nswvic[[x]])$p.coeff[3],NA)))
+# NSW/VIC 7 year (includes 2009)
+#  C30_nswvic7 <- unlist(lapply(1:length(coef.rain30.nswvic7),function(x) ifelse(summary(coef.rain30.nswvic7)[x,2]=="gam",summary(coef.rain30.nswvic7[[x]])$p.coeff[2],NA)))
+# # NSW/VIC 8 year (includes 2010)
+#  C30_nswvic8 <- unlist(lapply(1:length(coef.rain30.nswvic8),function(x) ifelse(summary(coef.rain30.nswvic8)[x,2]=="gam",summary(coef.rain30.nswvic8[[x]])$p.coeff[2],NA)))
+
+par(mfrow=c(2,1))
+hist(unlist(lapply(1:length(coef.rain30.nswvic),function(x) ifelse(summary(coef.rain30.nswvic)[x,2]=="gam",summary(coef.rain30.nswvic[[x]])$p.coeff[3],NA))), xlab = "value of tree cover estimate", main="NSW full data period")
+hist(unlist(lapply(1:length(coef.rain30.qld4),function(x) ifelse(summary(coef.rain30.qld4)[x,2]=="gam",summary(coef.rain30.qld4[[x]])$p.coeff[3],NA))), xlab = "value of tree cover estimate", main="Qld full data period")
+
+```
+Tree cover effect values are quite significant on a linear relationship, but they are not all significant (see below). For NSW/VIC they are all positive, but for QLD they are centered around 0. What does it mean when they are positive? It is categorical variable, which is ranked alphabetically, so "clear" = 1 and "tree" = 2. This means that a positive coefficient (on a linear scale) means there is more rainfall with tree cover and less when it is "clear".
+
+
+```{r}
+
+
+# p-value of the linear variables
+pvalues_qld4 <- lapply(1:length(coef.rain30.qld4),
+   function(x) summary(coef.rain30.qld4[[x]])$p.pv[2:4])
+
+plinear_qld <- as.tibble(do.call(rbind,pvalues_qld4))
+colnames(plinear_qld) = c("MDB", "LC", "trd")
+plinear_qld$state <- "QLD"
+
+# NSW all data
+pvalues_nswvic <- lapply(1:length(coef.rain30.nswvic),
+    function(x) summary(coef.rain30.nswvic[[x]])$p.pv[2:4])
+
+plinear_nsw <- as.tibble(do.call(rbind,pvalues_nswvic))
+colnames(plinear_nsw) = c("MDB", "LC", "trd")
+plinear_nsw$state <- "NSW/VIC"
+
+# plotting
+p_plot_df <- rbind(plinear_qld,plinear_nsw)
+p_plot_df %>%
+  gather(key="Variable", value="p_value", MDB:trd) %>%
+  ggplot(aes(p_value,fill=state)) + geom_histogram(alpha=0.5) +
+  facet_wrap(~Variable) +
+  scale_fill_manual(values = c("blue","red")) +
+  theme(axis.title = element_text(size = rel(2)),
+        axis.text = element_text(size=rel(1)),
+        strip.text = element_text(face="bold", size= rel(2)),
+        legend.text = element_text(face="bold", size= rel(1)),
+        legend.title = element_text(face="bold", size= rel(2)))
+# produce also as jpeg
+jpeg("figures/pvalues_linear_fullmodel.jpg", height=960, width=960)
+p_plot_df %>%
+  gather(key="Variable", value="p_value", MDB:trd) %>%
+  ggplot(aes(p_value,fill=state)) + geom_histogram(alpha=0.5) +
+  facet_wrap(~Variable) +
+  scale_fill_manual(values = c("blue","red")) +
+  theme(axis.title = element_text(size = rel(2)),
+        axis.text = element_text(size=rel(1)),
+        strip.text = element_text(face="bold", size= rel(2)),
+        legend.text = element_text(face="bold", size= rel(1)),
+        legend.title = element_text(face="bold", size= rel(2)))
+dev.off()
+
+rm(p_plot_df)
+
+
+
+## p value of seasons and climate indices
+p_qld <- do.call(rbind,
+                 lapply(1:length(coef.rain30.qld4), function(x) {
+                   ifelse(summary(coef.rain30.qld4)[x,2]=="gam",
+                      return(summary(coef.rain30.qld4[[x]])$s.pv),
+                                       return(rep(NA,6)))}))
+
+p_qld <- as.tibble(p_qld)
+colnames(p_qld) = c("SOI", "IOD", "NINO3.4", "NINO4")
+p_qld$state <- "QLD"
+
+p_nsw <- do.call(rbind,
+                 lapply(1:length(coef.rain30.nswvic), function(x) {
+                ifelse(summary(coef.rain30.nswvic)[x,2]=="gam",
+                  return(summary(coef.rain30.nswvic[[x]])$s.pv),
+                       return(rep(NA,6)))}))
+p_nsw <- as.tibble(p_nsw)
+colnames(p_nsw) = c("SOI", "IOD", "NINO3.4", "NINO4")
+p_nsw$state <- "NSW/VIC"
+
+p_plot_df <- rbind(p_qld,p_nsw)
+
+p_plot_df %>%
+  gather(key="Variable", value="p_value", SOI:NINO4) %>%
+  ggplot(aes(p_value,fill=state)) + geom_histogram(alpha=0.5) +
+  facet_wrap(~Variable) +
+  scale_fill_manual(values = c("blue","red")) +
+  theme(axis.title = element_text(size = rel(2)),
+        axis.text = element_text(size=rel(1.5)),
+        strip.text = element_text(face="bold", size= rel(2)),
+        legend.text = element_text(face="bold", size= rel(1.5)),
+        legend.title = element_text(face="bold", size= rel(2)))
+# produce also as jpg
+jpeg("figures/pvalues_fullmodel.jpg", height=960, width=960)
+p_plot_df %>%
+  gather(key="Variable", value="p_value", SOI:NINO4) %>%
+  ggplot(aes(p_value,fill=state)) + geom_histogram(alpha=0.5) +
+  facet_wrap(~Variable) +
+  scale_fill_manual(values = c("blue","red")) +
+  theme(axis.title = element_text(size = rel(2)),
+        axis.text = element_text(size=rel(1.5)),
+        strip.text = element_text(face="bold", size= rel(2)),
+        legend.text = element_text(face="bold", size= rel(1.5)),
+        legend.title = element_text(face="bold", size= rel(2)))
+#dev.off()
+rm(p_plot_df)
+
+```
+
+Clearly the MDB data is highly significant and takes out a lot of the variation in the model.This takes out quite a bit of variation out of the model for the climate indices, but at some locations these are still significant. It is also clear that the average MDB rainfall explains more of the variation in rainfall in QLD then it does in NSW/VIC. This is particularly clear in the significance of the other variables, which have much less significance in QLD.
+
+
+```{r}
+## extract r.sq of the model
+rsq_qld <- unlist(lapply(1:length(coef.rain30.qld4),
+          function(x) ifelse(summary(coef.rain30.qld4)[x,2]=="gam",
+                    summary(coef.rain30.qld4[[x]])$r.sq,NA)))
+rsq_nsw <- unlist(lapply(1:length(coef.rain30.nswvic),
+    function(x) ifelse(summary(coef.rain30.nswvic)[x,2]=="gam",
+                    summary(coef.rain30.nswvic[[x]])$r.sq,NA)))
+
+# show histogram
+plot_df <- data_frame(`r.squared` = c(rsq_qld,rsq_nsw),
+                      state = c(rep("QLD", length(rsq_qld)),
+                                rep("NSW/VIC", length(rsq_nsw))))
+
+#jpeg("../../figures/rsq_fullmodel.jpg", height=480, width=480)
+plot_df %>%
+  ggplot(aes(`r.squared`*100, fill=state)) + geom_histogram() +
+  scale_fill_manual(values = c("blue","red")) +
+  xlab(expression(paste("% of variability explained (",r^2,")")))
+#dev.off()
+
+plot_df %>%
+  group_by(state) %>%
+  summarise(mean_rsq = mean(`r.squared`))
+
+## frame of the two regions (100 years data)
+qld_tif <- raster("Data\\BoM\\rainfall\\AWAP\\from1900_FVG\\r19000101_qld.tif")
+nsw_tif <- raster("Data\\BoM\\rainfall\\AWAP\\from1900_FVG\\r19000101_nsw.tif")
+
+  dist_Cp30_qld4 <- raster(qld_tif)
+  dist_Cp30_qld4[] <- plinear_qld$LC
+
+#  jpeg("../../figures/Cp_30yrs_qld.jpg", width=1440, height=720)
+#  par(mfrow=c(1,2))
+  par(mar=c(3,3,1,7),xpd=T)
+  plot(e111,xlab="",ylab="", cex.lab = 2,
+       cex.axis=2)
+  image(dist_Cp30_qld4,col=c("red","orange","yellow","light blue"),breaks=c(0,0.05,0.1,0.2,1),legend=F,add=T)
+   plot(aus_reg,border="grey",add=T)
+  plot(mdb_reg,border="grey",lwd=3,add=T)
+  plot(e111,add=T)
+  image.plot(zlim=c(0,4),breaks=c(0,1,2,3,4),lab.breaks=c(0,0.05,0.1,0.2,1),legend.only=T,horizontal=F,col=c("red","orange","yellow","light blue"),legend.shrink=0.6,legend.width=0.7,legend.args=list(text="p value",line=1,cex=2,font=2),axis.args=list(cex.axis=1.8))
+legend(148.7,-27.9,c("State","MDB"),col=c("grey","grey"),lwd=c(1,3),bty="n",title="Boundary",cex=1)
+
+
+  dist_Cp30_nsw <- raster(nsw_tif)
+  dist_Cp30_nsw[] <- plinear_nsw$LC
+#
+#  jpeg("../../figures/Cp_30yrs_nswvic.jpg", width=1440, height=720)
+#  par(mfrow=c(1,3))
+  par(mar=c(3,3,1,7),xpd=T)
+  plot(e222,xlab="",ylab="", cex.lab = 2,
+       cex.axis=2) #,border="white")
+  image(dist_Cp30_nsw,col=c("red","orange","yellow","light blue"),breaks=c(0,0.05,0.1,0.2,1),legend=F,add=T)
+  plot(aus_reg,border="grey75",lwd=5,add=T)
+  plot(mdb_reg,border="grey75",lwd=5,add=T)
+  plot(e222,add=T)
+  image.plot(zlim=c(0,4),breaks=c(0,1,2,3,4),lab.breaks=c(0,0.05,0.1,0.2,1),legend.only=T,horizontal=F,col=c("red","orange","yellow","light blue"),legend.shrink=0.6,legend.width=0.7,legend.args=list(text="p value",line=1,cex=2,font=2),axis.args=list(cex.axis=1.8))
+  #dev.off()
+
+
+# Now make the final plot for the paper with both sites all data
+#  jpeg("../../figures/Cp_30yrs.jpg", width=1440, height=1440)
+  par(mfrow=c(2,1))
+  # NSW first
+  par(mar=c(3,3,1,9),xpd=T)
+  plot(e222,xlab="",ylab="", cex.lab = 2,
+       cex.axis=2) #,border="white")
+  image(dist_Cp30_nsw,col=c("red","orange","yellow","light blue"),breaks=c(0,0.05,0.1,0.2,1),legend=F,add=T)
+  plot(aus_reg,border="grey75",lwd=5,add=T)
+  plot(mdb_reg,border="grey75",lwd=5,add=T)
+  plot(e222,add=T)
+  image.plot(zlim=c(0,4),breaks=c(0,1,2,3,4),lab.breaks=c(0,0.05,0.1,0.2,1),legend.only=T,horizontal=F,col=c("red","orange","yellow","light blue"),legend.shrink=0.6,legend.width=0.7,legend.args=list(text="p value",line=1,cex=2,font=2),axis.args=list(cex.axis=1.8))
+legend(149,-36.6,c("State","MDB"),col=c("grey","grey"),
+       lwd=c(1,3),bty="n",title="Boundary",cex=1.8)
+  #dev.off()
+
+  # Then qld
+  par(mar=c(3,3,1,9),xpd=T)
+  plot(e111,xlab="",ylab="", cex.lab = 2,
+       cex.axis=2)
+  image(dist_Cp30_qld4,col=c("red","orange","yellow","light blue"),breaks=c(0,0.05,0.1,0.2,1),legend=F,add=T)
+  plot(aus_reg,border="grey",add=T)
+  plot(mdb_reg,border="grey",lwd=3,add=T)
+  plot(e111,add=T)
+  image.plot(zlim=c(0,4),breaks=c(0,1,2,3,4),lab.breaks=c(0,0.05,0.1,0.2,1),legend.only=T,horizontal=F,col=c("red","orange","yellow","light blue"),legend.shrink=0.6,legend.width=0.7,legend.args=list(text="p value",line=1,cex=2,font=2),axis.args=list(cex.axis=1.8))
+
+```
+Overall, more of the variation in the rainfall is explained in QLD compared to NSW/VIC by the model. THe NSW/VIC model shows an almost bimodal distribution of the r-squared.
+
+In terms of the spatial distribution of the significance of the tree cover (LC) effect, there is little evidence of a consistent change in the rainfall due to tree cover in QLD. However across the NSW/VIC area there is a significant area of change, and as indicated earlier, this change is all positive, suggesting more rainfall with tree cover.
+  
+### Rainfall model residuals
+
+```{r}
+#
+resid_qld <- lapply(1:length(coef.rain30.qld4), function(x) if(summary(coef.rain30.qld4)[x,2]=="gam") {residuals(coef.rain30.qld4[[x]])} else{NA})
+
+# ## calculate mean residual
+  test <- do.call(cbind,resid_qld)
+  qld.resid.mean <- apply(test,1, mean,na.rm=T)
+  residuals <- data_frame(Dates = seq.Date(as.Date("1979-01-01"),
+                             length = length(qld.resid.mean),
+                                           by = "month"),
+                          QLD = qld.resid.mean)
+#
+resid_nswvic <- lapply(1:length(coef.rain30.nswvic),
+            function(x) if(summary(coef.rain30.nswvic)[x,2]=="gam")
+              {residuals(coef.rain30.nswvic[[x]])} else{NA})
+
+## calculate mean residual
+test <- do.call(cbind,resid_nswvic)
+nswvic.resid.mean <- apply(test,1, mean,na.rm=T)
+residuals$NSWVIC <- nswvic.resid.mean
+
+
+## plots
+residuals %>%
+  gather(key="State", value="residual", QLD, NSWVIC) %>%
+  ggplot(aes(Dates,residual)) + geom_line(colour="blue") +
+  geom_vline(xintercept=as.numeric(as.Date("2003-01-01")), colour="red",
+             size=1.5) +
+  facet_wrap(~State)  +
+  theme(axis.text = element_text(size=rel(1.5)),
+        axis.title = element_text(size=rel(2)),
+        strip.text = element_text(size=rel(2), face = "bold"))
+
+jpeg("figures/GAMresidualTime.jpeg", height=960, width=960)
+residuals %>%
+  gather(key="State", value="residual", QLD, NSWVIC) %>%
+  ggplot(aes(Dates,residual)) + geom_line(colour="blue") +
+  geom_vline(xintercept=as.numeric(as.Date("2003-01-01")), colour="red",
+             size=1.5) +
+  facet_wrap(~State)  +
+  theme(axis.text = element_text(size=rel(1.5)),
+        axis.title = element_text(size=rel(2)),
+        strip.text = element_text(size=rel(2), face = "bold"))
+dev.off()
+
+
+#
+#
+## plot gam.check
+jpeg("figures/gam_check.jpg", width=720, height=960)
+  par(mfrow=c(4,2))
+  gam.check(coef.rain30.qld4[[1]])
+  gam.check(coef.rain30.nswvic[[1]])
+dev.off()
+
+```
+
+# Step 3 Residual trend analysis for model without tree cover
+
+This is the same model as above, but we have removed the tree cover variable.
+
+```{r model_noLC}
+## predicting model: land cover is category variable
+rain.trend3 <- function(x,y,var.data) {
+  # add a very small number to take out 0 values
+  var.data$rain <- as.vector(unlist(y[x]))[1:nrow(var.data)]+0.0001
+
+      rain_fit <- gam(rain ~ MDB
+                  + s(SOI, k=3, bs="cs")
+                  + s(IOD, k=3, bs="cs")
+                  #+ s(PDO, k=3, bs="cs")
+                  + s(NINO3.4, k=3, bs="cs")
+                  + s(NINO4, k=3, bs="cs")
+                  + trd
+                  , data=var.data,#family=Gamma(link=log),
+                  na.action = na.omit)
+    #
+  return(rain_fit)
+
+}
+
+## run model for 37 years
+mod_rain_qld4 <- lapply(2:ncol(rainQld_t),
+                       function(x) rain.trend3(x,rainQld_t,var.qld4))
+mod_rain_qld2 <- lapply(2:ncol(rainQld_t),
+                  function(x) rain.trend3(x,rainQld_t,var.qld2))
+## QLD
+rsq_qld <- unlist(lapply(1:length(mod_rain_qld4), 
+                    function(x) summary(mod_rain_qld4[[x]])$r.sq))
+#
+#
+## extract residual
+residual_qld <- lapply(1:length(mod_rain_qld4), 
+      function(x) {mod_rain_qld4[[x]]$y-fitted(mod_rain_qld4[[x]])})
+
+residual_qld2 <- lapply(1:length(mod_rain_qld2), 
+    function(x) {mod_rain_qld2[[x]]$y-fitted(mod_rain_qld2[[x]])})
+
+#
+# ## NSW/VIC
+#
+#NSW/VIC
+mod_rain_nswvic <- lapply(2:ncol(rainNSW_t), 
+                function(x) rain.trend3(x,rainNSW_t,var.data))
+
+## explaining power of the partial model
+rsq_nswvic <- unlist(lapply(1:length(mod_rain_nswvic), 
+              function(x) summary(mod_rain_nswvic[[x]])$r.sq))
+#
+
+# extract residual
+residual_nswvic <- lapply(1:length(mod_rain_nswvic),
+  function(x) {mod_rain_nswvic[[x]]$y-fitted(mod_rain_nswvic[[x]])})
+```
+
+### partial r-sq
+
+We can now analyse the residuals and the models. First we look at the partial explaining power of the climate indices in the model
+
+```{r plotResiduals}
+# histogram of partial model rsq
+qld_df <-  data.frame(rsq = rsq_qld*100,
+                      state = "Qld")
+nsw_df <-  data.frame(rsq = rsq_nswvic*100,
+                      state = "NSW/VIC")
+
+plot_df <- rbind(qld_df, nsw_df)
+#jpeg("../../figures/pmodel_explHistogram.jpg")
+plot_df %>%
+  ggplot(aes(rsq)) + geom_histogram(fill="blue") +
+  facet_wrap(~state) +
+  xlab(expression(paste("% of variability explained (",r^2,")"))) +
+  theme(axis.text = element_text(size=rel(1.5)),
+        strip.text = element_text(size=rel(2)),
+        axis.title = element_text(size=rel(2)))
+# dev.off()
+```
+
+Similar to earlier graph, shows that more of the variation is explained in Qld compared to NSW/VIC.
+
+### Residual distributions and t-test
+
+We can now analyse the residuals in more detail and look at t-tests
+
+```{r residualModelAnalysis}
+# stack the residuals
+
+# create a boxplot with the annual residuals from 1998
+resplot_df <- data_frame(Date = rep(ymd(rainNSW_t[[1]]),
+          length(residual_nswvic)+length(residual_qld)),
+          residuals = c(unlist(residual_nswvic),                                               unlist(residual_qld)),
+          State = c(rep("NSW/VIC",
+                        length(unlist(residual_nswvic))),
+                        rep("QLD", length(unlist(residual_qld)))))
+resplot_df %>%
+  filter(Date >= ymd("1998-01-01")) %>%
+  ggplot(aes(Date,residuals, fill=State)) +
+  geom_boxplot(aes(group=year(Date))) +
+  facet_wrap(~State, ncol=1)
+
+jpeg("figures/ResidualBoxplot.jpg")
+resplot_df %>%
+  filter(Date >= ymd("1998-01-01")) %>%
+  ggplot(aes(Date,residuals, fill=State)) +
+  geom_boxplot(aes(group=year(Date))) +
+  facet_wrap(~State, ncol=1)
+dev.off()
+
+
+# residuals before and after change
+#par(mfrow=c(1,2))
+jpeg("figures/ResidualBoxplotchange.jpg")
+p1 <- resplot_df %>%
+  filter(Date >= ymd("1998-01-01")) %>%
+  mutate(Change = ifelse(year(Date) > 2003, "After", "Before")) %>%
+  ggplot(aes(Change,residuals, fill= State)) +
+  geom_boxplot(aes(group=Change)) + facet_wrap(~State, ncol=1) +
+  guides(fill=FALSE) + ggtitle("whole period")
+#dev.off()
+
+#jpeg("../../figures/ResidualBoxplotchange2.jpg")
+p2 <- resplot_df %>%
+  filter(Date >= ymd("1998-01-01")) %>%
+  mutate(Change = ifelse(year(Date) > 2003, "After", "Before")) %>%
+  filter(year(Date) < 2010) %>%
+  ggplot(aes(Change,residuals, fill = State)) +
+  geom_boxplot(aes(group=Change)) + facet_wrap(~State, ncol=1) +
+  ylab(label="") + ggtitle("1998 - 2009")
+lay <- rbind(c(1,1,2,2,2))
+grid.arrange(p1,p2, layout_matrix = lay)
+dev.off()
+p1 <- resplot_df %>%
+  filter(Date >= ymd("1998-01-01")) %>%
+  mutate(Change = ifelse(year(Date) > 2003, "After", "Before")) %>%
+  ggplot(aes(Change,residuals, fill= State)) +
+  geom_boxplot(aes(group=Change)) + facet_wrap(~State, ncol=1) +
+  guides(fill=FALSE) + ggtitle("whole period")
+#dev.off()
+
+#jpeg("../../figures/ResidualBoxplotchange2.jpg")
+p2 <- resplot_df %>%
+  filter(Date >= ymd("1998-01-01")) %>%
+  mutate(Change = ifelse(year(Date) > 2003, "After", "Before")) %>%
+  filter(year(Date) < 2010) %>%
+  ggplot(aes(Change,residuals, fill = State)) +
+  geom_boxplot(aes(group=Change)) + facet_wrap(~State, ncol=1) +
+  ylab(label="") + ggtitle("1998 - 2009")
+lay <- rbind(c(1,1,2,2,2))
+grid.arrange(p1,p2, layout_matrix = lay)
+
+res2 <- resplot_df %>%
+  filter(Date >= ymd("1998-01-01")) %>%
+  mutate(Change = ifelse(year(Date) > 2003, "After", "Before")) %>%
+  #filter(year(Date) < 2010) %>%
+  filter(State == "QLD")
+
+  summary(lm(residuals~Change-1,data=res2))
+  t.test(formula=residuals~Change,data=res2)
+# No significant difference if measured to 2010 and slightly less rain (p < 0.05) before if measured to 2015 (~ 2 mm/month)
+
+
+res2 <- resplot_df %>%
+  filter(Date >= ymd("1998-01-01")) %>%
+  mutate(Change = ifelse(year(Date) > 2003, "After", "Before")) %>%
+  #filter(year(Date) < 2010) %>%
+  filter(State != "NSW/VIC")
+
+  summary(lm(residuals~Change-1,data=res2))
+  t.test(formula=residuals~Change,data=res2)
+
+
+```
+
+This does suggest that the residuals are significantly different before and after the change in landcover
+
+# step 4 Analysis of the residuals Mann-Whitney rank-sum statistic
+
+This mainly follows the original paper, except we will go straight for the averaging by 4 cells. The bootstrap analysis is also just run on the HPC, and we only pull in the results here
+
+```{r steptrend_ns4}
+## perform step test on the data using ns = 4
+## function to calculate the step trend statistic (Hirsch, 1985)
+stepTrend2 <- function(x,y,i, endyear=2015){
+#browser()
+    n1 <- 2003-1997
+
+    if (i==1){
+
+      z <- 56  # no. of column, related to the dim of the region
+      # Qld 57 by 51
+      # NSW 38 by 33
+
+    } else {
+
+    z <- 37 }
+
+if (x%%z!=0){ #& x%%z!=(z-1)) {
+    y.1 <- y[[x]]
+    y.2 <- y[[x+1]]
+    y.3 <- y[[x+z]]
+    y.4 <- y[[x+z+1]]
+
+    if(!is.na(y.1[1])&!is.na(y.2[1])&!is.na(y.3[1])&!is.na(y.4[1])) { 
+    if (i == 1) {
+      n2 <- endyear-2004
+      v.1 <- ts(y.1[c(229:288,313:length(y.1))],
+                start=c(1997,1),frequency=12)
+      v.2 <- ts(y.2[c(229:288,313:length(y.1))],
+                start=c(1997,1),frequency=12)
+      v.3 <- ts(y.3[c(229:288,313:length(y.1))],
+                start=c(1997,1),frequency=12)
+      v.4 <- ts(y.4[c(229:288,313:length(y.1))],
+                start=c(1997,1),frequency=12)
+
+    } else {
+
+      n2 <- endyear-2003
+
+      v.1 <- ts(y.1[c(229:length(y.1))],
+                start=c(1997,1),frequency=12)
+      v.2 <- ts(y.2[c(229:length(y.2))],
+                start=c(1997,1),frequency=12)
+      v.3 <- ts(y.3[c(229:length(y.3))],
+                start=c(1997,1),frequency=12)
+      v.4 <- ts(y.4[c(229:length(y.4))],
+                start=c(1997,1),frequency=12)
+}
+
+## rank by month
+   for (j in 1:12) {
+    assign(paste("r1",j,sep=""),rank(subset(v.1,cycle(v.1)==j)))
+    assign(paste("r2",j,sep=""),rank(subset(v.2,cycle(v.2)==j)))
+    assign(paste("r3",j,sep=""),rank(subset(v.3,cycle(v.3)==j)))
+    assign(paste("r4",j,sep=""),rank(subset(v.4,cycle(v.4)==j)))
+
+    }
+
+## mann-whitney rank sum statistic
+    rlist.1 <- list(r11,r12,r13,r14,r15,r16,r17,r18,r19,r110,r111,r112) ## full year
+    rlist.2 <- list(r21,r22,r23,r24,r25,r26,r27,r28,r29,r210,r211,r212)
+    rlist.3 <- list(r31,r32,r33,r34,r35,r36,r37,r38,r39,r310,r311,r312)
+    rlist.4 <- list(r41,r42,r43,r44,r45,r46,r47,r48,r49,r410,r411,r412)
+    rlist <- list(unlist(rlist.1),unlist(rlist.2),unlist(rlist.3),unlist(rlist.4)) 
+    
+    w.s1 <- 0
+    w.s2 <- 0
+    w.s3 <- 0
+    w.s4 <- 0
+
+for (k in 1:length(rlist.1)) {
+    w.s1 <- sum(rlist.1[[k]][1:n1])+w.s1
+    w.s2 <- sum(rlist.2[[k]][1:n1])+w.s2
+    w.s3 <- sum(rlist.3[[k]][1:n1])+w.s3
+    w.s4 <- sum(rlist.4[[k]][1:n1])+w.s4
+    }
+    w.s <- sum(w.s1,w.s2,w.s3,w.s4) #,w.s5,w.s6,w.s7,w.s8,w.s9)
+
+## other statistic
+# mean for full year
+    mu <- n1*(n1+n2+1)/2
+    mu.s <- 12*4*mu
+
+## variance (standard variation). The autocorrelation of the residuals can be assumed to be null (checked, cor.test())
+# assume only cross correlation
+    ss <- n1*n2*(n1+n2+1)/12
+    ss.s <- 0
+    for (kk in 1:4) {
+      for (kkk in 1:4) {
+#         for (kkkk in 1:12) {
+          ss.s <- 12*ss*cor(rlist[[kk]],rlist[[kkk]]) + ss.s
+#         }
+      }
+    }
+
+## step trend statistic
+    z <- (w.s - mu.s)/sqrt(ss.s)
+
+    return(z) }
+
+     else {return(NA)} }
+
+     else {return(NA)}
+
+  }
+
+## 30 years
+## full year,
+## central QLD
+  qld.z.new <- unlist(lapply(1:(length(residual_qld)-57),function(x) stepTrend2(x,residual_qld,1)))
+  qld.z.new <- c(qld.z.new,rep(NA,57))
+  tr_qld.step.new <- raster(qld_tif)
+  tr_qld.step.new[] <- qld.z.new
+
+## NSW
+  nswvic.z.new <- unlist(lapply(1:(length(residual_nswvic)-38),function(x) stepTrend2(x,residual_nswvic,2)))
+  nswvic.z.new <- c(nswvic.z.new,rep(NA,38))
+
+
+  tr_nswvic.step.new <- raster(nsw_tif)
+  tr_nswvic.step.new[] <- nswvic.z.new
+plotclt <- rev(brewer.pal(8,"RdYlBu"))
+
+jpeg("figures/step_new.jpg", width=1240, height=960, quality=100)
+  par(mar=c(3,3,1,9), mfrow=c(2,2), xpd=T)
+  plot(e222,xlab="",ylab="", cex.axis=2)#,border="white")
+  image(tr_nswvic.step.new,col=plotclt,breaks=c(-2.3,-1.645,-1.282,-0.842,0,0.842,1.282,1.645,3),legend=F,add=T)
+  plot(mdb_reg2,border="grey",add=T,lwd=3)
+  plot(aus_reg2,border="grey",add=T)
+  plot(e222,add=T)
+image.plot(zlim=c(-4,4),breaks=c(-4,-3,-2,-1,0,1,2,3,4),lab.breaks=c(0.00,0.05,0.1,0.2,1,0.2,0.1,0.05,0.00),legend.only=T,horizontal=F,col=plotclt,legend.shrink=0.7,legend.width=0.9,legend.args=list(text=c(expression(paste("level of significance (",alpha,")")),"positive Z'","negative Z'"),side=c(2,3,1),line=0.7,cex=1.5,font=2),axis.args=list(cex.axis=1.5))
+legend(149,-36.6,c("State","MDB"),col=c("grey","grey"),
+       lwd=c(1,3),bty="n",title="Boundary",cex=1.8)
+
+  # Qld
+  par(mar=c(3,3,1,9),xpd=T)
+  plot(e111,xlab="",ylab="", cex.axis=2)#,border="white")
+  image(tr_qld.step.new,col=plotclt,breaks=c(-3,-1.645,-1.282,-0.842,0,0.842,1.282,1.645,3),legend=F,add=T)
+  plot(mdb_reg2,border="grey",add=T,lwd=3)
+  plot(e111,add=T)
+image.plot(zlim=c(-4,4),breaks=c(-4,-3,-2,-1,0,1,2,3,4),lab.breaks=c(0.00,0.05,0.1,0.2,1,0.2,0.1,0.05,0.00),legend.only=T,horizontal=F,col=plotclt,legend.shrink=0.7,legend.width=0.9,legend.args=list(text=c(expression(paste("level of significance (",alpha,")")),"positive Z'","negative Z'"),side=c(2,3,1),line=0.9,cex=1.5,font=2),axis.args=list(cex.axis=1.5))
+
+dev.off()
+
+#ns = 4 results
+# positive
+qld_origp.new <- length(subset(qld.z.new,qld.z.new>=1.645))/
+  length(qld.z.new)
+# 0.00034
+# negative
+qld_orign.new <- length(subset(qld.z.new,qld.z.new<=-1.645))/
+  length(qld.z.new)
+# 0
+
+nsw_origp.z.new <- length(subset(nswvic.z.new,nswvic.z.new>=1.645))/
+  length(nswvic.z.new)
+# 0
+nsw_orign.z.new <- length(subset(nswvic.z.new,nswvic.z.new<=-1.645))/
+  length(nswvic.z.new)
+# 0
+
+
+
+```
+
+Bootstrap analysis was moved the HPC in January 2019. 
+
+```{r bootstrap_ns4, eval=F, echo=F}
+
+# moved to HPC 08/01/2019
+# # bootstrap ns = 4
+# ## multiple cells
+# # Set up for the shorter period
+# NstepTrend <- function(x,y,m,i){
+# 
+#     n1 <- 2003-1997
+# 
+#     if (i==1){
+# 
+#       z <- 56  # no. of column, related to the dim of the region
+#       # Qld 57 by 51
+#       # NSW 38 by 33
+# 
+#     } else {
+# 
+#     z <- 37 }
+# 
+# if (x%%z!=0){ #& x%%z!=(z-1)) {
+#     y.1 <- m[[x]]
+#     y.2 <- m[[x+1]]
+#     y.3 <- m[[x+z]]
+#     y.4 <- m[[x+z+1]]
+# 
+#     if(!is.na(y.1[1])&!is.na(y.2[1])&!is.na(y.3[1])&!is.na(y.4[1])) {
+#     if (i == 1) {
+#       n2 <- 2016-2004
+#       v.1 <- ts(y.1[c(229:288,313:length(y.1))],
+#                 start=c(1997,1),frequency=12)
+#       v.2 <- ts(y.2[c(229:288,313:length(y.2))],
+#                 start=c(1997,1),frequency=12)
+#       v.3 <- ts(y.3[c(229:288,313:length(y.3))],
+#                 start=c(1997,1),frequency=12)
+#       v.4 <- ts(y.4[c(229:288,313:length(y.4))],
+#                 start=c(1997,1),frequency=12)
+# 
+#     } else {
+# 
+#       n2 <- 2016-2002
+# 
+#       v.1 <- ts(y.1[c(229:length(y.1))],start=c(1997,1),frequency=12)
+#       v.2 <- ts(y.2[c(229:length(y.2))],start=c(1997,1),frequency=12)
+#       v.3 <- ts(y.3[c(229:length(y.3))],start=c(1997,1),frequency=12)
+#       v.4 <- ts(y.4[c(229:length(y.4))],start=c(1997,1),frequency=12)
+# }
+# 
+# ## rank by month
+# #browser()
+#    for (j in 1:12) {
+#     y1.mth <- data.frame(mth=as.vector(window(v.1,
+#                                               start=c(1997,i),
+#                                               frequency=1)),
+#                          o=y[[j]])[order(y[[j]]),]
+#     y2.mth <- data.frame(mth=as.vector(window(v.2,
+#                                               start=c(1997,i),
+#                                               frequency=1)),
+#                          o=y[[j]])[order(y[[j]]),]
+#     y3.mth <- data.frame(mth=as.vector(window(v.3,
+#                                               start=c(1997,i),
+#                                               frequency=1)),
+#                          o=y[[j]])[order(y[[j]]),]
+#     y4.mth <- data.frame(mth=as.vector(window(v.4,
+#                                               start=c(1997,i),
+#                                               frequency=1)),
+#                          o=y[[j]])[order(y[[j]]),]
+# 
+#     assign(paste("r1",j,sep=""),rank(y1.mth$mth))
+#     assign(paste("r2",j,sep=""),rank(y2.mth$mth))
+#     assign(paste("r3",j,sep=""),rank(y3.mth$mth))
+#     assign(paste("r4",j,sep=""),rank(y4.mth$mth))
+# 
+#     }
+# 
+# ## mann-whitney rank sum statistic
+#     rlist.1 <- list(r11,r12,r13,r14,r15,r16,r17,r18,r19,r110,r111,r112) ## full year
+#     rlist.2 <- list(r21,r22,r23,r24,r25,r26,r27,r28,r29,r210,r211,r212)
+#     rlist.3 <- list(r31,r32,r33,r34,r35,r36,r37,r38,r39,r310,r311,r312)
+#     rlist.4 <- list(r41,r42,r43,r44,r45,r46,r47,r48,r49,r410,r411,r412)
+#     rlist <- list(unlist(rlist.1),unlist(rlist.2),
+#                   unlist(rlist.3),unlist(rlist.4))
+# ## seasonal
+#     w.s1 <- 0
+#     w.s2 <- 0
+#     w.s3 <- 0
+#     w.s4 <- 0
+#   for (k in 1:length(rlist.1)) {
+# #   for (k in c(9:11)) {
+#     w.s1 <- sum(rlist.1[[k]][1:n1])+w.s1
+#     w.s2 <- sum(rlist.2[[k]][1:n1])+w.s2
+#     w.s3 <- sum(rlist.3[[k]][1:n1])+w.s3
+#     w.s4 <- sum(rlist.4[[k]][1:n1])+w.s4
+#     }
+#     w.s <- sum(w.s1,w.s2,w.s3,w.s4) #,w.s5,w.s6,w.s7,w.s8,w.s9)
+# 
+# ## other statistic
+# # mean for full year
+#     mu <- n1*(n1+n2+1)/2
+#     mu.s <- 12*4*mu
+# # ## mean for one season
+# #     mu <- n1*(n1+n2+1)/2
+# #     mu.s <- 3*4*mu
+# 
+# ## variance (standard variation). 
+# # assume only cross correlation
+#     ss <- n1*n2*(n1+n2+1)/12
+#     ss.s <- 0
+#     for (kk in 1:4) {
+#       for (kkk in 1:4) {
+# #         for (kkkk in 1:12) {
+#           ss.s <- 12*ss*cor(rlist[[kk]],rlist[[kkk]]) + ss.s
+# #         }
+#       }
+#     }
+# ## variance for one season
+# #     ss <- n1*n2*(n1+n2+1)/3
+# #     ss.s <- 0
+# #     for (kk in 1:4) {
+# #       for (kkk in 1:4) {
+# #           ss.s <- 3*ss*cor(rlist[[kk]],rlist[[kkk]]) + ss.s
+# #       }
+# #     }
+# 
+# ## step trend statistic
+#     z <- (w.s - mu.s)/sqrt(ss.s)
+# 
+#     return(z) }
+# 
+#      else {return(NA)} }
+# 
+#      else {return(NA)}
+# 
+#   }
+# 
+# 
+# R <- 1000
+# new.order <- list()
+# 
+# zpq.values = numeric(R)
+# znq.values = numeric(R)
+# period1 <- 2002 - 1997
+# period2 <- 2016 - 2004
+# mth.l <- rep((period1 + period2),12)
+# 
+# #ptm <- proc.time()
+# require(doParallel)
+# cl <- makeCluster(4)
+# registerDoParallel(cl)
+# 
+# QLD_zvalues <- foreach (i=1:R, .combine = rbind) %do% {
+# 
+#   for (j in 1:12) {
+#     new.order[[j]]<-sample(1:mth.l[j])
+#   }
+# 
+#   temp <- unlist(lapply(1:(length(residual_qld)-57),
+#           function(x,y) NstepTrend(x,y,residual_qld,1),new.order))
+#   # if(i==1) {write.table(temp,file="bt_zvalues_qld_7y.txt",row.names=F)
+#   #           } else
+#   #             {write.table(temp,file="bt_zvalues_qld_7y.txt",append=T,row.names=F,col.names=F)}
+#   data.frame(zpq.values =
+#                length(subset(temp,temp>=1.645))/length(temp),
+#               znq.values =
+#                length(subset(temp,temp<=-1.645))/length(temp))
+# }
+# stopCluster(cl)
+# 
+# registerDoParallel(cl)
+# # NSW VIC
+# NSW_zvalues <- foreach (i=1:R, .combine = rbind) %do% {
+# 
+#   for (j in 1:12) {
+#     new.order[[j]]<-sample(1:mth.l[j])
+#   }
+# 
+#   temp <- unlist(lapply(1:(length(residual_nswvic)-38),
+#           function(x,y) NstepTrend(x,y,residual_nswvic,1),new.order))
+#   # if(i==1) {write.table(temp,file="bt_zvalues_qld_7y.txt",row.names=F)
+#   #           } else
+#   #             {write.table(temp,file="bt_zvalues_qld_7y.txt",append=T,row.names=F,col.names=F)}
+#   data.frame(zpq.values =
+#                length(subset(temp,temp>=1.645))/length(temp),
+#               znq.values =
+#                length(subset(temp,temp<=-1.645))/length(temp))
+# }
+# stopCluster(cl)
+
+```
+
+Read in results from the HPC bootstrap analysis of the z values.
+
+```{r}
+NSW_zvalues <- readRDS("processed data/NSW_zvalues.RDS")
+QLD_zvalues <- readRDS("processed data/QLD_zvalues.RDS")
+```
+
+Create bootstrap histograms of the results
+
+```{r}
+
+
+bt4_nswp.values <- NSW_zvalues$zpq.values*100
+bt4_nswn.values <- NSW_zvalues$znq.values*100 
+bt4_qldp.values <- QLD_zvalues$zpq.values*100
+bt4_qldn.values <- QLD_zvalues$znq.values*100
+
+#jpeg("figures/bt4_hist.jpg")
+par(mfrow=c(2,2), mar = c(4,3,2,1)+0.1)
+# nsw pos
+hist(bt4_nswp.values,nclass=100,
+     xlab="% positive Z'",main="NSW/VIC",cex.lab=1.4,cex.main=1.3) #xlim=c(0,20))
+points(nsw_origp.z.new*100,0,pch=16,col="red",cex=1.8)
+# nsw neg
+hist(bt4_nswn.values,nclass=100,
+     xlab="% negative Z'",main="",cex.lab=1.4,
+     cex.main=1.3)#, xlim=c(0,20))
+points(nsw_orign.z.new*100,0,pch=16,col="red",cex=1.8)
+#qld pos
+hist(bt4_qldp.values,nclass=100,
+     xlab="% positive Z'",main="Qld",cex.lab=1.4,cex.main=1.3) #xlim=c(0,20))
+points(qld_origp.new*100,0,pch=16,col="red",cex=1.8)
+#qld neg
+hist(bt4_qldn.values,nclass=100,
+     xlab="% negative Z'",main="",cex.lab=1.4,
+     cex.main=1.3)#, xlim=c(0,20))
+points(qld_orign.new*100,0,pch=16,col="red",cex=1.8)
+#dev.off()
+
+
+```
+
+
+

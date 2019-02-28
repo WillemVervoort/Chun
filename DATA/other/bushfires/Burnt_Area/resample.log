@@ -1,3 +1,666 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:49ce2bd8572fe4a9bf6dd3548b56c3025122ac3969e4a1b074d17925ded070a2
-size 23595
+Error: ReadHDFHeaderMosaic : Reading Input Header File
+     : No grid data found in R:\Data\Other\bushfires\Burnt_Area\GFED4.0_MQ_200301_BA.hdf. The MRT only supports gridded HDF-EOS data, not swath or point HDF-EOS data.
+Error: ReadHDFHeaderMosaic : Opening Input Header File
+     : Unable to open R:\Data\Other\bushfires\Burnt_Area\MOD44B.A2000065.h27v12.005.2011259135233.hdf for reading.
+Error: ReadHDFHeaderMosaic : Reading Input Header File
+     : No grid data found in R:\Data\Other\bushfires\Burnt_Area\GFED4.0_MQ_200301_BA.hdf. The MRT only supports gridded HDF-EOS data, not swath or point HDF-EOS data.
+******************************************************************************
+
+MODIS Mosaic Tool (v4.1 March 2009)
+Start Time:  Wed Jul 31 00:16:51 2013
+
+------------------------------------------------------------------
+
+Input filenames (1):
+   R:\Data\Other\bushfires\Burnt_Area\MOD44B.A2000065.h28v13.005.2011259135856.hdf
+Output filename: R:\Data\Other\bushfires\Burnt_Area\TmpMosaic.hdf
+Mosaic Array:
+   file[ 0]
+
+Mosaic : processing band Cloud
+
+Output mosaic image info
+------------------------
+output image corners (lat/lon):
+    UL:  -39.999999996411 130.540728914647 
+    UR:  -39.999999996411 143.594801806104 
+    LL:  -49.999999995507 155.572382657536 
+    LR:  -49.999999995507 171.129620923279 
+
+output image corners (X-Y projection units):
+    UL:  11119505.196667001000 -4447802.078666999900 
+    UR:  12231455.716333000000 -4447802.078666999900 
+    LL:  11119505.196667001000 -5559752.598333000200 
+    LR:  12231455.716333000000 -5559752.598333000200 
+
+     band               type lines smpls pixsiz      min    max   fill
+  1) Cloud             UINT8  4800  4800 231.6564      0      0      0
+
+End Time:  Wed Jul 31 00:17:00 2013
+
+Finished mosaicking!
+
+******************************************************************************
+
+******************************************************************************
+
+MODIS Mosaic Tool (v4.1 March 2009)
+Start Time:  Wed Jul 31 01:11:00 2013
+
+------------------------------------------------------------------
+
+Input filenames (1):
+   R:\Data\Other\bushfires\Burnt_Area\MCD45A1.A2003001.h30v12.005.2007283012855.hdf
+Output filename: R:\Data\Other\bushfires\Burnt_Area\TmpMosaic.hdf
+Mosaic Array:
+   file[ 0]
+
+Mosaic : processing band nused
+
+Output mosaic image info
+------------------------
+output image corners (lat/lon):
+    UL:  -29.999999997306 138.564064589305 
+    UR:  -29.999999997306 150.111069971751 
+    LL:  -39.999999996411 156.648874697572 
+    LR:  -39.999999996411 169.702947589040 
+
+output image corners (X-Y projection units):
+    UL:  13343406.236000000000 -3335851.558999999900 
+    UR:  14455356.755666999000 -3335851.558999999900 
+    LL:  13343406.236000000000 -4447802.078666999900 
+    LR:  14455356.755666999000 -4447802.078666999900 
+
+     band               type lines smpls pixsiz      min    max   fill
+  1) nused             UINT8  2400  2400 463.3127      0    254    255
+
+End Time:  Wed Jul 31 01:11:01 2013
+
+Finished mosaicking!
+
+******************************************************************************
+
+******************************************************************************
+
+MODIS Reprojection Tool (v4.1 March 2009)
+Start Time:  Wed Jul 31 01:13:34 2013
+
+------------------------------------------------------------------
+
+
+Input image and reprojection info
+---------------------------------
+input_filename:          R:\Data\Other\bushfires\Burnt_Area\TmpMosaic.hdf
+output_filename:         R:\Data\Other\bushfires\Burnt_Area\tmpMCD45A1.A2003001.h30v12.005.2007283012855.hdf.tif
+input_filetype:          HDF-EOS
+output_filetype:         GEOTIFF
+input_projection_type:   SIN
+input_datum:             WGS84
+output_projection_type:  LCC
+output_datum:            WGS84
+resampling_type:         NN
+input projection parameters:  6371007.18 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+output projection parameters: 0.00 0.00 -18.00 -36.00 132.00 -27.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+
+input image corners (lat/lon):
+    UL:  -30.00 138.56 
+    UR:  -30.00 150.11 
+    LL:  -40.00 156.65 
+    LR:  -40.00 169.70 
+
+input image spatial subset corners (lat/lon):
+    UL:  -30.00 138.56 
+    UR:  -30.00 150.11 
+    LL:  -40.00 156.65 
+    LR:  -40.00 169.70 
+
+     band          select   type lines smpls pixsiz      min    max   fill
+  1) nused              1  UINT8  2400  2400 463.3127      0    254    255
+
+
+SINUSOIDAL PROJECTION PARAMETERS:
+
+   Radius of Sphere:     6371007.181000 meters
+   Longitude of Center:     0.000000 degrees
+   False Easting:      0.000000 meters 
+   False Northing:     0.000000 meters 
+
+LAMBERT CONFORMAL CONIC PROJECTION PARAMETERS:
+
+   Semi-Major Axis of Ellipsoid:     6378137.000000 meters
+   Semi-Minor Axis of Ellipsoid:     6356752.314245 meters
+   1st Standard Parallel:     -18.000000 degrees
+   2nd Standard Parallel:     -36.000000 degrees
+   Longitude of Central Meridian:     132.000000 degrees
+   Latitude  of Origin:     -27.000000 degrees
+   False Easting:      0.000000 meters 
+   False Northing:     0.000000 meters 
+
+NNResample : processing band nused
+
+Output image info
+-----------------
+output image extents (lat/lon):
+    UL:  -29.999999997305 138.564064589305 
+    UR:  -26.271897144907 164.980883508911 
+    LL:  -44.109331406345 139.558008282773 
+    LR:  -39.999987036188 169.708955270070 
+
+output image extents (X-Y projection units):
+    UL:  626087.005499490190 -344895.345373610030 
+    UR:  3217087.005499490100 -344895.345373610030 
+    LL:  626087.005499490190 -1922895.345373610000 
+    LR:  3217087.005499490100 -1922895.345373610000 
+
+     band               type lines smpls pixsiz      min    max   fill
+  1) nused             UINT8  1578  2591 1000.0000      0    254    255
+
+End Time:  Wed Jul 31 01:13:47 2013
+
+Finished processing!
+
+******************************************************************************
+
+******************************************************************************
+
+MODIS Mosaic Tool (v4.1 March 2009)
+Start Time:  Wed Jul 31 01:19:31 2013
+
+------------------------------------------------------------------
+
+Input filenames (1):
+   R:\Data\Other\bushfires\Burnt_Area\MCD45A1.A2003001.h30v12.005.2007283012855.hdf
+Output filename: R:\Data\Other\bushfires\Burnt_Area\TmpMosaic.hdf
+Mosaic Array:
+   file[ 0]
+
+Mosaic : processing band burndate
+
+Output mosaic image info
+------------------------
+output image corners (lat/lon):
+    UL:  -29.999999997306 138.564064589305 
+    UR:  -29.999999997306 150.111069971751 
+    LL:  -39.999999996411 156.648874697572 
+    LR:  -39.999999996411 169.702947589040 
+
+output image corners (X-Y projection units):
+    UL:  13343406.236000000000 -3335851.558999999900 
+    UR:  14455356.755666999000 -3335851.558999999900 
+    LL:  13343406.236000000000 -4447802.078666999900 
+    LR:  14455356.755666999000 -4447802.078666999900 
+
+     band               type lines smpls pixsiz      min    max   fill
+  1) burndate          INT16  2400  2400 463.3127      0  10000  11111
+
+End Time:  Wed Jul 31 01:19:33 2013
+
+Finished mosaicking!
+
+******************************************************************************
+
+******************************************************************************
+
+MODIS Reprojection Tool (v4.1 March 2009)
+Start Time:  Wed Jul 31 01:19:34 2013
+
+------------------------------------------------------------------
+
+
+Input image and reprojection info
+---------------------------------
+input_filename:          R:\Data\Other\bushfires\Burnt_Area\TmpMosaic.hdf
+output_filename:         R:\Data\Other\bushfires\Burnt_Area\tmpMCD45A1.A2003001.h30v12.005.2007283012855.hdf.tif
+input_filetype:          HDF-EOS
+output_filetype:         GEOTIFF
+input_projection_type:   SIN
+input_datum:             WGS84
+output_projection_type:  LCC
+output_datum:            WGS84
+resampling_type:         NN
+input projection parameters:  6371007.18 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+output projection parameters: 0.00 0.00 -18.00 -36.00 132.00 -27.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+
+input image corners (lat/lon):
+    UL:  -30.00 138.56 
+    UR:  -30.00 150.11 
+    LL:  -40.00 156.65 
+    LR:  -40.00 169.70 
+
+input image spatial subset corners (lat/lon):
+    UL:  -30.00 138.56 
+    UR:  -30.00 150.11 
+    LL:  -40.00 156.65 
+    LR:  -40.00 169.70 
+
+     band          select   type lines smpls pixsiz      min    max   fill
+  1) burndate           1  INT16  2400  2400 463.3127      0  10000  11111
+
+
+SINUSOIDAL PROJECTION PARAMETERS:
+
+   Radius of Sphere:     6371007.181000 meters
+   Longitude of Center:     0.000000 degrees
+   False Easting:      0.000000 meters 
+   False Northing:     0.000000 meters 
+
+LAMBERT CONFORMAL CONIC PROJECTION PARAMETERS:
+
+   Semi-Major Axis of Ellipsoid:     6378137.000000 meters
+   Semi-Minor Axis of Ellipsoid:     6356752.314245 meters
+   1st Standard Parallel:     -18.000000 degrees
+   2nd Standard Parallel:     -36.000000 degrees
+   Longitude of Central Meridian:     132.000000 degrees
+   Latitude  of Origin:     -27.000000 degrees
+   False Easting:      0.000000 meters 
+   False Northing:     0.000000 meters 
+
+NNResample : processing band burndate
+
+Output image info
+-----------------
+output image extents (lat/lon):
+    UL:  -29.999999997305 138.564064589305 
+    UR:  -26.271897144907 164.980883508911 
+    LL:  -44.109331406345 139.558008282773 
+    LR:  -39.999987036188 169.708955270070 
+
+output image extents (X-Y projection units):
+    UL:  626087.005499490190 -344895.345373610030 
+    UR:  3217087.005499490100 -344895.345373610030 
+    LL:  626087.005499490190 -1922895.345373610000 
+    LR:  3217087.005499490100 -1922895.345373610000 
+
+     band               type lines smpls pixsiz      min    max   fill
+  1) burndate          INT16  1578  2591 1000.0000      0  10000  11111
+
+End Time:  Wed Jul 31 01:19:46 2013
+
+Finished processing!
+
+******************************************************************************
+
+Error: ReadParameterFile : Bad Or Missing Input Filename Extension
+     : Missing input_filetype extension. Valid extensions are .hdf or .hdr
+******************************************************************************
+
+MODIS Reprojection Tool (v4.1 March 2009)
+Start Time:  Wed Jul 31 01:35:00 2013
+
+------------------------------------------------------------------
+
+
+Input image and reprojection info
+---------------------------------
+input_filename:          R:\Data\Other\bushfires\Burnt_Area\TmpMosaic.hdf
+output_filename:         R:\Data\Other\bushfires\Burnt_Area\tmpA2003001.tif
+input_filetype:          HDF-EOS
+output_filetype:         GEOTIFF
+input_projection_type:   SIN
+input_datum:             WGS84
+output_projection_type:  LCC
+output_datum:            WGS84
+resampling_type:         NN
+input projection parameters:  6371007.18 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+output projection parameters: 0.00 0.00 -18.00 -36.00 132.00 -27.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+
+input image corners (lat/lon):
+    UL:  -30.00 138.56 
+    UR:  -30.00 150.11 
+    LL:  -40.00 156.65 
+    LR:  -40.00 169.70 
+
+input image spatial subset corners (lat/lon):
+    UL:  -30.00 138.56 
+    UR:  -30.00 150.11 
+    LL:  -40.00 156.65 
+    LR:  -40.00 169.70 
+
+     band          select   type lines smpls pixsiz      min    max   fill
+  1) burndate           1  INT16  2400  2400 463.3127      0  10000  11111
+
+
+SINUSOIDAL PROJECTION PARAMETERS:
+
+   Radius of Sphere:     6371007.181000 meters
+   Longitude of Center:     0.000000 degrees
+   False Easting:      0.000000 meters 
+   False Northing:     0.000000 meters 
+
+LAMBERT CONFORMAL CONIC PROJECTION PARAMETERS:
+
+   Semi-Major Axis of Ellipsoid:     6378137.000000 meters
+   Semi-Minor Axis of Ellipsoid:     6356752.314245 meters
+   1st Standard Parallel:     -18.000000 degrees
+   2nd Standard Parallel:     -36.000000 degrees
+   Longitude of Central Meridian:     132.000000 degrees
+   Latitude  of Origin:     -27.000000 degrees
+   False Easting:      0.000000 meters 
+   False Northing:     0.000000 meters 
+
+NNResample : processing band burndate
+
+Output image info
+-----------------
+output image extents (lat/lon):
+    UL:  -29.999999997305 138.564064589305 
+    UR:  -26.271897144907 164.980883508911 
+    LL:  -44.109331406345 139.558008282773 
+    LR:  -39.999987036188 169.708955270070 
+
+output image extents (X-Y projection units):
+    UL:  626087.005499490190 -344895.345373610030 
+    UR:  3217087.005499490100 -344895.345373610030 
+    LL:  626087.005499490190 -1922895.345373610000 
+    LR:  3217087.005499490100 -1922895.345373610000 
+
+     band               type lines smpls pixsiz      min    max   fill
+  1) burndate          INT16  1578  2591 1000.0000      0  10000  11111
+
+End Time:  Wed Jul 31 01:35:13 2013
+
+Finished processing!
+
+******************************************************************************
+
+Error: ReadParameterFile : Bad Or Missing Input Filename Extension
+     : Incorrect input_filetype extension
+******************************************************************************
+
+MODIS Reprojection Tool (v4.1 March 2009)
+Start Time:  Wed Jul 31 01:46:06 2013
+
+------------------------------------------------------------------
+
+
+Input image and reprojection info
+---------------------------------
+input_filename:          R:\Data\Other\bushfires\Burnt_Area\TmpMosaic.hdf
+output_filename:         R:\Data\Other\bushfires\Burnt_Area\tmpA2003001.tif
+input_filetype:          HDF-EOS
+output_filetype:         GEOTIFF
+input_projection_type:   SIN
+input_datum:             WGS84
+output_projection_type:  LCC
+output_datum:            WGS84
+resampling_type:         NN
+input projection parameters:  6371007.18 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+output projection parameters: 0.00 0.00 -18.00 -36.00 132.00 -27.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+
+input image corners (lat/lon):
+    UL:  -30.00 138.56 
+    UR:  -30.00 150.11 
+    LL:  -40.00 156.65 
+    LR:  -40.00 169.70 
+
+input image spatial subset corners (lat/lon):
+    UL:  -30.00 138.56 
+    UR:  -30.00 150.11 
+    LL:  -40.00 156.65 
+    LR:  -40.00 169.70 
+
+     band          select   type lines smpls pixsiz      min    max   fill
+  1) burndate           1  INT16  2400  2400 463.3127      0  10000  11111
+
+
+SINUSOIDAL PROJECTION PARAMETERS:
+
+   Radius of Sphere:     6371007.181000 meters
+   Longitude of Center:     0.000000 degrees
+   False Easting:      0.000000 meters 
+   False Northing:     0.000000 meters 
+
+LAMBERT CONFORMAL CONIC PROJECTION PARAMETERS:
+
+   Semi-Major Axis of Ellipsoid:     6378137.000000 meters
+   Semi-Minor Axis of Ellipsoid:     6356752.314245 meters
+   1st Standard Parallel:     -18.000000 degrees
+   2nd Standard Parallel:     -36.000000 degrees
+   Longitude of Central Meridian:     132.000000 degrees
+   Latitude  of Origin:     -27.000000 degrees
+   False Easting:      0.000000 meters 
+   False Northing:     0.000000 meters 
+
+NNResample : processing band burndate
+
+Output image info
+-----------------
+output image extents (lat/lon):
+    UL:  -29.999999997305 138.564064589305 
+    UR:  -26.271897144907 164.980883508911 
+    LL:  -44.109331406345 139.558008282773 
+    LR:  -39.999987036188 169.708955270070 
+
+output image extents (X-Y projection units):
+    UL:  626087.005499490190 -344895.345373610030 
+    UR:  3217087.005499490100 -344895.345373610030 
+    LL:  626087.005499490190 -1922895.345373610000 
+    LR:  3217087.005499490100 -1922895.345373610000 
+
+     band               type lines smpls pixsiz      min    max   fill
+  1) burndate          INT16  1578  2591 1000.0000      0  10000  11111
+
+End Time:  Wed Jul 31 01:46:20 2013
+
+Finished processing!
+
+******************************************************************************
+
+Error: ReadParameterFile : Bad Or Missing Input Filename Extension
+     : Incorrect input_filetype extension
+******************************************************************************
+
+MODIS Reprojection Tool (v4.1 March 2009)
+Start Time:  Wed Jul 31 01:46:40 2013
+
+------------------------------------------------------------------
+
+
+Input image and reprojection info
+---------------------------------
+input_filename:          R:\Data\Other\bushfires\Burnt_Area\TmpMosaic.hdf
+output_filename:         R:\Data\Other\bushfires\Burnt_Area\tmpA2003001.tif
+input_filetype:          HDF-EOS
+output_filetype:         GEOTIFF
+input_projection_type:   SIN
+input_datum:             WGS84
+output_projection_type:  LCC
+output_datum:            WGS84
+resampling_type:         NN
+input projection parameters:  6371007.18 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+output projection parameters: 0.00 0.00 -18.00 -36.00 132.00 -27.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+
+input image corners (lat/lon):
+    UL:  -30.00 138.56 
+    UR:  -30.00 150.11 
+    LL:  -40.00 156.65 
+    LR:  -40.00 169.70 
+
+input image spatial subset corners (lat/lon):
+    UL:  -30.00 138.56 
+    UR:  -30.00 150.11 
+    LL:  -40.00 156.65 
+    LR:  -40.00 169.70 
+
+     band          select   type lines smpls pixsiz      min    max   fill
+  1) burndate           1  INT16  2400  2400 463.3127      0  10000  11111
+
+
+SINUSOIDAL PROJECTION PARAMETERS:
+
+   Radius of Sphere:     6371007.181000 meters
+   Longitude of Center:     0.000000 degrees
+   False Easting:      0.000000 meters 
+   False Northing:     0.000000 meters 
+
+LAMBERT CONFORMAL CONIC PROJECTION PARAMETERS:
+
+   Semi-Major Axis of Ellipsoid:     6378137.000000 meters
+   Semi-Minor Axis of Ellipsoid:     6356752.314245 meters
+   1st Standard Parallel:     -18.000000 degrees
+   2nd Standard Parallel:     -36.000000 degrees
+   Longitude of Central Meridian:     132.000000 degrees
+   Latitude  of Origin:     -27.000000 degrees
+   False Easting:      0.000000 meters 
+   False Northing:     0.000000 meters 
+
+NNResample : processing band burndate
+
+Output image info
+-----------------
+output image extents (lat/lon):
+    UL:  -29.999999997305 138.564064589305 
+    UR:  -26.271897144907 164.980883508911 
+    LL:  -44.109331406345 139.558008282773 
+    LR:  -39.999987036188 169.708955270070 
+
+output image extents (X-Y projection units):
+    UL:  626087.005499490190 -344895.345373610030 
+    UR:  3217087.005499490100 -344895.345373610030 
+    LL:  626087.005499490190 -1922895.345373610000 
+    LR:  3217087.005499490100 -1922895.345373610000 
+
+     band               type lines smpls pixsiz      min    max   fill
+  1) burndate          INT16  1578  2591 1000.0000      0  10000  11111
+
+End Time:  Wed Jul 31 01:46:56 2013
+
+Finished processing!
+
+******************************************************************************
+
+******************************************************************************
+
+MODIS Mosaic Tool (v4.1 March 2009)
+Start Time:  Wed Jul 31 01:50:08 2013
+
+------------------------------------------------------------------
+
+Input filenames (2):
+   R:\Data\Other\bushfires\Burnt_Area\MCD45A1.A2003001.h29v12.005.2007283021530.hdf
+   R:\Data\Other\bushfires\Burnt_Area\MCD45A1.A2003001.h30v12.005.2007283012855.hdf
+Output filename: R:\Data\Other\bushfires\Burnt_Area\TmpMosaic.hdf
+Mosaic Array:
+   file[ 0]  file[ 1]
+
+Mosaic : processing band burndate
+
+Output mosaic image info
+------------------------
+output image corners (lat/lon):
+    UL:  -29.999999997306 127.017059206860 
+    UR:  -29.999999997306 150.111069971751 
+    LL:  -39.999999996411 143.594801806104 
+    LR:  -39.999999996411 169.702947589040 
+
+output image corners (X-Y projection units):
+    UL:  12231455.716333000000 -3335851.558999999900 
+    UR:  14455356.755666999000 -3335851.558999999900 
+    LL:  12231455.716333000000 -4447802.078666999900 
+    LR:  14455356.755666999000 -4447802.078666999900 
+
+     band               type lines smpls pixsiz      min    max   fill
+  1) burndate          INT16  2400  4800 463.3127      0  10000  11111
+
+End Time:  Wed Jul 31 01:50:23 2013
+
+Finished mosaicking!
+
+******************************************************************************
+
+******************************************************************************
+
+MODIS Reprojection Tool (v4.1 March 2009)
+Start Time:  Wed Jul 31 01:51:42 2013
+
+------------------------------------------------------------------
+
+
+Input image and reprojection info
+---------------------------------
+input_filename:          R:\Data\Other\bushfires\Burnt_Area\TmpMosaic.hdf
+output_filename:         R:\Data\Other\bushfires\Burnt_Area\tmpA2003001.tif
+input_filetype:          HDF-EOS
+output_filetype:         GEOTIFF
+input_projection_type:   SIN
+input_datum:             WGS84
+output_projection_type:  LCC
+output_datum:            WGS84
+resampling_type:         NN
+input projection parameters:  6371007.18 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+output projection parameters: 0.00 0.00 -18.00 -36.00 132.00 -27.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 
+
+input image corners (lat/lon):
+    UL:  -30.00 127.02 
+    UR:  -30.00 150.11 
+    LL:  -40.00 143.59 
+    LR:  -40.00 169.70 
+
+input image spatial subset corners (lat/lon):
+    UL:  -30.00 127.02 
+    UR:  -30.00 150.11 
+    LL:  -40.00 143.59 
+    LR:  -40.00 169.70 
+
+     band          select   type lines smpls pixsiz      min    max   fill
+  1) burndate           1  INT16  2400  4800 463.3127      0  10000  11111
+
+
+SINUSOIDAL PROJECTION PARAMETERS:
+
+   Radius of Sphere:     6371007.181000 meters
+   Longitude of Center:     0.000000 degrees
+   False Easting:      0.000000 meters 
+   False Northing:     0.000000 meters 
+
+LAMBERT CONFORMAL CONIC PROJECTION PARAMETERS:
+
+   Semi-Major Axis of Ellipsoid:     6378137.000000 meters
+   Semi-Minor Axis of Ellipsoid:     6356752.314245 meters
+   1st Standard Parallel:     -18.000000 degrees
+   2nd Standard Parallel:     -36.000000 degrees
+   Longitude of Central Meridian:     132.000000 degrees
+   Latitude  of Origin:     -27.000000 degrees
+   False Easting:      0.000000 meters 
+   False Northing:     0.000000 meters 
+
+NNResample : processing band burndate
+
+Output image info
+-----------------
+output image extents (lat/lon):
+    UL:  -29.914089383561 127.020971610199 
+    UR:  -26.128658384005 164.933475564942 
+    LL:  -44.184212174302 126.258140114951 
+    LR:  -40.006659909964 169.706122880869 
+
+output image extents (X-Y projection units):
+    UL:  -475369.439432947430 -328540.730136446650 
+    UR:  3216630.560567052600 -328540.730136446650 
+    LL:  -475369.439432947430 -1923540.730136446700 
+    LR:  3216630.560567052600 -1923540.730136446700 
+
+     band               type lines smpls pixsiz      min    max   fill
+  1) burndate          INT16  1595  3692 1000.0000      0  10000  11111
+
+End Time:  Wed Jul 31 01:51:59 2013
+
+Finished processing!
+
+******************************************************************************
+
+Warning: gctp_call : Environmental Variable Not Found
+     : MRT_DATA_DIR nor MRTDATADIR not defined
+Error: GetInputGeoCornerMosaic : General Processing
+     : Error converting lat/long coordinates to input projection coordinates.
+******************************************************************************
+
+MODIS Reprojection Tool (v4.1 March 2009)
+Start Time:  Sat Jun 28 22:34:34 2014
+
+------------------------------------------------------------------
+
+Warning: gctp_call : Environmental Variable Not Found
+     : MRT_DATA_DIR nor MRTDATADIR not defined
+Error: GetInputGeoCorner : General Processing
+     : Error converting input projection coordinates to lat/long coordinates.

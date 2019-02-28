@@ -1,0 +1,5 @@
+Test,Qld ,NSW/VIC 
+LC variable,Small area of significant pixels \& in the centre,Large area possibly aligning \& with bushfire affected area.
+t-test regression \& model residuals,Slightly lower mean residual (p <0.05) \& after change (0.5 mm/month),Lower mean residual (p < 0.50) \& after change (1.5 mm/month)
+Positive Z' score,0.2\% of pixels at p < 0.1,3.7\% of pixel at p < 0.1
+Field significance \% /& of Z'scores, Both positive and negative \% \& within random distribution, Positive \% outside random distribution.

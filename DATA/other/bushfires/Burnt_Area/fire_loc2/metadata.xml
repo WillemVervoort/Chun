@@ -1,3 +1,2 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:92e747a92bd51b29f5ee651257b07ac9d354cede3cd6639b7adf15f6e537c92c
-size 523
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xml:lang="en"><Esri><CreaDate>20160901</CreaDate><CreaTime>10252300</CreaTime><ArcGISFormat>1.0</ArcGISFormat><SyncOnce>TRUE</SyncOnce><DataProperties><lineage><Process ToolSource="C:\Program Files (x86)\ArcGIS\Desktop10.0\ArcToolbox\Toolboxes\Spatial Analyst Tools.tbx\RasterCalculator" Date="20160901" Time="102523">RasterCalculator "fire_loc.tif"&gt;0 R:\GRP-AVSProject\OLD\Data\Other\bushfires\Burnt_Area\fire_loc2</Process></lineage></DataProperties></Esri></metadata>

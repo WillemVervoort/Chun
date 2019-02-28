@@ -1,0 +1,1745 @@
+---
+title: Detecting the impact of land cover change on observed rainfall.
+preprint: false
+author:
+  - name: Chun X. Liang
+    affiliation: 1
+  - name: Floris F. van Ogtrop
+    affiliation: 1
+  - name: R. Willem Vervoort
+    affiliation: 1
+    corresponding: true
+    email: willem.vervoort@sydney.edu.au
+affiliation:
+  - code: 1
+    address: Sydney Institute of Agriculture, The University of Sydney, NSW 2006
+abstract: >
+ Analysis of observational data to identify relationships between rainfall and land cover change are difficult due to multiple environmental factors that cannot be strictly controlled. In this study we present a methodology to investigate the relationship using statistical methods on data from best available sources at two sites in Australia. Gridded data of rainfall and tree cover were used as spatially corresponding local conditions. Large scale effects were represented by climatic indicators, such as SOI and IOD. Regression analysis and step trend tests were used to assess the effect of abrupt land surface intervention. 
+  At a Queensland site, significant tree cover change between 2002 - 2005 did not result in strong statistically significant precipitation changes. On the other hand, results from a bushfire affected NSW/VIC region suggests significant changes in the rainfall. This indicates the method works better when a abrupt change in the data can be clearly identified. The results from the step trend test implied a positive relationship between the tree cover and the rainfall at 0.1 significance level in both locations in data up to 2009. However, high rainfall variability and possible regrowth meant that no signifcant changes were observed in alonger time sereies to 2015. 
+header-includes: >
+  \usepackage{lipsum}
+  \usepackage{textcomp}
+bibliography: reflist_chap3.bib
+date: "`r Sys.Date()`"
+output: 
+  rticles::peerj_article:
+    base_format: bookdown::pdf_document2 # bookdown::pdf_document2 # for using \@ref()
+---
+```{r packages, echo=F, warnings=F, message=F, eval=T}
+require(knitr)
+require(bookdown)
+require(pander)
+library(fields)
+library(graphics)
+library(maptools)
+library(plotKML)
+library(raster)
+library(reshape)
+library(rgeos)
+library(rgdal)
+library(RColorBrewer)
+library(tidyverse)
+require(lubridate)
+library(deseasonalize)
+library(mgcv)
+library(ncdf4)
+require(gridExtra)
+#library(nnet)
+```
+
+```{r setup, warning=F, message=F, echo =F}
+# root dir
+knitr::opts_knit$set(root.dir = 
+                       "E:/cloudstor/chun/chun/manuscripts/PeerJRainfall_Landuse")
+```
+
+# Introduction {-}
+
+Land use and land cover changes can lead to changes in the local climate. Empirical and modelling studies have found that cloud types and rainfall are correlated to large scale vegetation cover changes, such as deforestation in the Amazon and in the Sahel [@Chagnon2005;@Pinto2009; @Wang2009; @Mei2010; @kucharski_further_2013; @pitman_scale_2016] and afforestation in south Israel [@Otterman1990; @Ben-Gai1998]. Using airborne measurement in Western Australia, @Junkermann2009 showed a significantly higher level of aerosols over an agricultural area compared to an adjacent natural vegetation. They suggested that a modification of aerosol concentrations due to deforestation could have contributed to a reduction of local rainfall, as more, but smaller rain droplets were observed. @Nair2011 reported from the Bunny Fence Experiment in Western Australia that local land use change altered the synoptic west coast trough dynamics and surface roughness, and this resulted in an observed rainfall decrease. Maximum temperatures were also found to be sensitive to land cover change in eastern Australia [@McAlpine2007]. 
+
+Overall the number of empirical studies analyzing changes to rainfall due to land cover change from observational data is limited. Most of the studies mentioned previously were either model simulations, or comparisons of modelled data with observations. This is because there are some fundamental experimental difficulties in both space (where does evaporated water reappear as rainfall?) and in time (how much time does it take for land cover change effects to appear or disappear?). In addition, in many areas across the globe, rainfall variability is related to a complex set of interactions, of which land use change might only be a minor component.
+
+Locally, there are two main sources that generate rainfall: moisture from advective atmospheric transport; and local evapotranspiration [@Eltahir1996; @Bosilovich2006; @Dirmeyer2009; @Gimeno2010]. The local evapotranspiration component is the component considered to be affected by land use change [@Eltahir1996]. According to @Trenberth1999, the contribution of advective moisture partially depends on the availability of external moisture and atmospheric transport. On the longer time scale, such as monthly and annually, large scale atmospheric dynamics are affected by large scale climate drivers. For example, many studies have reported significant relationships between rainfall in large parts of Australia and the El Niño-Southern Oscillation (ENSO) [@Verdon2004; @Risbey2009; @Speer2011]. In contrast, local ET is determined by local land surface characteristics, which influence local scale atmospheric dynamics and hence the amount of rainfall, including contribution from both main sources. 
+
+Although climate drivers demonstrate some capability to predict Australian rainfall, there is still a large amount of unexplained variance. @Westra2010 pointed out that models based on global sea surface temperature anomalies can only predict up to 14.7\% of annual precipitation variance. Some of the remaining variance could be due to land surface processes as suggested in studies predicting local rainfall [e.g. @Ma2011; @Zeng2012; @pitman_scale_2016; @saha_investigating_2016]. However, most are based on modelling experiments and few empirical observational studies have been reported. However, @Pitman2004 found a good match between observations and simulated rainfall changes in southwest Western Australia, forced by land cover change. @Timbal2006 were able to reproduce the rainfall decline in south west Australia by including land cover influence. In addition, local land use change might not be a primary, but is likely to be a secondary cause of rainfall change [@Nicholls2006]. 
+
+Therefore, the aim of this study is to use a statistical approach on rainfall data at regional scales to investigate the cause and effect relationship between land cover change and local rainfall, which is demonstrated in many modelling studies. More specifically, we hypothesize that a step change on the land cover on the surface will cause a step change in the rainfall. To demonstrate this we study changes in observed rainfall over time at a Queensland and NSW/Victoria location where there are possible step changes in land cover change due to land clearing and bush fires. The methodology uses statistical approaches to identify changes in rainfall, which are subsequently associated with land cover change through spatial comparison.
+
+In this paper, after this section (the introduction), section 2 covers the case study areas and the observed land use change. Section 3 describes the data used in the study in more detail. Section 4 details the statistical methods and the underlying assumptions related to the modelling approach, Section 5 gives the results, which are further discussed in section 6 and finally section 7 offers the conclusions.  
+
+Study regions and tree cover change
+===================================
+
+In Australia, significant tree cover change has mainly occurred in the north east  and south east of the continent,  as well as in the southwest of Western Australia. According to the National Dynamic Land Cover Dataset (DLCD) [@Lymburner2010], most of these areas have experienced decreases in the Enhanced Vegetation Index (EVI) post 2000 aws derived from satellite data. As an index for vegetation greenness, the decreasing values indicate lower biomass over time in the tree cover regions. The possible EVI reduction might be due to land clearing, bush fires or drought.  
+
+```{r selreg, fig.cap="Selected study regions are highlighted by red rectangles in the main map (the red rectangle in the insert indicates the location of the main map). The types of tree cover in 2008 from the DLCD product is shown at the background. In site 1 (the QLD region), the tree cover is mostly sparse. In site 2 (the NSW/VIC region), many areas have open or close forest where the tree cover is denser.", out.width="90%", echo=F}  
+
+include_graphics("figures/map_selreg.jpg")
+```
+  
+Two regions were selected where significant tree cover change since 2000 was reported. The first region is located in south central Queensland partly covering the north of the Murray Darling Basin (MDB) (site 1 in Figure \@ref(fig:selreg)). High rates of land clearing have been reported in this region during the early 2000s [@SLATS2004]. The second study region is located at the border of New South Wales and Victoria, and includes the Snowy Mountain ranges (site 2 in Figure \@ref(fig:selreg)). Severe bush fires occurred in this area  in early 2003 (see Figure \@ref(fig:figure2bushfire)). The 2003 bush fires were the largest and the worst in the last 60 years [@Fire2011]. Two thirds of Kosciuszko national park was heavily burned and regrowth was reported to be slow due to drought and cold conditions [@ABC2003], and the type of species in this region. However, in the longer term, after an early high transpiration period a recovery of pre-fire evapotranspiration would be expected [@Kuzcera1987]. For the purpose of this study, significant tree cover loss has happened in both study areas in the last decade, either permanently or temporarily.  
+
+```{r figure2bushfire, fig.cap = "Location of bushfires occurring in January 2003, in and around the NSW/VIC study region, as shown by the red pixels. The map shows the large area in the Kosciuszko national park that has been burned. Some locations in the southwest of teh Australian Capital Territory (ACT) have also experienced intensive bushfires.", out.width="90%", echo=F}
+include_graphics("figures/bushfire_nswvic.jpg")
+```
+
+
+The two regions have different characteristics. The QLD region is partially grassland and subtropical, while the NSW/VIC region is mainly within the temperate zone, under the Köppen classification. According to Australian Bureau of Meteorology (BoM), the NSW/VIC region receives 1000 - 2000 mm rainfall annually, which is more than double the annual rainfall in the QLD region. Evapotranspiration is similar in both regions. Marine moisture and orographic effects are likely to be the main contributors to rainfall in the southeast mountain areas of the NSW/VIC region. 
+
+The land use and land cover characteristics in the two regions are also different. In the Queensland region, the tree cover is sparse over most of the area. The MODIS satellite tree cover data (discussed in more detail in section 3) shows that tree cover in this region is generally below 20\% of total ground area. Grazing is the main activity in this region, with over 90\% of land used by the grazing industry [@ABARES2010]. Our starting assumption is that the main cause of the EVI  decline over large part of the region is due to land clearing. Tree cover has been cleared at a massive scale over the last decade, especially during 2002 - 2004. The reports from the Queensland Statewide Land Cover and Trees Study (SLATS) [e.g. @SLATS2001; @SLATS2017] were used to investigate the time and location of the land clearing in the QLD region.
+
+The Kosciuszko national park is within the NSW/VIC region. Here tree cover is denser with open or even closed forest (the tree cover distribution is bimodal at 10 - 20\% and 60 - 70\%). The dominant species in the alpine area are Snow Gum and large stand species such as Alpine Ash and Mountain Gum in the sub-alpine area. These trees can reach a great height but they take long time to grow. For example, Alpine Ash would need about 20 years to mature. Although land clearing is not a major issue in this region, it is vulnerable to fires and drought. The MODIS burned area product, MCD45A1 [@Roy2002; @Roy2005; @Roy2008], was used to locate bush fires areas in the NSW/VIC region, with a grid resolution of 500 m. MCD45A1 provides monthly burning information on all pixels, which helps to pinpoint an abrupt event. 
+
+Due to the difference in nature of the land cover change in the two regions, the post-change vegetation status is hypothesized to be different as well (see Figure \@ref(fig:figure3-tc-simple)). 
+
+```{r figure3-tc-simple, fig.cap= "The expected evolution of the land surface after trees have been removed in (a) the QLD region and (b) the NSW/VIC region.", out.width="90%", echo=F}
+include_graphics("figures/tc_simple.jpg")
+```
+
+
+```{r mapping, echo = F, eval=F}
+  
+## define the boundary of sub-regions
+   e1 <- extent(c(1324304.091,1723901.773,-222556.668,80451.265))
+   e2 <- extent(c(1346395.141,1534425.527,-1169402.246,-607644.171))
+  # 
+   e11 <- extent(c(145.425, 149.025, -28.475, -25.175))
+   e22 <- extent(c(146.675, 149.325, -37.075, -34.675))
+
+  e111 <- extent(c(145.825, 148.625, -28.075, -25.575)) 
+  e222 <- extent(c(147.075, 148.925, -36.675, -35.075)) 
+
+## the selected regions for mapping
+root_dir <- "e:/cloudstor/chun/chun/data"
+aus_reg <- readShapePoly(paste(root_dir,
+                               "Geo\\aus_state2011\\STE11aAust.shp",sep="/"),
+                         proj4string=CRS("+proj=lcc +lat_1=-18 +lat_2=-36 +lat_0=-27 +lon_0=132 +x_0=0 +y_0=0"))
+aus_reg2 <- gSimplify(aus_reg,0.01,topologyPreserve=T)
+
+mdb_reg <- readShapePoly(paste(root_dir,
+                               "Geo\\MDB\\mdb_boundary.shp", sep="/"),
+                               proj4string=CRS("+proj=lcc +lat_1=-18 +lat_2=-36 +lat_0=-27 +lon_0=132 +x_0=0 +y_0=0"))
+mdb_reg2 <- gSimplify(mdb_reg,0.01,topologyPreserve=TRUE)
+
+#remove(list=c("aus_reg","mdb_reg"))
+
+## Burned area map
+
+fire_0301 <- raster(paste(root_dir,
+          "Other\\bushfires\\Burnt_Area\\tmpA2003001.burndate.tif",
+                          sep="/"))
+fire_0301nsw <- crop(fire_0301,e2)
+fire_0301nsw_t <- projectRaster(fire_0301nsw,
+                           crs = "+proj=longlat +lat_1=-18 +lat_2=-36 +lat_0=-27 +lon_0=132 +x_0=0 +y_0=0 +ellps=WGS84")
+fire_loc <- crop(fire_0301nsw_t,e222)
+remove(list=c("fire_0301","fire_0301nsw"))
+
+jpeg("../../figures/bushfire_nswvic.jpg", width=960, height=960)
+  par(mar=c(3,3,1,6),xpd=T)
+  plot(e222,border="white")  
+  image(fire_loc,add=T, breaks=c(0,0.99,366.5,10000),col=c("white","red","white"))
+  plot(e222,add=T)
+  plot(aus_reg2,border="grey",add=T)
+  plot(mdb_reg2,border="grey",lwd=3,add=T)
+#   text(1430000,-1000000,"study region",cex=1.2)
+  text(149.1, -35.3,"ACT",font=2,cex=1.2)
+  text(148.4, -36,"Kosciuszko",font=2,cex=0.9)#,srt=90)
+  text(147.5, -36.4,"VIC",font=2,cex=1.2)
+  text(148, -35.5,"NSW",font=2,cex=1.2)
+  image.plot(zlim=c(0,1),breaks=c(0,0.5,1),lab.breaks=c("","burned \narea",""),legend.only=T,horizontal=F,col=c("red","red"),legend.shrink=0.03,legend.width=1.3,legend.args=list(text="",line=0),lwd.poly=0.1)
+legend(149,-36.1,c("State","MDB"),col=c("grey","grey"),lwd=c(1,3),bty="n",title="Boundary",cex=0.9)
+ dev.off()
+
+ 
+Data <- read_csv(paste(root_dir,
+          "/Other/slats/SLATSOverviewClearing20180814.csv",
+          sep=""))
+
+
+jpeg("../../figures/slats.jpg", width=1024, height = 760)
+Data %>% 
+  gather(key="Year",value="clearing", `1988-1989`:`2014-2015`) %>%
+  filter(Bioregion == "Mulga Lands" |
+           Bioregion == "Brigalow Belt") %>%
+  ggplot(aes(Year,clearing, fill=Bioregion)) + 
+  geom_bar(stat="identity") + ylab("Clearing (ha)") +
+  scale_fill_grey() +
+  theme(axis.text.x = element_text(size = rel(2),
+                                   angle = 45, vjust=0.5),
+        axis.text.y = element_text(size = rel(2)),
+        axis.title = element_text(size = rel(2), face = "bold"),
+        legend.text = element_text(size = rel(2)),
+        legend.title = element_text(size = rel(2), face = "bold"))
+dev.off() 
+ 
+```
+
+```{r treeCover,eval=F , echo = F}
+
+rootdir <-"E:/cloudstor/chun2/data/satellite/MOD44/B"
+
+# read in the file list from the directory
+x <- dir(path=rootdir,pattern="Percent_Tree_Cover.tif")
+# Identify the different states in the images
+# NSW
+NSW <- x[grep("NSW",x)]
+# Qld
+Qld <- x[grep("Qld",x)]
+
+img <- list()
+# raster and brick
+for(i in 1:length(NSW)) {
+  img[[i]] <- raster(paste(rootdir,NSW[i],sep="/"))
+}
+
+imgQ <- list()
+# raster and brick
+for(i in 1:length(Qld)) {
+  imgQ[[i]] <- raster(paste(rootdir,Qld[i],sep="/"))
+}
+
+NSW_b <- do.call(brick,img)
+Qld_b <- do.call(brick, imgQ)
+
+tm <- seq(as.Date("2000-03-06"), as.Date("2016-03-06"), "year")
+mod_tc_r22 <- setZ(NSW_b, tm, "year")
+
+mod_tc_r11 <- setZ(Qld_b, tm, "year")
+
+## apply t-test to tree cover data
+fun <- function(x,m) {
+  var_x <- sd(x,na.rm=T)
+  mu_1 <- mean(x[1:3],na.rm=T)
+  # m = 1 Queensland, 
+  if (m==1) {y <- x[4:16]} else {
+    # NSW whole series m = 2
+    if (m ==2) {y <- x[4:16]} else {
+      # build in other possibilities for length series
+      y <- x[4:(16 - m)]
+    }  
+  mu_2 <- mean(y,na.rm=T)
+  z <- (mu_2-mu_1)/var_x
+  if (!is.na(z) & abs(z)>1.645) {return(mu_2-mu_1)} else {return(NA)}
+  }
+}
+
+# Qld
+mod_tc_r1.z <- calc(mod_tc_r11,function(x) fun(x,1))
+# Qld 2011
+#mod_tc_r1_7y.z <- calc(mod_tc_r11,function(x) fun(x,5))
+# NSW
+mod_tc_r2.z <- calc(mod_tc_r22,function(x) fun(x,2))
+# # NSW only 5 years after
+# mod_tc_r2_5y.z <- calc(mod_tc_r22,function(x) fun(x,7))
+# NSW 7 years after (2011)
+#mod_tc_r2_7y.z <- calc(mod_tc_r22,function(x) fun(x,5))
+# # NSW 9 years after
+# mod_tc_r2_9y.z <- calc(mod_tc_r22,function(x) fun(x,3))
+
+
+plotclr <- brewer.pal(8,"PiYG")
+
+jpeg("../../figures/tc_figs.jpg", width=1280, height=640, quality=100)
+par(mfrow=c(1,2), mar=c(5,3,5,5))
+
+#par(mar=c(3,9,2,5))
+plot(e111, cex.axis=1.5, font.axis=2, ylab="",xlab="")
+image(mod_tc_r1.z,col=plotclr,breaks=c(-70,-20,-10,-5,0,5,10,20,70),
+      legend=F,add=T)
+#plot(e111,add=T)
+plot(aus_reg2,border="grey",add=T,lwd=3,ylab="")
+plot(mdb_reg2,border="grey",lwd=5,add=T,ylab="")
+# FULL PERIOD NSW
+par(mar=c(5,0,5,11))
+plot(e222, cex.axis=1.5, font.axis=2, ylab="",xlab="")
+image(mod_tc_r2.z,col=plotclr,breaks=c(-70,-20,-10,-5,0,5,10,20,70),
+      legend=F,add=T)
+#plot(e111,add=T)
+plot(aus_reg2,border="grey",add=T, lwd=3,ylab="")
+plot(mdb_reg2,border="grey",lwd=5,add=T,ylab="")
+image.plot(zlim=c(-4,4), breaks=c(-4,-3,-2,-1,-0.2,0.2,1,2,3,4),
+           lab.breaks=c(-70,-20,-10,-5,"no tree","0 or",5,10,20,70),
+           legend.only=T,horizontal=F,
+           col=c("#C51B7D","#DE77AE","#F1B6DA","#FDE0EF","white",
+                 "#E6F5D0","#B8E186","#7FBC41","#4D9221"),
+           legend.shrink=0.8,
+           legend.width=3,
+           legend.mar=5.1,
+           legend.args=list(text=expression(paste(Delta,
+                            "tree (% ground)",sep="")),
+                            line=1,cex=1.5,font=2),
+           axis.args=list(cex.axis=1.5),graphics.reset=F)
+legend(147.1,-36.2,c("State","MDB"),col=c("grey","grey"),lwd=c(2,5),bty="n",title="Boundary",cex=1.5)
+dev.off()
+
+
+```
+
+The overall hypothesis is that the effect of 2003 - 2004 land clearings in the QLD region and the 2003 bush fires in the NSW/VIC region cause a step change in the local rainfall. The actual tree cover change during this time at the pixel level was derived from the 15-year MODIS data (discussed below). The difference of tree cover before and after the land disturbance was tested using a Student's t-test. As the length of the tree cover data is shorter than available rainfall data, earlier land clearing in the QLD region cannot be identified spatially, hence they are excluded from the analysis.
+
+Data {#Data}
+==============
+Several land surface data sets were used in this study. The main one was the MOD44B product Global Vegetation Continuous Field data set (version 5). This data set provides estimates of percent tree cover (percentage of ground surface covered by trees) at a grid resolution of 250 m [@Townshend2011], which is finer then the earlier mentioned burned product MCD45A1. The data set is available on an annual time interval for the study period of 2000 - 2015. The tree cover data was produced from 16-day Terra MODIS Land Surface Reflectance data and Land Surface Temperature [@Townshend2011]. The National Dynamic Land Cover Dataset (DLCD) [@Lymburner2010] from the Australian Collaborative Land Use Mapping Program (ACLUMP) was used to verify the trend of vegetation cover change calculated from the previous data set. This data set, developed by Geoscience Australia and Australian Bureau of Agricultural and Resource Economics and Sciences (ABARES), is the first nationally consistent and thematically comprehensive land cover reference for Australia. The DLCD is based on the 16-day Enhanced Vegetation Index (EVI), again from the MODIS satellite, between April 2000 and April 2015. It also has a grid resolution of 250 m. The data set provides information on the final land cover types (as in 2015) and estimated trend of EVI statistics (annual mean, maximum and minimum). 
+
+The SILO Rainfall product data for Australia was used [@SILO2001] (available online at \url{https://silo.longpaddock.qld.gov.au/})) . The data has been projected onto a national 0.05\textdegree by 0.05\textdegree grid (approximately 5 km by 5 km). This gridded data set was generated from station observations using spline interpolation and kriging [@SILO2001]. The data has been compared to other gridded products and observed data and is generally of high quality [@Beesley2009; @Tozer2012]. The data is available on a daily and monthly basis from 1889 to current. Here a subset of 36 years (1979 - 2015) was used. The study was conducted on monthly data, as a land cover change effect on annual rainfall might be negligible, but can often  be significant in particular months or seasons [e.g. @Otterman1990; @Gaertner2001; @Semazzi2001; @Oleson2004; @Deo2009]. 
+
+Large scale climate drivers are represented by various climatic indices. The Southern Oscillation Index (SOI) is generally regarded as a good predictor of Australian rainfall [@Risbey2009; @Chowdhury2010; @Westra2010], but its skill is weaker in some parts of Australia. For example the Southern Annular Mode (SAM) is found to be more important than ENSO in south Western Australia [@Meneghini2007]. The testing of the suitability of each index for the regions of interest is described in a later section. The following climate indices were used as candidate predictors for local rainfall. 
+
+- Southern Oscillation Index (SOI). The Troup version of the monthly SOI series used in this study was obtained from BoM (available online at \url{http://www.bom.gov.au/climate/current/soihtm1.shtml}).  
+- Eastern, East Central and Central Tropical Pacific Sea Surface Temperatures (NINO 3, NINO 3.4 and NINO 4). Monthly SST anomalies are available from IRI/LDEO data library and the extended NINO data set is used (available online at \url{http://iridl.ldeo.columbia.edu/SOURCES/.Indices/.nino/.EXTENDED/}).   
+- Pacific Decadal Oscillation (PDO). The Pacific Decadal Oscillation is the leading principal component of monthly SST anomaly in the North Pacific Ocean.. The monthly PDO series was provided by JISAO (Joint Institute for the Study of the Atmosphere and Ocean, University of Washington) (available online at \url{http://jisao.washington.edu/pdo/PDO.latest}).  
+- Indian Ocean Dipole (IOD). The Indian Ocean dipole is commonly measured by the difference between SST anomaly in the western (50 - 70\textdegree E and 10\textdegree S-10\textdegree N) and eastern (90 - 110\textdegree E and 0 - 10\textdegree S) equatorial India Ocean [@Saji1999]. Monthly IOD was obtained from JAMSTEC (the Japan Agency for Marine-Earth Science and Technology) (available online at \url{http://www.jamstec.go.jp/frcgc/research/d1/iod/DATA/dmi.monthly.txt}).  
+
+```{r climaticIndex,eval=F , echo = F}
+
+# climate indicator data
+file1 <- "../..\\Data\\BoM\\SOI\\SOI.csv"
+SOI <- read_csv(file1)
+SOI <- gather(SOI,key="Month", value="SOI",Jan:Dec)
+SOI <- SOI[order(as.Date(paste(SOI$Year,SOI$Month,
+                                        "01",sep="-"), "%Y-%b-%d")),]
+SOI_100a <- SOI %>%
+  filter(Year > 1899 & Year < 2016)
+SOI_30a <- SOI %>%
+  filter(Year > 1978 & Year < 2016)
+## deseasonalised SOI
+SOI_100 <- ds(SOI_100a$SOI, ic = "AIC", type = "monthly",
+              standardizeQ=F)$z
+SOI_30 <- ds(SOI_30a$SOI, ic = "AIC", type = "monthly",
+             standardizeQ=F)$z
+
+file2 <- "../..\\Data\\BoM\\SST\\SST34_anomaly.nc"
+SST34 <- nc_open(file2)
+SST34_var <- ncvar_get(SST34,SST34$var[[1]])
+nc_close(SST34)
+SST34_df <- tibble(Date = seq.Date(as.Date("1856-01-01"),
+                                   as.Date("2018-04-01"),
+                                   by="month"),
+                   SST34 = SST34_var)
+SST34_100a <- SST34_df %>%
+  filter(Date >= "1900-01-01" & Date < "2016-01-01")
+SST34_30a <- SST34_df %>%
+  filter(Date >= "1979-01-01" & Date < "2016-01-01")
+## deseasonalised SST34
+SST34_30 <- ds(SST34_30a$SST34,ic = "AIC", type="monthly",
+               standardizeQ=F)$z
+SST34_100 <- ds(SST34_100a$SST34,ic = "AIC", type="monthly",
+               standardizeQ=F)$z
+
+file3 <- "../..\\Data\\BoM\\SST\\SST3_anomaly.nc"
+SST3 <- nc_open(file3)
+SST3_var <- ncvar_get(SST3,SST3$var[[1]])
+nc_close(SST3)
+SST3_df <- tibble(Date = seq.Date(as.Date("1856-01-01"),
+                                   as.Date("2018-04-01"),
+                                   by="month"),
+                   SST3 = SST3_var)
+SST3_100a <- SST3_df %>%
+  filter(Date >= "1900-01-01" & Date < "2016-01-01")
+SST3_30a <- SST3_df %>%
+  filter(Date >= "1979-01-01" & Date < "2016-01-01")
+## deseasonalised SST3
+SST3_30 <- ds(SST3_30a$SST3,ic = "AIC", type="monthly",
+              standardizeQ=F)$z
+SST3_100 <- ds(SST3_100a$SST3,ic = "AIC", type="monthly",
+              standardizeQ=F)$z
+
+file4 <- "../..\\Data\\BoM\\SST\\SST4_anomaly.nc"
+SST4 <- nc_open(file4)
+SST4_var <- ncvar_get(SST4,SST4$var[[1]])
+nc_close(SST4)
+SST4_df <- tibble(Date = seq.Date(as.Date("1856-01-01"),
+                                   as.Date("2018-04-01"),
+                                   by="month"),
+                   SST4 = SST4_var)
+SST4_100a <- SST4_df %>%
+  filter(Date >= "1900-01-01" & Date < "2016-01-01")
+SST4_30a <- SST4_df %>%
+  filter(Date >= "1979-01-01" & Date < "2016-01-01")
+## deseasonalised SST4
+SST4_30 <- ds(SST4_30a$SST4,ic = "AIC", type="monthly",
+              standardizeQ=F)$z
+SST4_100 <- ds(SST4_100a$SST4,ic = "AIC", type="monthly",
+              standardizeQ=F)$z
+
+file5 <- "../..\\Data\\BoM\\PDO\\PDO.latest_1900-.txt"
+pdo_mth <- read_table(file5)
+pdo_mth <- gather(pdo_mth,key="Month", value="PDO", JAN:DEC)
+pdo_mth$YEAR <- substr(pdo_mth$YEAR,1,4)
+pdo_mth <- pdo_mth[order(as.Date(paste(pdo_mth$YEAR,pdo_mth$Month,
+                                        "01",sep="-"), "%Y-%b-%d")),]
+PDO_100a <- pdo_mth %>%
+  filter(YEAR > 1899 & YEAR < 2016)
+## deseasonalised PDO
+PDO_100 <- ds(PDO_100a$PDO,ic = "AIC", type = "monthly",
+              standardizeQ=F)$z
+
+file7 <- "../..\\Data\\BoM\\IOD\\iod_jamstec.txt"
+IOD <- read_table2(file7)
+IOD <- tibble(Date = seq.Date(as.Date("1870-01-16"),
+                                   as.Date("2018-03-16"),
+                                   by="month"),
+              IOD = IOD$`DMI(=West-East)`)
+IOD_30a <- IOD %>%
+  filter(Date > "1979-01-01" & Date < "2016-01-01")
+IOD_100a <- IOD %>%
+  filter(Date > "1899-01-01" & Date < "2016-01-01")
+## deseasonalised IOD
+IOD_30 <- ds(IOD_30a$IOD, ic = "AIC", type = "monthly",
+             standardizeQ=F)$z
+IOD_100 <- ds(IOD_100a$IOD, ic = "AIC", type = "monthly",
+             standardizeQ=F)$z
+# end of read data
+# should write out useful data
+save.image("../../data/data_environment.Rdata")
+```
+
+Statistical method
+===================
+
+
+As an initial analysis a simple boxplot and t-test is used to analyse whether there is a significant change in tree cover in time, and before and after the suspected change in the regions. 
+
+To assess the actual causal relationship between the tree cover and the rainfall a flexible regression model is applied (discussed in detail below). A step change is not directly obvious in the time series  of the rainfall anomalies (Figure \@ref(fig:ts-mean)) for both regions, even though the data is deseasonalised and detrended. In this study we apply different statistical methods to analyse the effect of tree cover change on rainfall. Both methods  make use of a regression model to remove year-on-year variability in rainfall to strengthen the tree cover change signal. 
+
+In the first method, the tree cover change is implemented as a factor variable in the regression model, and the significance of this variable is tested. In the second method, a rank sum test (step trend test), is applied to the regression model residuals after effects of other major factors were removed. This assumes that after removal of all climate, long term linear trend and seasonal variation, the vegetation cover change is the only factor explaining the non-random pattern in the rainfall residuals.
+
+```{r ts-mean, echo = F, fig.cap = "The deseasonalised and detrended rainfall over the 30 years period in (a) the QLD region and (b) the NSW/VIC region. The vertical red lines indicate the year of 2003, in which the studied land cover changes occurred. A change in the time series data is not obvious before and after the land cover changes.", out.width="90%", echo=F}
+
+include_graphics("figures/Rainfall_resid.jpg")
+```
+
+
+### Regression model {#reg_model}
+
+As highlighted in the introduction, the Australian climate is influenced by sea surface temperatures in the tropical Pacific and Indian Oceans, as well as pressure systems in the Southern Ocean [@BoM2012].  @Risbey2009 compared five large-scale drivers, including ENSO (measured by SOI and the Tropical Pacific Sea surface temperatures (SSTs)), IOD, SAM, MJO (Madden-Julian oscillation) and blocking, in relation to Australian rainfall variability. The MJO is a large scale eastward-propagating wave-like disturbance located around equatorial latitudes [@Risbey2009]. They identified SOI as the most important index among all climate indices tested for broad parts of Australia (including QLD and NSW/VIC) in almost any season. In this study, four climate indices were selected from the main climatic indicators (see section [Data]) and used as the explanatory variables in the model for each study region. A further complicating factor is the influence of the "millenium drought" over the study period and in particular the change to wet conditions in 2010 - 2011 [@vanDijk2013]. Therefore, the spatially averaged monthly rainfall in the Murray Darling Basin (MDB, downloaded from [the Bureau of Meteorology](http://www.bom.gov.au/web01/ncc/www/cli_chg/timeseries/rain/allmonths/mdb/latest.txt)) was used to explain the year-on-year variation in the rainfall in the regions. As climate alone are unlikely able to fully explain the temporal variation in rainfall in the regions, including the drought [@vanDijk2013; @Westra2010], this variable was included. Since both regions at least partly overlap with the MDB, the average rainfall across was assumed to be a useful explaining variable.
+
+
+```{r climateData, echo=F, eval=F}
+load("../../data/data_environment.Rdata")
+
+# SILO data
+
+## ----extract_Silo-----------------------------------------------------
+years <- seq(1979,2016,by=1)
+
+SILOdata <- list()
+
+# run a loop
+for (i in 1:length(years)) {
+   # url <- paste("https://s3-ap-southeast-2.amazonaws.com/silo-open-data/annual/monthly_rain/",
+   #              years[i],
+   #              ".monthly_rain.nc",sep="")
+   # curl_download(url,
+   #               paste("data/monthly_rainfall_",years[i],".nc",sep=""))
+  SILOdata[[i]] <- brick(paste("../../data/monthly_rainfall_",years[i],".nc",
+                          sep=""),varname="monthly_rain")
+}
+
+SILOdata__b <- do.call(stack, SILOdata)
+
+#crop to extents
+# e111 <- extent(c(145.825, 148.625, -28.075, -25.575)) 
+# e222 <- extent(c(147.075, 148.925, -36.675, -35.075)) 
+
+#  NSW
+SILOdata.NSW <- crop(SILOdata__b, extent(e222)) 
+#QLD
+SILOdata.QLD <- crop(SILOdata__b, extent(e111))
+# # MDB
+# mdb_reg <- readShapePoly("../../data/Geo\\MDB\\mdb_boundary.shp",
+#                                proj4string=CRS("+proj=lcc +lat_1=-18 +lat_2=-36 +lat_0=-27 +lon_0=132 +x_0=0 +y_0=0"))
+SILOdata.MDB <- crop(SILOdata__b, extent(mdb_reg))
+# 
+# aus_reg <- readShapePoly("../../data/Geo\\aus_state2011\\STE11aAust.shp",
+#                          proj4string=CRS("+proj=lcc +lat_1=-18 +lat_2=-36")) 
+# 
+
+# remove orig
+rm(SILOdata)
+rm(SILOdata__b)
+# test -----------------------------
+# require(rasterVis)
+# gplot(SILOdata.NSW[[1]])  + geom_tile(aes(fill = value)) + coord_equal() +
+#   facet_wrap(~variable) + scale_fill_gradient(low="darksalmon", high="blue",
+#                                         guide="colorbar",na.value="white") +
+#   xlab("Longitude") + ylab("Latitude")
+# ------------------------
+
+# rewrite as a monthly dataframe
+# NSW
+rainNSW_t <- as.tibble(data.frame(Date =  seq.Date(as.Date("1979-01-01"),
+                                   as.Date("2016-12-31"),by="month"),
+                                  rain=t(SILOdata.NSW@data@values))) 
+
+# calculate mean by row
+nsw_mean <- rainNSW_t %>%
+  mutate(Means = rowMeans(.[,-1], na.rm = T)) %>%
+  dplyr::select(Date,Means)
+
+rm(SILOdata.NSW)
+
+# Qld
+rainQld_t <- as.tibble(data.frame(Date =  seq.Date(as.Date("1979-01-01"),
+                                   as.Date("2016-12-31"),by="month"),
+                                  rain=t(SILOdata.QLD@data@values))) 
+
+# calculate mean by row
+qld_mean <- rainQld_t %>%
+  mutate(Means = rowMeans(.[,-1], na.rm = T)) %>%
+  dplyr::select(Date,Means)
+
+rm(SILOdata.QLD)
+
+# MDB
+rainMDB_t <- as.tibble(data.frame(Date =  seq.Date(as.Date("1979-01-01"),
+                                   as.Date("2016-12-31"),by="month"),
+                                  rain=t(SILOdata.MDB@data@values))) 
+
+# calculate mean by row
+MDB_mean <- rainMDB_t %>%
+  mutate(MDBrain = rowMeans(.[,-1], na.rm = T)) %>%
+  dplyr::select(Date,MDBrain) %>%
+  filter(Date < "2016-01-01")
+
+rm(SILOdata.MDB)
+
+# rainfall histogram
+
+rain <- tibble(Rainfall = c(nsw_mean$Means,qld_mean$Means),
+               State = c(rep("NSW/VIC",length(nsw_mean$Means)),
+                         rep("QLD",length(qld_mean$Means))))
+
+jpeg("../../figures/hist_rainfall.jpg")
+rain %>%
+  ggplot(aes(Rainfall)) + geom_histogram(fill="blue") +
+  facet_wrap(~State) + xlab("Monthly Rainfall (mm)") + 
+  ylab("Frequency") +
+  theme(axis.text=element_text(size=rel(2)),
+        axis.title=element_text(size=rel(2.5)),
+        strip.text =element_text(size=rel(2), face="bold"))
+dev.off()
+
+
+
+  
+# autocorrelation in rainfall
+acf_df <- data_frame(lag = 1:12, 
+                     acf_Qld = acf(qld_mean$Means,
+                      lag.max=12,main="QLD")$acf[2:13,1,1],
+                     acf_NSW = acf(nsw_mean$Means,
+                  lag.max=12,main="NSW & VIC")$acf[2:13,1,1],
+                     pacf_Qld = pacf(qld_mean$Means,
+                             lag.max=12,main="")$acf[,1,1],
+                     pacf_NSW = pacf(nsw_mean$Means,
+                           lag.max=12,main="")$acf[,1,1])
+                     
+jpeg("../../figures/autocorrelation.jpg")
+acf_df %>%
+  gather(key="acf", value="cor", acf_Qld:pacf_NSW) %>%
+  ggplot(aes(lag, cor)) + geom_bar(stat="identity", fill = "blue") +
+  facet_wrap(~acf) + xlab("Lag") + ylab("correlation")
+dev.off()
+  
+## deseasonalise & detrend rainfall: assume the deseasonalised monthly zonal rainfall is normal distributed and can be used in pearson cross-correlation function
+## use stl function in R
+
+## revision June 2018: change this to only deseasonalise using the 
+# deseasonalise package
+qld_deseason <- ds(qld_mean$Means,ic="AIC", type="monthly",
+                     standardizeQ=F)$z
+nsw_deseason <- ds(nsw_mean$Means,ic="AIC", type="monthly",
+                     standardizeQ=F)$z
+qld100_deseason <- ds(qld_mean$Means,ic="AIC", type="monthly",
+                      standardizeQ=F)$z
+nsw100_deseason <- ds(qld_mean$Means,ic="AIC", type="monthly",
+                      standardizeQ=F)$z
+  
+  
+# test whether any linear trends are significant
+df_list <- list(qld = data.frame(z=qld_deseason,
+                           trend=1:length(qld_deseason)),
+                nsw = data.frame(z=nsw_deseason,
+                           trend=1:length(nsw_deseason)),
+                qld100 = data.frame(z=qld100_deseason,
+                 trend=1:length(qld_deseason)),
+                nsw100 = data.frame(z=nsw100_deseason,
+                 trend=1:length(nsw100_deseason)))
+result <- lapply(df_list,
+                 function(x) summary(lm(z~trend,
+                                        data=x))$coefficients)
+# none have a trend
+
+# 
+plot_df <- tibble(Dates = rep(qld_mean$Date,2),
+                  Resid = c(qld_deseason,nsw_deseason),
+                  State = c(rep("Qld",length(qld_deseason)),
+                            rep("NSW",length(nsw_deseason))))
+
+jpeg("../../figures/Rainfall_resid.jpg", width=960, height=960)
+plot_df %>%
+  ggplot(aes(Dates,Resid)) + geom_line() + 
+  geom_vline(xintercept = as.Date("2003-01-01"), 
+             col="red", size=1.5) +
+  geom_text(aes(x=as.Date("2004-12-01"),y=150),
+            label="2003", col="red", size=7) +
+  facet_wrap(~State, ncol = 1) + xlab("Date") +
+  ylab("Deseasonalised rainfall for the NSW and Qld locations") +
+  theme(axis.text=element_text(size=rel(2)),
+        axis.title=element_text(size=rel(2.5)),
+        strip.text =element_text(size=rel(2), face="bold"))
+dev.off()  
+
+
+
+
+# Figure 5
+plot_df_qld <- tibble(Lag = ccf(as.vector(SOI_30),
+                            as.vector(qld_deseason),lag.max=12, 
+                            plot=F)$lag[,,1],
+                  SOI = ccf(as.vector(SOI_30),
+                            as.vector(qld_deseason),lag.max=12, 
+                            plot=F)$acf[,,1],
+                  NINO3.4 = ccf(as.vector(SST34_30),
+                                as.vector(qld_deseason),lag.max=12,
+                                plot=F)$acf[,,1],
+                  NINO4 = ccf(as.vector(SST4_30),
+                              as.vector(qld_deseason),lag.max=12,
+                              plot=F)$acf[,,1],
+                  PDO = ccf(as.vector(PDO_100),
+                            as.vector(qld_deseason),lag.max=12,
+                            plot=F)$acf[,,1],
+                  IOD = ccf(as.vector(IOD_30),
+                            as.vector(qld_deseason),lag.max=12, 
+                            plot=F)$acf[,,1])
+
+jpeg("../../figures/cor_qld.jpg", width=960, height=960)
+plot_df_qld %>%
+  gather(key="SST", value="correlation", SOI:IOD) %>%
+  ggplot(aes(Lag,correlation)) + 
+  geom_bar(fill="blue", stat="identity") +
+  facet_wrap(~SST) + xlab("Lag in months") + ylab("correlation") +
+  xlim(c(-12.5,0.5)) +
+  theme(axis.text=element_text(size=rel(2)),
+        axis.title=element_text(size=rel(2.5)),
+        strip.text =element_text(size=rel(2), face="bold"))
+dev.off()
+
+# to add and calculate ci: qnorm((1 + 0.95)/2)/sqrt(x$n.used)
+
+plot_df <- tibble(Lag = ccf(as.vector(SOI_30),
+                            as.vector(nsw_deseason),lag.max=12, 
+                            plot=F)$lag[,,1],
+                  SOI = ccf(as.vector(SOI_30),
+                            as.vector(nsw_deseason),lag.max=12, 
+                            plot=F)$acf[,,1],
+                  NINO3.4 = ccf(as.vector(SST34_30),
+                                as.vector(nsw_deseason),lag.max=12,
+                                plot=F)$acf[,,1],
+                  NINO4 = ccf(as.vector(SST4_30),
+                              as.vector(nsw_deseason),lag.max=12,
+                              plot=F)$acf[,,1],
+                  PDO = ccf(as.vector(PDO_100),
+                            as.vector(nsw100_deseason),lag.max=12,
+                            plot=F)$acf[,,1],
+                  IOD = ccf(as.vector(IOD_30),
+                            as.vector(nsw_deseason),lag.max=12, 
+                            plot=F)$acf[,,1])
+
+jpeg("../../figures/cor_nswvic.jpg", width=960, height=960)
+plot_df %>%
+  gather(key="SST", value="correlation", SOI:IOD) %>%
+  ggplot(aes(Lag,correlation)) + 
+  geom_bar(fill="blue", stat="identity") +
+  facet_wrap(~SST) + xlab("Lag in months") + ylab("correlation") +
+  xlim(c(-12.5,0.5)) +
+  theme(axis.text=element_text(size=rel(2)),
+        axis.title=element_text(size=rel(2.5)),
+        strip.text =element_text(size=rel(2), face="bold"))
+dev.off()
+
+```
+
+Correlations between rainfall and each climate index were analysed. Rainfall in each study region was first deseasonalised and detrended using the seasonal decomposition function `ds` in the package `deseasonalise` in R [@Rstats2018]. Using detrended data gives a better indication of the underlying correlation compared to the correlation between trends in the data [@Smith2012]. 
+The cross-correlations between the deseasonalised and detrended rainfall and the climatic indices were tested using the Pearson's product moment correlation method, assuming the relationships are linear. Although the optimal technique for exploring the correlation with each index could be different as described in @Risbey2009, the Pearson's method was applied to all indices for consistency. Because the PDO describes the multi-decadal SST with lower frequency [@MacDonald2005; @Zanchettin2008; @Kamruzzaman2011], instead of 37-year rainfall data, a longer period (115 years, from 1900 to 2015) was used to estimate the correlation with PDO, up to lag 24. For the other indices, the 37-year data was used.  
+
+```{r cor-rain-qld, fig.cap="Cross-correlation of six climate indices and rainfall in QLD study region. For the PDO analysis, 108-year rainfall data (1900 - 2008) are used. Otherwise, 36-year rainfall data are used. The correlation with NINO 3 is not shown as it is very similar to but weaker than for NINO 3.4.", out.width="90%", echo=F}
+include_graphics("figures/cor_qld.tif")
+```
+
+```{r cor-rain-nsw, fig.cap="Cross-correlation of six climate indices and rainfall in NSW/VIC study region.", out.width="90%", echo=F}
+include_graphics("figures/cor_nswvic.tif")
+```
+
+Based on the correlation between the climatic indices and rainfall in the regions (as shown in Figure \@ref(fig:cor-rain-qld) and Figure \@ref(fig:cor-rain-nsw)), it can be concluded that:
+\begin{itemize}
+  \setlength{\itemsep}{0cm}
+  \setlength{\parskip}{0cm}
+  \item In QLD, the correlation between rainfall and SOI at zero time lags is the strongest across all indices, outweighing the other ENSO indicators. IOD and PDO have a weak influence in QLD.
+  \item In NSW/VIC, again the SOI has the strongest correlation with rainfall, followed by the IOD. For both, the strongest correlations occur at the zero time lags. 
+  \item in both cases PDO had the weakest correlations, and this factor was not further considered as a predictor.
+  \item in general, for the better correlated indices, strongest correlations occured at zero time lags.
+\end{itemize}
+The above findings are consistent with previous studies. Although some indices are serially correlated with rainfall up to several months, the lag zero events have the greatest correlation coefficients. Using multiple climatic index series was generally found most useful in rainfall prediction [e.g. @Risbey2009; @Kamruzzaman2011]. 
+
+Rainfall in Australia shows strong seasonal patterns [@Holper2011; @ABS2012]. For example, the north part of the country is summer rainfall dominant with a dry winter, while most of the southern part has a winter rainfall regime. This character is driven by the movement of subtropical high pressure systems which dominate the Australian climate [@BoM2012a]. These characteristic summer and winter rainfall patterns mean that the seasonal component of rainfall has a periodic pattern which should be included in the model.
+
+Long term trends in the regional rainfall in some parts of Australia are significant [@Hughes2003; @Gallant2007; @Chowdhury2010]. In the northern and eastern parts of the continent, increasing rainfall is reported over the last century [@Hughes2003]. The presence of such long term trends may be confused with the outcome of a step change in rainfall. As a result a linear trend term was implemented in the model to remove any long term effect.
+
+We assumed all the factors are additive smooth components in determining rainfall following @Kamruzzaman2011. In this case, the rainfall model is a generalised additive model (GAM) [@Hastie1986] with a log link function `g()` and assuming the residuals are gamma distributed (see Figure \@ref(fig:hist-rain)). This means all predictors are modelled as smooth functions, in this case using the shrinkage version of the cubic regression splines [@Wood2011]. All splines were limited to 3 knots in flexibility [@Wood2011], to reduce the risk of overfitting.
+\vspace{0.5cm}
+\begin{equation}
+\begin{array}{lll}
+g(E(\mathbf{R}_r)) = &\beta_0 + s_1(\mathbf{MDB_{monthlyRain}} + \\ &s_2(\mathbf{SOI}) + s_3(\mathbf{IOD}) + \\                &s_4(\mathbf{Nino3.4}) + s_5(\mathbf{Nino4}) + s_6(\mathbf{Season}) + \\
+           &\beta_1\mathbf{Trend} + \boldsymbol{\epsilon}_r
+\end{array}
+(\#eq:model)
+\end{equation}
+The bold letters represent the time series vectors.  The region is indicated by $r$, while $\beta_u$ ($_u$=0, 1) are the fitted coefficients in the model. $s_v$ ($_v$=1, 2, 3,...) are the smooth penalized cubic regression spline functions on the climatic indices and the season. MDB_{monthlyRain} is the spatially averaged monthly rainfall across the Murray Darling Basin. Apart from dropping PDO as a predictor, all other climate indices were included, allowing the model to select the appropriate predictors.
+
+A possible linear long term trend in the rainfall data is modelled by \textbf{Trend} = 1,2,3...n, where n is the total number of months in the time series. \textbf{Season} is the seasonal component.
+The climatic terms are also modelled with smooth functions. The effect of large scale drivers on Australian rainfall is more likely to be seasonal [@Murphy2008; @Schepen2012], and the smooth spline function is more flexible in reproducing the variability in impacts of the climatic indices.
+
+```{r hist-rain, fig.cap="Distribution of monthly rainfall in (a) QLD and (b) NSW/VIC. Using a Kolmogorov-Smirnov test with shape = 1 and 2.4  for QLD and NSW/VIC respectively, rainfall in both regions can be modelled as a gamma distribution.", echo=F, out.width="90%"}
+include_graphics("figures/hist_rainfall.jpg")
+```
+
+
+\subsection{Tree cover change as factor variable}
+
+One of the main difficulties in empirical observation studies related to the effect of land cover change on rainfall is the lack of continuous monitoring of land surface variables. Moreover, no specific variable can possibly be defined that can clearly represent the land surface process. Given the lack of a full picture of the land surface process, a factor variable was used in the regression model to represent the abrupt land surface change (see Equation \@ref(eq:model)). The change could be a result of either land clearing or bush fires as long as it is permanent or takes a long time to recover. As indicated we approached the problem in two different models ways.
+
+In the first method, the tree cover change was used as a predictor in the regression model, represented by a factor variable \textbf{LC}. The significance of the coefficient of \textbf{LC}, denoted as $\beta'_5$ in Equation \@ref(eq:model), can be determined by a ratio test.
+\begin{equation}
+  \mbox{LC} = \left\{
+  \begin{array}{ll}
+     \mbox{Trees} \\
+     \mbox{Removed}
+  \end{array} \right.\\
+(\#eq:dummyC)
+\end{equation}
+Therefore in both regions, land cover is "trees" for the period before land cover change and "removed" for the period after the change. Here we simply assumed that vegetation cover change has occurred on every pixel. The remaining term $\epsilon_r$ is the amount of rainfall that is attributed to other unspecified factors and random errors. Hence the regression model becomes
+\vspace{0.5cm}
+\begin{equation}
+\begin{array}{lll}
+g(E(\mathbf{R}_r)) = &\beta'_0 + s'_1(\mathbf{MDB_{monthlyRain}} + \\
+  &s'_2(\mathbf{SOI}) + s'_3(\mathbf{IOD}) + \\
+  &s'_4(\mathbf{Nino3.4}) + s'_5(\mathbf{Nino4}) + s'_6\mathbf{Season} + \\
+  &\beta'_1\mathbf{Trend} + \beta'_2\mathbf{LC} + \boldsymbol{\epsilon'}_r
+\end{array}
+(\#eq:model2)
+\end{equation}
+
+
+One of the difficulties is to point an exact time to the changes in the vegetation cover in the two regions. In the QLD region, no exact time can be assigned to the land clearing. According to the SLATS reports, the most substantial clearing occurred between 2003 - 2004 . However, the information on the change in type of land cover during the time period is missing. Therefore, four scenarios were initially tested in the analysis (**see supplementary material**). In the NSW/VIC region, severe bush fires were reported in early January 2003. Hence the "tree" cover state was up to December 2002 then it was changed to "removed" state from January 2003. As a starting date, the regression model was run from 1979 for both regions.
+
+```{r simpleMode,eval=F, echo = F}
+## plotting a hypothesed land cover change model
+data1 <- data.frame(year=c(1,2,2,3),tc=c(2,2,1,1))
+data2 <- data.frame(year=c(1,2,2,3,4),tc=c(2,2,1,1.5,2))
+
+jpeg("../figures/tc_simple.jpg", width=720, height=480)
+par(mar=c(5,6,1,1), mfrow=c(1,2))
+plot(data1$year,data1$tc,type="l",ylim=c(0.5,2.5),xlab="",ylab="",xaxt="n",yaxt="n")
+axis(1,at=c(1,2,3),labels=c("before","LCC","after"),cex.axis=1.3)
+axis(2,at=c(1,2),label=c("removed","tree"),cex.axis=1.3,las=2)
+par(mar=c(5,6,1,1))
+plot(data2$year,data2$tc,type="l",ylim=c(0.5,2.5),xlab="",ylab="",xaxt="n",yaxt="n")
+axis(1,at=c(1,2,4),labels=c("before","LCC","after"),cex.axis=1.3)
+axis(2,at=c(1,2),label=c("removed","tree"),cex.axis=1.3,las=2)
+dev.off()
+
+```
+
+```{r fullRegression,eval=F , echo = F}
+## predicting model: land cover is category variable
+rain.trend <- function(x,y,var.data) {
+  # add a very small number to take out 0 values
+  var.data$rain <- as.vector(unlist(y[x]))[1:nrow(var.data)]+0.0001
+
+      rain_fit <- gam(rain ~ MDB
+                  + s(SOI, k=3, bs="cs")
+                  + s(IOD, k=3, bs="cs")
+                  #+ s(PDO, k=3, bs="cs")
+                  + s(NINO3.4, k=3, bs="cs")
+                  + s(NINO4, k=3, bs="cs")
+                  + cover
+                  + trd
+                  , data=var.data,#family=Gamma(link=log),
+                  na.action = na.omit)
+    #
+  return(rain_fit)
+
+}
+
+## generate variables for the model
+trd <- seq(1:444)
+
+LC <- c(rep("tree",288),rep("clear",156))
+# different QLD scenarios
+LC_qld1 <- c(rep("tree",294),rep("clear",150)) ## after-change: from Jun 2003
+LC_qld2 <- c(rep("tree",300),rep("clear",144)) ## after- : from Jan 2004
+LC_qld3 <- c(rep("tree",306),rep("clear",138)) ## after- : from Jun 2004
+LC_qld4 <- c(rep("tree",312),rep("clear",132)) ## after- : from Jan 2005
+
+# NSW
+var.data <- data.frame(trd, MDB = MDB_mean$MDBrain, 
+                       SOI = SOI_30a$SOI,
+                       IOD = IOD_30a$IOD,
+                       #PDO = PDO_100a$PDO,
+                       NINO3.4 = SST34_30a$SST34,
+                       NINO4 = SST4_30a$SST4,
+                       cover = LC)
+
+# QLD
+# test different scenarios
+#
+var.qld2 <- data.frame(trd, MDB = MDB_mean$MDBrain, 
+                       SOI = SOI_30a$SOI,
+                       IOD = IOD_30a$IOD,
+                       #PDO = PDO_100a$PDO,
+                       NINO3.4 = SST34_30a$SST34,
+                       NINO4 = SST4_30a$SST4,
+                       cover = LC_qld2)
+
+var.qld4 <- data.frame(trd, MDB = MDB_mean$MDBrain,
+                       SOI = SOI_30a$SOI,
+                       IOD = IOD_30a$IOD,
+                       #PDO = PDO_100a$PDO,
+                       NINO3.4 = SST34_30a$SST34,
+                       NINO4 = SST4_30a$SST4,
+                       cover = LC_qld4)
+
+## run model for all periods
+## QLD
+coef.rain30.qld2 <- lapply(2:ncol(rainQld_t),
+                    function(x) rain.trend(x,rainQld_t,var.qld2))
+coef.rain30.qld4 <- lapply(2:ncol(rainQld_t),
+                       function(x) rain.trend(x,rainQld_t,var.qld4))
+# NSW/VIC
+coef.rain30.nswvic <- lapply(2:ncol(rainNSW_t),
+                   function(x) rain.trend(x,rainNSW_t,var.data))
+```
+
+```{r ExtractMDB, eval=F, echo=F}
+## extract sign of MDB, which is assumed to have a linear relationship with
+## the rainfall in the area
+# Qld
+MDB_qld <- unlist(lapply(1:length(coef.rain30.qld4),function(x) ifelse(summary(coef.rain30.qld4)[x,2]=="gam",summary(coef.rain30.qld4[[x]])$p.coeff[2],NA)))
+# NSW/VIC
+MDB_nswvic <- unlist(lapply(1:length(coef.rain30.nswvic),function(x) ifelse(summary(coef.rain30.nswvic)[x,2]=="gam",summary(coef.rain30.nswvic[[x]])$p.coeff[2],NA)))
+
+par(mfrow=c(2,1))
+hist(MDB_nswvic, xlab = "value of MDB rainfall estimate", main="NSW full data period")
+hist(MDB_qld, xlab = "value of MDB rainfall estimate", main="Qld full data period")
+
+```
+
+
+```{r ExtractC, eval=F, echo=F}
+## extract sign of C (the tree cover effect)
+C30_qld <- unlist(lapply(1:length(coef.rain30.qld4),function(x) ifelse(summary(coef.rain30.qld4)[x,2]=="gam",summary(coef.rain30.qld4[[x]])$p.coeff[3],NA)))
+# NSW/VIC
+C30_nswvic <- unlist(lapply(1:length(coef.rain30.nswvic),function(x) ifelse(summary(coef.rain30.nswvic)[x,2]=="gam",summary(coef.rain30.nswvic[[x]])$p.coeff[3],NA)))
+# NSW/VIC 7 year (includes 2009)
+#  C30_nswvic7 <- unlist(lapply(1:length(coef.rain30.nswvic7),function(x) ifelse(summary(coef.rain30.nswvic7)[x,2]=="gam",summary(coef.rain30.nswvic7[[x]])$p.coeff[2],NA)))
+# # NSW/VIC 8 year (includes 2010)
+#  C30_nswvic8 <- unlist(lapply(1:length(coef.rain30.nswvic8),function(x) ifelse(summary(coef.rain30.nswvic8)[x,2]=="gam",summary(coef.rain30.nswvic8[[x]])$p.coeff[2],NA)))
+
+jpeg("../../figures/hist_sign_LC.jpg")
+par(mfrow=c(2,1))
+hist(unlist(lapply(1:length(coef.rain30.nswvic),function(x) ifelse(summary(coef.rain30.nswvic)[x,2]=="gam",summary(coef.rain30.nswvic[[x]])$p.coeff[3],NA))), xlab = "value of tree cover estimate", main="NSW full data period")
+hist(unlist(lapply(1:length(coef.rain30.qld4),function(x) ifelse(summary(coef.rain30.qld4)[x,2]=="gam",summary(coef.rain30.qld4[[x]])$p.coeff[3],NA))), xlab = "value of tree cover estimate", main="Qld full data period")
+dev.off()
+
+# p-value of C
+Cp30_qld4 <- unlist(lapply(1:length(coef.rain30.qld4),
+   function(x) ifelse(summary(coef.rain30.qld4)[x,2]=="gam",
+                      summary(coef.rain30.qld4[[x]])$p.pv[3],NA)))
+# NSW all data
+Cp30_nswvic <- unlist(lapply(1:length(coef.rain30.nswvic),
+    function(x) ifelse(summary(coef.rain30.nswvic)[x,2]=="gam",
+                       summary(coef.rain30.nswvic[[x]])$p.pv[3],
+                       NA)))
+
+
+## frame of the two regions (100 years data)
+qld_tif <- raster("../..\\Data\\BoM\\rainfall\\AWAP\\from1900_FVG\\r19000101_qld.tif")
+nsw_tif <- raster("../..\\Data\\BoM\\rainfall\\AWAP\\from1900_FVG\\r19000101_nsw.tif")
+
+  dist_Cp30_qld4 <- raster(qld_tif)
+  dist_Cp30_qld4[] <- Cp30_qld4
+
+  dist_Cp30_nsw <- raster(nsw_tif)
+  dist_Cp30_nsw[] <- Cp30_nswvic
+
+# Now make the final plot for the paper with both sites and 2009 and all data
+  jpeg("../../figures/Cp_30yrs.jpg", width=1440, height=720)
+  par(mfrow=c(1,2))
+  par(mar=c(5,5,3,7))
+  # QLD first
+  plot(e111,xlab="",ylab="", cex.lab = 2,
+       cex.axis=2)
+  image(dist_Cp30_qld4,col=c("red","orange","yellow","light blue"),breaks=c(0,0.05,0.1,0.2,1),legend=F,add=T)
+#   plot(aus_reg2,border="grey",add=T)
+  plot(mdb_reg2,border="grey",lwd=5,add=T)
+  plot(e111,add=T)
+legend(148,-27.5,c("State","MDB"),col=c("grey","grey"),lwd=c(2,5),bty="n",title="Boundary",cex=1.5)
+
+
+  # Then NSW
+  par(mar=c(5,0,3,9),xpd=T)
+  plot(e222,xlab="",ylab="", cex.lab = 2,
+       cex.axis=2) #,border="white")
+  image(dist_Cp30_nsw,col=c("red","orange","yellow","light blue"),breaks=c(0,0.05,0.1,0.2,1),legend=F,add=T)
+  plot(aus_reg2,border="grey75",lwd=2,add=T)
+  plot(mdb_reg2,border="grey75",lwd=5,add=T)
+  plot(e222,add=T)
+  image.plot(zlim=c(0,4),breaks=c(0,1,2,3,4),lab.breaks=c(0,0.05,0.1,0.2,1),legend.only=T,horizontal=F,col=c("red","orange","yellow","light blue"),legend.shrink=0.6,legend.width=1.2,legend.args=list(text="p value",line=1,cex=2,font=2),axis.args=list(cex.axis=1.8))
+
+  dev.off()
+
+
+```
+
+```{r pvalues_allvars, echo=F, eval=F}
+
+# p-value of the linear variables
+pvalues_qld4 <- lapply(1:length(coef.rain30.qld4),
+   function(x) summary(coef.rain30.qld4[[x]])$p.pv[2:4])
+
+plinear_qld <- as.tibble(do.call(rbind,pvalues_qld4))
+colnames(plinear_qld) = c("MDB", "LC", "trd")
+plinear_qld$state <- "QLD"
+
+# NSW all data
+pvalues_nswvic <- lapply(1:length(coef.rain30.nswvic),
+    function(x) summary(coef.rain30.nswvic[[x]])$p.pv[2:4])
+
+plinear_nsw <- as.tibble(do.call(rbind,pvalues_nswvic))
+colnames(plinear_nsw) = c("MDB", "LC", "trd")
+plinear_nsw$state <- "NSW/VIC"
+
+# plotting
+p_plot_df <- rbind(plinear_qld,plinear_nsw)
+p_plot_df %>%
+  gather(key="Variable", value="p_value", MDB:trd) %>%
+  ggplot(aes(p_value,fill=state)) + geom_histogram(alpha=0.5) +
+  facet_wrap(~Variable) +
+  scale_fill_manual(values = c("blue","red")) +
+  theme(axis.title = element_text(size = rel(2)),
+        axis.text = element_text(size=rel(1)),
+        strip.text = element_text(face="bold", size= rel(2)),
+        legend.text = element_text(face="bold", size= rel(1)),
+        legend.title = element_text(face="bold", size= rel(2)))
+# produce also as jpeg
+jpeg("../../figures/pvalues_linear_fullmodel.jpg", height=960, width=960)
+p_plot_df %>%
+  gather(key="Variable", value="p_value", MDB:trd) %>%
+  ggplot(aes(p_value,fill=state)) + geom_histogram(alpha=0.5) +
+  facet_wrap(~Variable) +
+  scale_fill_manual(values = c("blue","red")) +
+  theme(axis.title = element_text(size = rel(2)),
+        axis.text = element_text(size=rel(1)),
+        strip.text = element_text(face="bold", size= rel(2)),
+        legend.text = element_text(face="bold", size= rel(1)),
+        legend.title = element_text(face="bold", size= rel(2)))
+dev.off()
+
+rm(p_plot_df)
+
+
+
+## p value of seasons and climate indices
+p_qld <- do.call(rbind,
+                 lapply(1:length(coef.rain30.qld4), function(x) {
+                   ifelse(summary(coef.rain30.qld4)[x,2]=="gam",
+                      return(summary(coef.rain30.qld4[[x]])$s.pv),
+                                       return(rep(NA,6)))}))
+
+p_qld <- as.tibble(p_qld)
+colnames(p_qld) = c("SOI", "IOD", "NINO3.4", "NINO4")
+p_qld$state <- "QLD"
+
+p_nsw <- do.call(rbind,
+                 lapply(1:length(coef.rain30.nswvic), function(x) {
+                ifelse(summary(coef.rain30.nswvic)[x,2]=="gam",
+                  return(summary(coef.rain30.nswvic[[x]])$s.pv),
+                       return(rep(NA,6)))}))
+p_nsw <- as.tibble(p_nsw)
+colnames(p_nsw) = c("SOI", "IOD", "NINO3.4", "NINO4")
+p_nsw$state <- "NSW/VIC"
+
+p_plot_df <- rbind(p_qld,p_nsw)
+
+p_plot_df %>%
+  gather(key="Variable", value="p_value", SOI:NINO4) %>%
+  ggplot(aes(p_value,fill=state)) + geom_histogram(alpha=0.5) +
+  facet_wrap(~Variable) +
+  scale_fill_manual(values = c("blue","red")) +
+  theme(axis.title = element_text(size = rel(2)),
+        axis.text = element_text(size=rel(1.5)),
+        strip.text = element_text(face="bold", size= rel(2)),
+        legend.text = element_text(face="bold", size= rel(1.5)),
+        legend.title = element_text(face="bold", size= rel(2)))
+# produce also as jpg
+jpeg("../../figures/pvalues_fullmodel.jpg", height=960, width=960)
+p_plot_df %>%
+  gather(key="Variable", value="p_value", SOI:NINO4) %>%
+  ggplot(aes(p_value,fill=state)) + geom_histogram(alpha=0.5) +
+  facet_wrap(~Variable) +
+  scale_fill_manual(values = c("blue","red")) +
+  theme(axis.title = element_text(size = rel(2)),
+        axis.text = element_text(size=rel(1.5)),
+        strip.text = element_text(face="bold", size= rel(2)),
+        legend.text = element_text(face="bold", size= rel(1.5)),
+        legend.title = element_text(face="bold", size= rel(2)))
+dev.off()
+rm(p_plot_df)
+
+```
+
+
+
+```{r value_rsqModel, eval=F, echo=F}
+## extract r.sq of the model
+rsq_qld <- unlist(lapply(1:length(coef.rain30.qld4),
+          function(x) ifelse(summary(coef.rain30.qld4)[x,2]=="gam",
+                    summary(coef.rain30.qld4[[x]])$r.sq,NA)))
+rsq_nsw <- unlist(lapply(1:length(coef.rain30.nswvic),
+    function(x) ifelse(summary(coef.rain30.nswvic)[x,2]=="gam",
+                    summary(coef.rain30.nswvic[[x]])$r.sq,NA)))
+
+# show histogram
+plot_df <- data_frame(`r.squared` = c(rsq_qld,rsq_nsw),
+                      state = c(rep("QLD", length(rsq_qld)),
+                                rep("NSW/VIC", length(rsq_nsw))))
+
+jpeg("../../figures/rsq_fullmodel.jpg", height=480, width=480)
+plot_df %>%
+  ggplot(aes(`r.squared`*100, fill=state)) + geom_histogram() +
+  scale_fill_manual(values = c("blue","red")) +
+  xlab(expression(paste("% of variability explained (",r^2,")")))
+dev.off()
+
+plot_df %>%
+  group_by(state) %>%
+  summarise(mean_rsq = mean(`r.squared`))
+
+
+```
+
+
+```{r GAMresiduals, echo=F, eval=F}
+#
+resid_qld <- lapply(1:length(coef.rain30.qld4), function(x) if(summary(coef.rain30.qld4)[x,2]=="gam") {residuals(coef.rain30.qld4[[x]])} else{NA})
+
+# ## calculate mean residual
+  test <- do.call(cbind,resid_qld)
+  qld.resid.mean <- apply(test,1, mean,na.rm=T)
+  residuals <- data_frame(Dates = seq.Date(as.Date("1979-01-01"),
+                             length = length(qld.resid.mean),
+                                           by = "month"),
+                          QLD = qld.resid.mean)
+#
+resid_nswvic <- lapply(1:length(coef.rain30.nswvic),
+            function(x) if(summary(coef.rain30.nswvic)[x,2]=="gam")
+              {residuals(coef.rain30.nswvic[[x]])} else{NA})
+
+## calculate mean residual
+test <- do.call(cbind,resid_nswvic)
+nswvic.resid.mean <- apply(test,1, mean,na.rm=T)
+residuals$NSWVIC <- nswvic.resid.mean
+
+
+## plots
+jpeg("../../figures/GAMresidualTime.jpeg", height=960, width=960)
+residuals %>%
+  gather(key="State", value="residual", QLD, NSWVIC) %>%
+  ggplot(aes(Dates,residual)) + geom_line(colour="blue") +
+  geom_vline(xintercept=as.numeric(as.Date("2003-01-01")), colour="red",
+             size=1.5) +
+  facet_wrap(~State)  +
+  theme(axis.text = element_text(size=rel(1.5)),
+        axis.title = element_text(size=rel(2)),
+        strip.text = element_text(size=rel(2), face = "bold"))
+dev.off()
+
+
+#
+#
+## plot gam.check
+jpeg("../../figures/gam_check.jpg", width=720, height=960)
+  par(mfrow=c(4,2))
+  gam.check(coef.rain30.qld4[[1]])
+  gam.check(coef.rain30.nswvic[[1]])
+dev.off()
+
+```
+
+## Step trend test
+
+To support the regression analysis, a Mann-Whitney Rank-Sum step trend test was used to detect changes in rainfall as a result of vegetation cover change. This specific nonparametric statistical test was modified from the Mann-Whitney U test by @Hirsch1985 and can identify a step change in data which is cross-correlated. The gridded rainfall dataset used in this study has a high spatial correlation between neighbouring pixels due to the underlying interpolation method. The advantages of using the Rank-Sum test are: (1) it does not depend on assumptions of the data distribution; (2) it is not restricted to datasets with no missing data; (3) it is robust and not as easily influenced by outliers and negative numbers [@Hirsch1985].
+
+The rainfall residuals from the regression model in Equation \@ref(eq:model2) were used for the step trend test. To detect a step change, using deseasonalised and detrended data is important [@Hirsch1985]. Furthermore, as rainfall can only be partially attributed to local sources and conditions, other effects are introduced by large scale dynamics and changes in climatic factors. The assumption is that the regression model should remove these effects, and additionally deseasonalise and detrend the rainfall data. As a result, the local landuse effects are amplified in the remaining residuals. The  test, described in the following sub section, subsequently associates trends in the rainfall residuals with tree cover changes.
+
+```{r Residual_Analysis, eval=F, echo=F}
+## predicting model: land cover is category variable
+rain.trend3 <- function(x,y,var.data) {
+  # add a very small number to take out 0 values
+  var.data$rain <- as.vector(unlist(y[x]))[1:nrow(var.data)]+0.0001
+
+      rain_fit <- gam(rain ~ MDB
+                  + s(SOI, k=3, bs="cs")
+                  + s(IOD, k=3, bs="cs")
+                  #+ s(PDO, k=3, bs="cs")
+                  + s(NINO3.4, k=3, bs="cs")
+                  + s(NINO4, k=3, bs="cs")
+                  + trd
+                  , data=var.data,#family=Gamma(link=log),
+                  na.action = na.omit)
+    #
+  return(rain_fit)
+
+}
+
+## run model for 37 years
+mod_rain_qld4 <- lapply(2:ncol(rainQld_t),
+                       function(x) rain.trend3(x,rainQld_t,var.qld4))
+mod_rain_qld2 <- lapply(2:ncol(rainQld_t),
+                  function(x) rain.trend3(x,rainQld_t,var.qld2))
+## QLD
+rsq_qld <- unlist(lapply(1:length(mod_rain_qld4), 
+                    function(x) summary(mod_rain_qld4[[x]])$r.sq))
+#
+#
+## extract residual
+residual_qld <- lapply(1:length(mod_rain_qld4), 
+      function(x) {mod_rain_qld4[[x]]$y-fitted(mod_rain_qld4[[x]])})
+
+residual_qld2 <- lapply(1:length(mod_rain_qld2), 
+    function(x) {mod_rain_qld2[[x]]$y-fitted(mod_rain_qld2[[x]])})
+
+#
+# ## NSW/VIC
+#
+#NSW/VIC
+mod_rain_nswvic <- lapply(2:ncol(rainNSW_t), 
+                function(x) rain.trend3(x,rainNSW_t,var.data))
+
+## explaining power of the partial model
+rsq_nswvic <- unlist(lapply(1:length(mod_rain_nswvic), 
+              function(x) summary(mod_rain_nswvic[[x]])$r.sq))
+#
+
+# extract residual
+residual_nswvic <- lapply(1:length(mod_rain_nswvic),
+  function(x) {mod_rain_nswvic[[x]]$y-fitted(mod_rain_nswvic[[x]])})
+
+# histogram of partial model rsq
+qld_df <-  data.frame(rsq = rsq_qld*100,
+                      state = "Qld")
+nsw_df <-  data.frame(rsq = rsq_nswvic*100,
+                      state = "NSW")
+
+plot_df <- rbind(qld_df, nsw_df)
+jpeg("../../figures/pmodel_explHistogram.jpg")
+plot_df %>%
+  ggplot(aes(rsq)) + geom_histogram(fill="blue") +
+  facet_wrap(~state) +
+  xlab(expression(paste("% of variability explained (",r^2,")"))) +
+  theme(axis.text = element_text(size=rel(1.5)),
+        strip.text = element_text(size=rel(2)),
+        axis.title = element_text(size=rel(2)))
+ dev.off()
+
+# stack the residuals
+
+# # create a boxplot with the annual residuals from 1998
+# resplot_df <- data_frame(Date = rep(ymd(paste(nsw_30[[1]],
+#                                               "01", sep="-")),
+#                         length(residual_nswvic)+length(residual_qld)),
+#                           residuals = c(unlist(residual_nswvic),
+#                                                   unlist(residual_qld)),
+#                       State = c(rep("NSW/VIC",
+#                                     length(unlist(residual_nswvic))),
+#                                   rep("QLD", length(unlist(residual_qld)))))
+# 
+# jpeg("../../figures/ResidualBoxplot.jpg")
+# resplot_df %>%
+#   filter(Date >= ymd("1998-01-01")) %>%
+#   ggplot(aes(Date,residuals, fill=State)) +
+#   geom_boxplot(aes(group=year(Date))) +
+#   facet_wrap(~State, ncol=1)
+# dev.off()
+
+
+# residuals before and after change
+# create a boxplot with the annual residuals from 1998
+resplot_df <- data_frame(Date = rep(ymd(rainNSW_t[[1]][1:444]),
+          length(residual_nswvic) + length(residual_qld)),
+          residuals = c(unlist(residual_nswvic),                                               unlist(residual_qld)),
+          State = c(rep("NSW/VIC",
+                        length(unlist(residual_nswvic))),
+                        rep("QLD", length(unlist(residual_qld)))))
+# resplot_df %>%
+#   filter(Date >= ymd("1998-01-01")) %>%
+#   ggplot(aes(Date,residuals, fill=State)) +
+#   geom_boxplot(aes(group=year(Date))) +
+#   facet_wrap(~State, ncol=1)
+
+jpeg("../../figures/ResidualBoxplot.jpg")
+resplot_df %>%
+  filter(Date >= ymd("1998-01-01")) %>%
+  ggplot(aes(Date,residuals, fill=State)) +
+  geom_boxplot(aes(group=year(Date))) +
+  facet_wrap(~State, ncol=1)
+dev.off()
+
+
+# residuals before and after change
+#par(mfrow=c(1,2))
+jpeg("figures/ResidualBoxplotchange.jpg")
+resplot_df %>%
+  filter(Date >= ymd("1998-01-01")) %>%
+  mutate(Change = ifelse(year(Date) > 2003, "After", "Before")) %>%
+  ggplot(aes(Change,residuals, fill= State)) +
+  geom_boxplot(aes(group=Change)) + facet_wrap(~State, ncol=1) +
+  guides(fill=FALSE) + ggtitle("whole period")
+dev.off()
+
+
+# QLD
+res2 <- resplot_df %>%
+  filter(Date >= ymd("1998-01-01")) %>%
+  mutate(Change = ifelse(year(Date) > 2003, "After", "Before")) %>%
+  #filter(year(Date) < 2010) %>%
+  filter(State == "QLD")
+
+  summary(lm(residuals~Change-1,data=res2))
+  t.test(formula=residuals~Change,data=res2)
+#significant difference  and slightly less mean monthly residual rain (p < 0.05) after (~ 0.45 mm/month)
+
+# NSW/VIC
+res3 <- resplot_df %>%
+  filter(Date >= ymd("1998-01-01")) %>%
+  mutate(Change = ifelse(year(Date) > 2003, "After", "Before")) %>%
+  #filter(year(Date) < 2010) %>%
+  filter(State == "NSW/VIC")
+
+  summary(lm(residuals~Change-1,data=res3))
+  t.test(formula=residuals~Change,data=res3)
+#significant difference  and less mean monthly residual rain (p < 0.05) after (~ 1.5 mm/month)
+
+
+```
+
+```{r partialSSTmodel, eval=F, echo=F}
+## explaining power of the partial model only SST
+rain.trend4 <- function(x,y,var.data) {
+
+  var.data$rain <- as.vector(unlist(y[x]))[1:nrow(var.data)]+0.0001
+
+      rain_fit <- gam(rain ~
+                  + s(SOI, k=3, bs="cs")
+                  + s(IOD, k=3, bs="cs")
+                  #+ s(PDO, k=3, bs="cs")
+                  + s(NINO3.4, k=3, bs="cs")
+                  + s(NINO4, k=3, bs="cs")
+                  #+ trd
+                  , data=var.data,#family=Gamma(link=log),
+                  na.action = na.omit)
+    #
+  return(rain_fit)
+  #} #else {NA}
+
+}
+
+
+## explaining power of index
+  coef.soi.qld <- lapply(2:ncol(rainQld_t), 
+                         function(x) rain.trend4(x,rainQld_t,var.qld4))
+  coef.soi.nswvic <- lapply(2:ncol(rainNSW_t), 
+                            function(x) rain.trend4(x,rainNSW_t,var.data))
+  rsq_soi_qld <- unlist(lapply(1:length(coef.soi.qld), 
+                         function(x) ifelse(summary(coef.soi.qld)[x,2]=="gam",
+                                            summary(coef.soi.qld[[x]])$r.sq,NA)))
+  rsq_soi_nswvic <- unlist(lapply(1:length(coef.soi.nswvic), 
+                            function(x) ifelse(summary(coef.soi.nswvic)[x,2]=="gam",
+                                         summary(coef.soi.nswvic[[x]])$r.sq,NA)))
+
+qld_df <-  data.frame(rsq = rsq_soi_qld*100,
+                      state = "Qld")
+nsw_df <-  data.frame(rsq = rsq_soi_nswvic*100,
+                      state = "NSW")
+
+plot_df <- rbind(qld_df, nsw_df)
+jpeg("../../figures/soi_explHistogram.jpg", width=960, height=960)
+plot_df %>%
+  ggplot(aes(rsq)) + geom_histogram(fill="blue") +
+  facet_wrap(~state) +
+  xlab(expression(paste("% of variability explained (adj",r^2,")"))) +
+  theme(axis.text = element_text(size=rel(1.5)),
+        strip.text = element_text(size=rel(2)),
+        axis.title = element_text(size=rel(2)))
+ dev.off()
+
+ plot_df %>%
+   group_by(state) %>%
+   summarise(mean_rsq = mean(rsq))
+
+
+```
+
+### Mann-Whitney rank-sum statistic
+
+As indicated, the step trend test is a modified version of the Mann-Whitney U statistic [@Hirsch1985]. As a nonparametric rank-based test, the Mann-Whitney test does not use the exact values of rainfall but depends on the ranks of the data. For each month, rainfall residuals of each year were ranked in an ascending order. The ranking of January rainfall in a sample pixel k in QLD is illustrated below:
+
+```{r exampleRank, echo=F}
+table <- data_frame(Year = c(1998 , 1999 , 2000 , 2001 ,
+                             2002 , 2005 , 2006),
+                    `Rainfall residuals` =c(-0.3, -60.9, -16.1,
+                                                      -71.7, 111.1,
+                                             -7.2, -60.5),
+                    Rank= c(6, 2, 4,
+                                                               1, 7, 5, 3))
+colnames(table)[3] <- paste("Rank","$R'_{1k}$")
+pander(table, caption="Example of ranking rainfall residuals",
+             style="rmarkdown")
+
+```
+
+\noindent Therefore, the smallest or most negative value has rank 1 and the largest value has the maximum rank.
+
+The before and after period in the data formed two groups of samples. The split point of the two periods was based on the timing of the vegetation cover changes. In the QLD region, changes occurred anytime during 2003 and 2004. In contrast to the previous method, the time period covering the land cover change  was excluded, as the nonparametric test allows missing data. @Hirsch1985 also pointed out that the power of the test is higher if the data of the change period is ignored. Hence 2003 and 2004 were excluded from the analysis. As a result, the after-change period was 2005 - 2015 for the Queensland location.
+
+In the case of NSW/VIC, the bushfires broke out in early January 2003. The change was within a relatively short period of the year. Therefore the after change period in this region still started in January 2003. Following @Hirsch1985, the before period was set to five years (1998 - 2002) in both regions. The length of the after period is also difficult for the NSW/VIC region, as the regrowth would at some point have impacted the local effects.
+
+
+The rank of rainfall in month j year i in pixel k is denoted as $R'_{ijk}$. The sum of ranks of rainfall in month j in pixel k before the known intervention is:
+\begin{equation}
+  W_{jk} = \sum_{i=1}^{n_1}R'_{ijk}.
+  (\#eq:Wj)
+\end{equation}
+$n_1$ is the number of years before the land cover change. The expected value of $W_{jk}$ is
+\begin{equation}
+  \mu_w=n_1(n_1+n_2+1)/2
+\end{equation}
+
+$n_2$ is the number of years after the change. Hence the expected value of the rank sum before the intervention is the same for all months and all pixels. The sum of ranks for the whole time period is fixed, as $(n_1+n_2)(n_1+n_2+1)/2$. In this study, since there are only two groups (before and after), knowing the rank-sum of one group is the same as knowing the rank-sum of the other group. If the rainfall data is temporally and spatially independent, the variance of $W_{jk}$ is
+\begin{equation}
+  \sigma^2_w = n_1\cdot n_2(n_1+n_2+1)/m
+\end{equation}
+where m is the number of months which is 12 in the case of a full year.
+
+### Step trend test
+
+Instead of completing the Mann-Whitney U-test, @Hirsch1985 applied a standard normal Z test to the rank-sum statistics. As highlighted, this modified test accounts for serial and cross correlation in the data. In the case here, the deseasonalised and detrended data shows little autocorrelation in the time series but possesses strong cross correlation between neighbouring pixels, i.e. $R>0.99$.
+
+The sum of $W_{jk}$ for a block of $ns$ pixels over the whole year, $\sum_{j=1}^{12}\sum_{k=1}^{ns}W_{jk}$, has mean
+\begin{equation}
+  E(\sum_{j=1}^{12}\sum_{k=1}^{ns}W_{jk})=12\cdot ns\cdot\mu_W
+\end{equation}
+and variance
+\begin{equation}
+  Var(\sum_{j=1}^{12}\sum_{k=1}^{ns}W_{jk})=\sum_{j=1}^{12}\sum_{k=1}^{ns}\sum_{h=1}^{ns}C(W_{jk},W_{jh}).
+\end{equation}
+$C(W_{jk},W_{jh})$ is the covariance of the W statistics between pixel k and pixel h in month j. When $k=h$, $C(W_{jk},W_{jh})=\sigma^2_w$. When $k\neq h$,
+\begin{equation}
+  C(W_{jk},W_{jh})=\sigma^2_w r(R_k,R_h)
+\end{equation}
+where $r(R_k,R_h)$ is the product moment correlation coefficient of the concurrent ranks in pixel k and h. Here $r$ is calculated on the full time series in each pixel. In the analysis, the test was applied to a square block of four pixels each time. As argued by @Hirsch1985, $ns=4$ is the most optimal solution to balance the cost and the gain in the test power.
+
+The statistic of the step trend test is then defined as
+\begin{equation}
+  Z'=\frac{\sum_{j=1}^{12}\sum_{k=1}^{ns}W_{jk}-12\cdot ns\cdot\mu_w}{\sqrt{Var(\sum_{j=1}^{12}\sum_{k=1}^{ns}W_{jk})}}.
+  (\#eq:Z)
+\end{equation}
+The above statistic is written for a 12 month period. By changing the value 12, it can also be used to test seasonal rainfall change or for other customized periods.
+
+```{r (ref:Zscore), echo=F}
+table2 <- data_frame(" "= c("Z' $>$ 0 & rainfall decreases after change",
+    "Z' $<$ 0 & rainfall increases after change",
+    "Z' = 0 & rainfall does not change"))
+pander(table2, caption="The interpretation of Z' score in the step trend test", style="rmarkdown")
+```
+
+The null hypothesis ($H_0$) in this study is that there was no change in rainfall due to land surface intervention. The results of the step trend test can be interpreted according to the sign of the Z' score (see Table \@ref(tab:Zscore), Chapter 23, P887 [@Hipel1994]). Z' is normally distributed similar to the standard normal statistics Z. Hence it can be compared to a standard normal distribution to determine the p value.
+
+
+```{r steptrend_ns4, echo=F, eval=F}
+## perform step test on the data using ns = 4
+## function to calculate the step trend statistic (Hirsch, 1985)
+stepTrend2 <- function(x,y,i, endyear=2015){
+#browser()
+    n1 <- 2002-1997
+
+    if (i==1){
+
+      z <- 56  # no. of column, related to the dim of the region
+      # Qld 57 by 51
+      # NSW 38 by 33
+
+    } else {
+
+    z <- 37 }
+
+if (x%%z!=0){ #& x%%z!=(z-1)) {
+    y.1 <- y[[x]]
+    y.2 <- y[[x+1]]
+    y.3 <- y[[x+z]]
+    y.4 <- y[[x+z+1]]
+
+    if(!is.na(y.1[1])&!is.na(y.2[1])&!is.na(y.3[1])&!is.na(y.4[1])) { 
+
+    if (i == 1) {
+      n2 <- endyear-2004
+      v.1 <- ts(y.1[c(229:288,313:length(y.1))],
+                start=c(1997,1),frequency=12)
+      v.2 <- ts(y.2[c(229:288,313:length(y.1))],
+                start=c(1997,1),frequency=12)
+      v.3 <- ts(y.3[c(229:288,313:length(y.1))],
+                start=c(1997,1),frequency=12)
+      v.4 <- ts(y.4[c(229:288,313:length(y.1))],
+                start=c(1997,1),frequency=12)
+
+    } else {
+
+      n2 <- endyear-2002
+
+      v.1 <- ts(y.1[c(229:length(y.1))],
+                start=c(1997,1),frequency=12)
+      v.2 <- ts(y.2[c(229:length(y.2))],
+                start=c(1997,1),frequency=12)
+      v.3 <- ts(y.3[c(229:length(y.3))],
+                start=c(1997,1),frequency=12)
+      v.4 <- ts(y.4[c(229:length(y.4))],
+                start=c(1997,1),frequency=12)
+}
+
+## rank by month
+   for (j in 1:12) {
+    assign(paste("r1",j,sep=""),rank(subset(v.1,cycle(v.1)==j)))
+    assign(paste("r2",j,sep=""),rank(subset(v.2,cycle(v.2)==j)))
+    assign(paste("r3",j,sep=""),rank(subset(v.3,cycle(v.3)==j)))
+    assign(paste("r4",j,sep=""),rank(subset(v.4,cycle(v.4)==j)))
+
+    }
+
+## mann-whitney rank sum statistic
+    rlist.1 <- list(r11,r12,r13,r14,r15,r16,r17,r18,r19,r110,r111,r112) ## full year
+    rlist.2 <- list(r21,r22,r23,r24,r25,r26,r27,r28,r29,r210,r211,r212)
+    rlist.3 <- list(r31,r32,r33,r34,r35,r36,r37,r38,r39,r310,r311,r312)
+    rlist.4 <- list(r41,r42,r43,r44,r45,r46,r47,r48,r49,r410,r411,r412)
+    rlist <- list(unlist(rlist.1),unlist(rlist.2),unlist(rlist.3),unlist(rlist.4)) #,unlist(rlist.5),unlist(rlist.6),unlist(rlist.7),unlist(rlist.8),unlist(rlist.9))
+## seasonal
+    w.s1 <- 0
+    w.s2 <- 0
+    w.s3 <- 0
+    w.s4 <- 0
+  for (k in 1:length(rlist.1)) {
+#   for (k in c(9:11)) {
+    w.s1 <- sum(rlist.1[[k]][1:n1])+w.s1
+    w.s2 <- sum(rlist.2[[k]][1:n1])+w.s2
+    w.s3 <- sum(rlist.3[[k]][1:n1])+w.s3
+    w.s4 <- sum(rlist.4[[k]][1:n1])+w.s4
+    }
+    w.s <- sum(w.s1,w.s2,w.s3,w.s4) #,w.s5,w.s6,w.s7,w.s8,w.s9)
+
+## other statistic
+# mean for full year
+    mu <- n1*(n1+n2+1)/2
+    mu.s <- 12*4*mu
+# assume only cross correlation
+    ss <- n1*n2*(n1+n2+1)/12
+    ss.s <- 0
+    for (kk in 1:4) {
+      for (kkk in 1:4) {
+#         for (kkkk in 1:12) {
+          ss.s <- 12*ss*cor(rlist[[kk]],rlist[[kkk]]) + ss.s
+#         }
+      }
+    }
+
+
+## step trend statistic
+    z <- (w.s - mu.s)/sqrt(ss.s)
+
+    return(z) }
+
+     else {return(NA)} }
+
+     else {return(NA)}
+
+  }
+
+## 30 years
+## full year,
+## central QLD
+  qld.z.new <- unlist(lapply(1:(length(residual_qld)-57),function(x) stepTrend2(x,residual_qld,1)))
+  qld.z.new <- c(qld.z.new,rep(NA,57))
+  tr_qld.step.new <- raster(qld_tif)
+  tr_qld.step.new[] <- qld.z.new
+
+## NSW
+  nswvic.z.new <- unlist(lapply(1:(length(residual_nswvic)-38),function(x) stepTrend2(x,residual_nswvic,2)))
+  nswvic.z.new <- c(nswvic.z.new,rep(NA,38))
+
+
+  tr_nswvic.step.new <- raster(nsw_tif)
+  tr_nswvic.step.new[] <- nswvic.z.new
+plotclt <- rev(brewer.pal(8,"RdYlBu"))
+
+jpeg("figures/step_new.jpg", width=1440, height=720, quality=100)
+  par(mar=c(5,3,3,7), mfrow=c(1,2), xpd=T)
+  plot(e111,xlab="",ylab="", cex.axis=2)#,border="white")
+  image(tr_qld.step.new,col=plotclt,
+        breaks=c(-3,-1.645,-1.282,-0.842,0,0.842,1.282,1.645,3),legend=F,add=T)
+  plot(mdb_reg2,border="grey",add=T,lwd=5)
+  plot(e111,add=T)
+# image.plot(zlim=c(-4,4),breaks=c(-4,-3,-2,-1,0,1,2,3,4),lab.breaks=c(0.00,0.05,0.1,0.2,1,0.2,0.1,0.05,0.00),legend.only=T,horizontal=F,col=plotclt,legend.shrink=0.7,legend.width=0.9,legend.args=list(text=c(expression(paste("level of significance (",alpha,")")),"positive Z'","negative Z'"),side=c(2,3,1),line=0.7,cex=1.5,font=2),axis.args=list(cex.axis=1.5))
+legend(147.8,-27.5,c("State","MDB"),col=c("grey","grey"),
+       lwd=c(2,5),bty="n",title="Boundary",cex=1.8)
+
+  # NSW
+  par(mar=c(5,0,3,10))
+  plot(e222,xlab="",ylab="", cex.axis=2)#,border="white")
+  image(tr_nswvic.step.new,col=plotclt,breaks=c(-2.3,-1.645,-1.282,-0.842,0,0.842,1.282,1.645,3),legend=F,add=T)
+  plot(mdb_reg2,border="grey",add=T,lwd=5)
+  plot(aus_reg2,border="grey",add=T, lwd=2)
+  plot(e222,add=T)
+  par(mar=c(3,3,1,9),xpd=T)
+image.plot(zlim=c(-4,4),breaks=c(-4,-3,-2,-1,0,1,2,3,4),
+           lab.breaks=c(0.00,0.05,0.1,0.2,1,0.2,0.1,0.05,0.00),
+           legend.only=T,horizontal=F,col=plotclt,
+           legend.shrink=0.7,legend.width=1.5,
+           legend.args=list(text=c(expression(paste("
+                    level of significance (",alpha,")")),"positive Z'",
+                           "negative Z'"),
+                            side=c(2,3,1),line=0.9,cex=1.5,font=2),
+           axis.args=list(cex.axis=1.5))
+
+dev.off()
+
+#ns = 4 results
+# positive
+qld_origp.new <- length(subset(qld.z.new,qld.z.new>=1.645))/
+  length(qld.z.new)
+# 0.00034
+# negative
+qld_orign.new <- length(subset(qld.z.new,qld.z.new<=-1.645))/
+  length(qld.z.new)
+# 0
+
+nsw_origp.z.new <- length(subset(nswvic.z.new,nswvic.z.new>=1.645))/
+  length(nswvic.z.new)
+# 0
+nsw_orign.z.new <- length(subset(nswvic.z.new,nswvic.z.new<=-1.0))/
+  length(nswvic.z.new)
+# 0
+
+
+
+
+```
+
+```{r bootstrap_ns1, echo=F, eval=F}
+## 4 cell step trend
+# this was run on the HPC
+NSW_zvalues <- readRDS("../../processed data/NSW_zvalues.RDS")
+QLD_zvalues <- readRDS("../../processed data/QLD_zvalues.RDS")
+
+
+bt4_nswp.values <- NSW_zvalues$zpq.values*100
+bt4_nswn.values <- NSW_zvalues$znq.values*100 
+bt4_qldp.values <- QLD_zvalues$zpq.values*100
+bt4_qldn.values <- QLD_zvalues$znq.values*100
+
+real_df <- data.frame(zvalue = c(nsw_origp.z.new, nsw_orign.z.new,
+                                 qld_origp.new, qld_orign.new)*100, 
+                      sign = rep(c("postive","negative"),2),
+                      State=c("NSW/VIC","NSW/VIC","QLD","QLD"),
+                      type=rep("real",4))
+
+MC_df <- data.frame(zvalue = c(bt4_nswp.values,bt4_nswn.values,
+                                 bt4_qldp.values, bt4_qldp.values),
+                    sign =c(rep("postive",length(bt4_nswp.values)),
+                            rep("negative",length(bt4_nswn.values)),
+                            rep("postive",length(bt4_qldp.values)),
+                            rep("negative",length(bt4_qldn.values))),
+                    State = c(rep("NSW/VIC",length(bt4_nswn.values)*2),
+                              rep("QLD",length(bt4_qldn.values)*2)),
+                    type = rep("Monte Carlo",
+                               length(bt4_nswn.values)*2 +length(bt4_qldn.values)*2))
+
+
+jpeg("figures/bt4_hist.jpg", width=740,height=740, quality = 100)
+# A histogram of taus
+hp <- ggplot(MC_df, aes(x=zvalue)) + geom_histogram(binwidth=2,fill="blue")
+# Histogram of p_values by state
+# With panels that have the same scaling, but different range 
+# (and therefore different physical sizes)
+#hp <- hp + facet_wrap(~ State*sign,ncol=2,scales="free")
+# # add a red point for the real slope from the data
+hp <- hp + geom_point(data=real_df,aes(x=zvalue, y=0),colour="red",
+                 shape=16,size=8) + 
+  facet_wrap(~ State*sign,ncol=2, scales="free") #+
+hp <- hp + scale_colour_grey(start = 0, end = 0.6)
+hp <- hp + theme(axis.title = element_text(face ="bold", size=rel(2)),
+                 strip.text = element_text(face ="bold", size=rel(2)),
+                 axis.text = element_text(face ="bold", size=rel(1.5)))
+hp
+dev.off()
+
+
+```
+
+
+Results
+===========
+
+## Tree cover change
+
+The pixels, where the tree cover change based on the MOD44B data was significant ($p \leq 0.05$) in each study region, are shown in Figure \@ref(fig:tctrend) for the NSW/VIC region  (left panel) and the QLD region (right panel). In the QLD region there actually has generally been an increase in tree cover after the clearing of native vegetation stopped. In the NSW/VIC region, much of the tree loss between 2002 and 2003 was concentrated in the Snowy Mountains close to the border of NSW and VIC, which is also evident in the figure. Tree cover loss occurred in large parts of the QLD region between 2002 and 2005, but this tree loss was spatially less concentrated. 
+```{r tctrend, fig.cap ="The maps show significant changes in tree cover identified from the MOD44B data between 2003 and 2015 in the NSW/VIC region (right) and the Qld region (left). The amount of change was calculated as the difference in tree cover before and after the specified land cover intervention and it is shown as the percentage of the ground area. Green colour indicates an increase in tree cover, while red colour indicates a decrease in tree cover.", echo=F, out.width="90%"}
+include_graphics("figures/tc_figs.jpg")
+```
+
+
+## Regression Model and significance of Vegetation Cover Changes
+
+Generally the regression model only explains a limited amount of the rainfall variability (Figure \@reg(fig:rsq_model). The model in Equation \@ref(eq:model2) accounts for an average around 33\% of the variation in the NSW/VIC region and about 50% of the variation in the QLD region as indicated by the adjusted $r^2$. The adjusted $r^2$ is the coefficient of determination, a measurement of the amount of variability predicted by the model adjusting for the number of explanatory terms. The residual analysis shows that the assumptions of the regression model are generally met (Figure \@ref(fig:residuals). The standardised residual plots, however, show some funnelling for the NSW/VIC regions, suggesting non constant variance. The residual patterns are consistent for all pixels within each region.
+
+```{r rsq_model, fig.cap = "The distribution of the variance explained (adjusted $r^2$ ) by the full regression model", echo=F, out.width="90%"}
+include_graphics("figures/rsq_fullmodel.jpg")
+
+```
+
+In terms of predictors of the local rainfall in the model, logically, the average rainfall across the larger Murray Darling Basin is highly significant. This confirms that this variable is a good reflection of the year on year variability in the rainfall.
+The model also confirms the importance of the climate drivers and the seasonality in Australian rainfall, as many of these variables were significant. Even at the grid level, the seasons and several of the climatic indices were significant ($p \leq 0.05$) everywhere in both regions. The climate drivers (at lag zero) accounted, on average, for 6.5\% of the rainfall variability in both the QLD region and the NSW/VIC region (see Figure \@ref(fig:rsq) for the distribution of adjusted $r^2$ in these two regions). These figures are within the upper bound of seasonal rainfall predictability by a SST anomaly field reported by @Westra2010.
+
+```{r residuals, fig.cap ="The residual analysis of a sample pixel in the QLD region (top) and NSW/VIC region (bottom).", echo=F, out.width="90%"}
+include_graphics("figures/gam_check.jpg")
+```
+
+```{r rsq, fig.cap = "The performance of the regression model if rainfall is only modelled by the climate drivers. It shows the percentage of rainfall variability that can be explained by the climate drivers for the Qld and NSW/VIC region", echo=F, out.width="90%"}
+include_graphics("figures/soi_explhistogram.jpg")
+
+```
+
+
+There were generally no statistically significant long term trends in both regions. However, this result might not prove or disprove the existence a long term trend in rainfall. The overall time period is fairly short [@Koutsoyiannis2007] and more pixels in NSW/VIC could indicate a significant step change if the long term trend effect is not removed by the model. As trend free data is an important requirement for the step trend test, the trend term was kept in the regression model to ensure the detection of step change was not due to a possible long term trend.
+
+```{r LCp, fig.cap = "The spatial distribution of significance of land cover step change variable in the GAM model predicting changes in rainfall in the both regions. The left graph relates to the Qld region, while the right hand plot reflects the NSW/VIC region. The outlines of relevant Australian states and the Murray Darling Basin are indicated in grey.  The p value reported is for the land cover variable in the model.", echo=F, out.width="90%"}
+include_graphics("figures/Cp_30yrs.jpg")
+```
+
+The land cover variable in the model (Equation \@ref(eq:model2)) aims to identify a step change in the rainfall before and after the observed change in land cover. The  variable was mainly significant ($p \leq 0.05$) for the rainfall estimates in some areas in NSW/VIC, as shown in Figure \@ref(fig:LCp) (right panel). However, the number of pixels where the landcover variable was significant was much greater in NSW/VIC compared to the QLD region. There was also some relationship between the areas of bushfires in Figure \@ref(fig:bushfire). Only a very small area with a significant step change due to the land cover changes was found in rainfall in the QLD region (left panel)
+
+More generally, the model for NSW/VIC suggests that the land cover variable has a positive impact on rainfall in both regions. The fitted coefficients for the Land cover change variable were consistently positive for the "tree" part of the series. It implies that rainfall was higher when the surface was covered by trees.
+
+## Step Trend Test
+
+```{r steptest30, fig.cap="Spatial distribution of the step trend test Z' statistics in the two study sites. The panel on the left is for the QLD region, while the panel of the right is for NSW/VIC. Warm colours (yellow, orange and red) are for positive Z' values which indicate decreasing rainfall trend due to the land surface change. Cold colours (light blue to blue) are for negative Z' values which indicate increasing rainfall trend. The deeper the colour, the more significant the statistic.", echo = F, out.width="90%"}
+include_graphics("figures/step_new.jpg")
+```
+
+The spatial step trend test based on the regression residuals without the landcover variable generates Z' scores. The results for the Qld region (left) and NSWVIC region (right)  are shown in Figure \@ref(fig:steptest30). This figure provides two types of information: the sign and the significance level. The sign indicates the direction of the step change in the residuals of the regression, as listed in Table \@ref(Zscore). In both regions there are areas of positive Z' values which imply a decrease in rainfall, but this is stronger in the NSW/VIC area than in the QLD area. For the NSW/VIC area there appears to be a reasonable relationship between the locations where changes in tree cover are observed (Figure \@ref(fig:tc_trend)) and the patterns in the Z' score. However, there is not necessarily a direct relationship as movement of air masses could mean that actual changes of rainfall are observed close by, but not necessarily exactly at areas with changes of landcover.
+There is once again a difference between the left panel and the right panel, indicating only a few significant of Z' scores in the QLD region wich matches the earlier significance in the landcover variable in the full regresion. In the QLD region, only 0.2\% of the pixels obtained a positive Z' score with p $<$ 0.1. In the NSW/VIC region 3.7\% of pixels have a positive Z' score with p $<$ 0.1. In general it is only a small proportion of both study regions.
+
+```{r meandiff, fig.cap ="Boxplots of annual rainfall residuals (estimated based on Equation 2 before and after the land cover intervention during 1979 - 2015 in the study regions. On average, the after period has a significantly lower annual rainfall residual in NSW/VIC, but a signifcantly higher annual rainfall residual in the Qld study area", echo=F, out.width="90%"}
+
+include_graphics("figures/ResidualBoxplotchange.jpg")
+```
+
+The rainfall regression residuals without the landcover variable for the two regions (before-change since 1979 and after-change) were also compared (Figure \@ref(fig:meandiff)) using a simple t-test. From the boxplots it is difficult to see that there were significantly different ($p < 0.05$) mean rainfall residual values between the "before" and "after" periods in both regions.  For the Queensland locations, the mean monthly rainfall residuals were slightly lower  ($p < 0.05$) after the change in landcover ($~ 0.45 mm/month$). For the NSW/VIC locations there was larger decrease in the mean monthly rainfall residual ($p < 0.05$) after the change($~ 1.5 mm/month$).
+
+The choice of the number of pixels averaged in the step trend test ($ns$) has some impact on the test results [@Hirsch1985]. The cases of $ns = 1$ and $ns = 9$ were also tested. The results for $ns = 1$ showed a lower number of significant pixels(at p $<$ 0.10) compared to the $ns = 4$ test. The results from the $ns = 9$ test was not different from the $ns = 4$ test. We therefore decided to stay with $ns = 4$. The power of the test does not change much after $ns = 4$, as shown by @Hirsch1985.
+
+As part of the analysis, the "field significance" of the Z' score test was considered to improve the interpretion of the step change at regional scales from multiple local tests [@Wilks2006, @Westra2013]. Here, the bootstrapping resampling method from @Westra2013 was used to evaluate the field significance. This means the spatial structure of the pixels was maintained, but the order of the years and months was changed by random resampling. For each resampling, the test statistic identifies the percentage of the pixels with a significant positive or negative step change for the step trend test. The test statistics on 1000 resampled replicates were used to develop the distribution of these percentage values, and the observed fraction of significant Z' scores (at $p < 0.1$) is plotted on the distribution (Figure \@ref(fig:fieldsig)). The results support the earlier Z' score results. Only the percentage significant positive Z' scores for the NSW/VIC region falls on the tail of the field significance distribution, while all the others are well within the distribution. This suggests that the percentage of significant positive Z' scores in the NSW/VIC region is least likely due to a unique series of rainfall years, but is most likely due to changes in landcover. In other words, in the NSW/VIC region it is most likely that the change in landcover caused a decrease in the rainfall. 
+
+```{r fieldsig, fig.cap ="Field significance results showing the distribution of % of significant Z' scores for the resampled series (blue bars), and the % significant Z'scores for the original series of rainfall years (red circle)", echo=F, out.width="90%"}
+
+include_graphics("figures/bt4_hist.jpg")
+```
+
+
+Discussion
+=============
+
+```{r summarytable, echo=F, message=F}
+library(kableExtra)
+
+table <- read_csv("TestSummaryTable2.csv")
+kable(table,caption="Summary table of all tests on the two regions ", format = "latex", booktabs =TRUE) %>%
+  kable_styling(latex_options = "scale_down")#%>%
+  #kableExtra::landscape()
+```
+
+Overall the summary table of the results indicates that the effects of land clearing or bushfire on rainfall are consistent across the range of different statistical tests. In all cases, the data for the NSW/VIC region 
+
+Generally, empirical studies on LCC-precipitation interaction are conducted within an area with known land surface intervention [e.g. @Otterman1990,@Durieux2003,@Negri2004,@Sato2007]. However, these locations are rare and difficult to isolate from real landscape change. Modelling studies are abundant, but are generally not linked to observed data. In this study we therefore tested the effect of land cover change across a broad region, rather than only for locations where changes were known to occur or have occured. The advantage of the suggested approach is that it does not require a long time series of land cover data as this is usually unavailable. Furthermore, it does not assume a specific relationship between vegetation cover change and rainfall but allows the data to show this relationship, by applying the analysis to a broader area outside the boundary of the vegetation cover change. This approach is expected to provide a way to reduce the risk of a false positive paradox, by comparing results between areas with and without vegetation cover change.
+
+While there is some indication that the observed landuse changes (Figure \@ref(fig:tctrend)) cause a decrease in the rainfall, our analysis has not been able to give an unequivocal answer. There are several possible complicating fatcors in the data that could explain the differences between the two regions and the two time periods.
+
+## Rainfall variability
+
+The first and most significant effect on the results remains the variability in the rainfall. The regression model used here is a simple model. We only consider the important effects of a historical trend, seasonality and climate drivers. The purpose of using the regression model is to remove the year to year and month to month variability in rainfall and therefore strengthen the land cover signal in the residuals. However, the model shows that trend, seasonality, ENSO and IOD together explain no more than 30\% of the rainfall variability, and only around 7\% on average is due to the climate drivers (Figure \@ref(fig:rsq) . And while this is consistent with the literature e.g. @Westra2010, a large amount of variation is left in the model residuals. Rainfall is generally considered a stochastic process [e.g. @Fowler2005,@Cowpertwait2009,@Burton2010] and clearly some of the variability is either a different response to a combination of climate factors (as interactions were not tested in the model), or a strongly non-stationary response to the climate drivers. The remaining variability in the residuals increases the difficulty to detect a change in rainfall. This is clearly demonstrated in the difference in land cover variable significance and the Z' score between the series to 2009 and the series to 2015. While 2009 was at the end of the drought, the series to 2015 includes the record breaking year 2010 (Figure \@ref(fig:ts-mean)).
+
+The severe bushfires in 2003 were also triggered by the extreme drought conditions during the millenium drought [@vanDijk2013]. Although the drought on rainfall has been accounted for in part by the model, a further delayed or cumulative impact of drought could be feeding into the local land-atmosphere interaction. As a result, the rainfall feedback to the vegetation cover change could be weak under the dry conditions, and this could have affected the result.
+
+## Vegetation dynamics
+
+The second possible effect is the dynamic nature of the vegetation clearing and recovery. Although land clearing has occurred at a high rate and broad scale in Queensland [@SLATS2017], the clearing does not have a clear start and end point. QLD has a long history of land clearing. According to the series of SLATS reports on land cover changes in QLD released by the Queensland government, land clearing continued in and around the study region between 1988 - 2008. Major broad scale and high rate clearings occurred in 1999 - 2000 and 2002 - 2004 (Figure \@ref(fig:slat)). And even though there was a decrease in land clearing post 2005, it is difficult to define a clear cut change in this region. The more continuous ongoing land clearing could have reduced the significance of a step change.
+
+```{r slat, fig.cap="Woody vegetation clearing rate in QLD for the two major bioregions in the study area. The data were obtained from SLATS (2017), and clearly indicate a sharp decrease in the clearing rate after 2005.", echo=F, out.width="90%"}
+include_graphics("figures/slats.jpg")
+```
+
+The two approaches used in this study indicate quite different results on the level of change in the NSW/VIC region. The regression model showed that a large area in the NSW/VIC region has experienced a significant land cover effect ($p < 0.05$) on the rainfall after 2003. The effect in the step trend test (Z' scores) is much mroe subdued, even though it was able to detect significant changes ($p < 0.1$) within the area in the period to 2009, but almost no effect in the period to 2015. In contrast, the results are almost reversed in the Qld area. While some of this could be due to the difficulty in removing year on year rainfall variability, some of this might also be due to vegetation regrowth in both locations.
+
+The specific vegetation class in the Queensland area is well-known for rapid regrowth and "thickening" in favourable conditions [@Gowen2016], and this could explain the change in vegetation cover between 2009 and 2015 in the Qld area (Figure \@ref(fig:tctrend)). In particular the favourable rainfall years of 2010 and 2011 would have boosted regrowth, increasing evapotranspiration and therefore decreasing the effect of the rainfall change.
+
+The different causes of vegetation cover change in these two regions could lead to different post-change characteristics. The magnitude of EVI decreasing trends in the QLD region are less than in NSW region, as reported in the DLCD data. This is due to the lower tree density in the QLD region than in the NSW/VIC region before land surface interventions. The significant bushfires (Figure \@ref(fig:fig2bushfire)) would have drastically reduced the vegetation cover and recovery was very slow in some areas within the NSW/VIC area. The persistent drought in the 2000s [@Howden2012,@vanDijk2013] delayed the regrowth of trees. On the other hand, replacing tree cover with pasture and crops in the Qld area might have a relatively subtle impact on the EVI.
+
+## Misalignment of rainfall effects and vegetation clearing
+
+Particularly in the NSW/VIC area, there is no direct overlap between the pixels with significant vegetation change (Figure \@ref(fig:tctrend)) and the pixels with significant land cover variables or positive Z'scores (Figure \@ref(fig:LCp) and Figure \@ref(fig:steptest30)). While this seems possibly surprising at first, a plausible explanation could be the general movement of moisture and climate systems over the landscape, resulting in a possible shift of where the moisture is evaporated and where rainfall occurs. Specifically for this reason, this study selected rather large spatial boxes to capture the overall response rather than the pixel by pixel comparison/
+
+## Gridded monthly rainfall data
+
+The rainfall data used in this study is a gridded data set. This data set is robust and consistent over a long time series (from 1900 to current) and has a broad national wide coverage which can provide more information spatially. However, high cross correlation between pixels, due to the interpolation method generating this data set, can also introduce spatial noise. In the step trend test the cross correlation was accounted for. Some other methods are also available which can be used to perform a comparative trial. For example, [@Narisma2007] applied a spatial Gaussian filter on a similar data set and used wavelet analysis to detect step change in rainfall. High quality station data is another option to test whether the observed spatial pattern in the step trend test results was not due to the gridded data itself. Resampling methods, such as bootstrapping and permutation [@Wilks1997,@Kundzewicz2004,@Westra2013], can also be used to further assess the strength of significance of results and incorporate spatial and temporal patterns in the analysis. While the gridded data set is most useful in regions with sparse rain gauge networks, it can actually reduces information where the rain gauge density is high [@Jones2009]. In the NSW/VIC area, the coverage of rainfall stations is more intensive but they are mainly located in the valleys. The interpolated data might not be the best represention of the local rainfall.
+
+## General approach
+
+Parametric tests are generally more powerful than nonparametric test in detecting a trend, when the data is normally distributed [@Onoz2003,@Kundzewicz2004]. As a non-parametric test, the step trend test has the advantages of distribution free and having no restriction on missing data [@Hirsch1985]. This is particularly useful in rainfall analysis since rainfall data is usually skewed. On the other hand, the disadvantages of non-parametric tests, such as being limited to hypothesis testing and weaker in power, also hold for the step trend test [@Whitley2002].
+
+Overall, the current study provides a clear approach build on several lines of evidence to provide some evidence to reject the null hypothesis (no step change in rainfall occurs as a result of tree cover loss). Limited by the available data, the time frame under study was chosen to include a long lasting drought period [@Holper2011, @vanDijk2013]. The strong impact of this prolonged drought might have suppressed the land-atmosphere interaction and confused the cause and effect relation between rainfall and vegetation cover change. This could be one of the reasons that the LCC effects on the local climate found in other studies [e.g. @Gorgen2006,@McAlpine2007] are not found to be significant here.
+Possible future work could focus on a non-drought period, or when a longer series of land cover data is available. Wile the power of the test can be improved with the longer length of the after-intervention period [@Hirsch1985], the dynamic nature of vegetation regrowth in this case study prevents this effect.
+A better approach might be to build a global study that investigates multiple locations where drastic landcover changes have taken place, which would also remove some of the climate variability effects due to the larger sample size.
+
+Conclusions
+===========
+
+In this study, we present an approach to identify if   
+
+
+found some observationl data based evidence, although not strong, that vegetation cover change has changed local rainfall. The semi-parametric method and non-parametric method did totally agree on detecting a significant step change in rainfall in the hot dry QLD region where land clearing has occurred. On the other hand, the bushfires in the humid, temperate mountain range in the NSW/VIC region has experienced reduced rainfall. But the dry spell also plays an important role in the results.
+
+Drought has had a pronounced impact on the land surface condition during the study period, leading to significant reduction in vegetation and extreme events such as bushfires. The associated lack of rainfall and high temperatures may mask the step change in the vegetation. Hence, the signal of LCC feedback on rainfall is probably weaker under such regional dry conditions, as the impact of LCC on rainfall is mainly through changes in moisture convergence [@Gorgen2006,@Pitman2007].
+
+acknowledgments
+===============
+CL was supported by an Australian Postgraduate Award for this work.
+
+\newpage
+appendix
+==============
+
+## Summary of Data
+
+
+\newpage
+
+References {#references .unnumbered}
+==========
