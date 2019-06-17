@@ -1,0 +1,546 @@
+%% Submissions for peer-review must enable line-numbering
+%% using the lineno option in the \documentclass command.
+%%
+%% Preprints and camera-ready submissions do not need
+%% line numbers, and should have this option removed.
+%%
+%% Please note that the line numbering option requires
+%% version 1.1 or newer of the wlpeerj.cls file, and
+%% the corresponding author info requires v1.2
+
+\documentclass[fleqn,10pt,lineno]{wlpeerj} % for journal submissions
+
+% ZNK -- Adding headers for pandoc
+
+\setlength{\emergencystretch}{3em}
+\providecommand{\tightlist}{
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{lipsum}
+\usepackage[unicode=true]{hyperref}
+\usepackage{longtable}
+
+
+\usepackage{lipsum} \usepackage{textcomp, rotating}
+
+\title{Detecting the impact of land cover change on observed rainfall.}
+
+\author[1]{Chun X. Liang}
+
+\author[1]{Floris F. van Ogtrop}
+
+\author[1]{R. Willem Vervoort}
+
+\corrauthor[1]{R. Willem Vervoort}{\href{mailto:willem.vervoort@sydney.edu.au}{\nolinkurl{willem.vervoort@sydney.edu.au}}}
+
+\affil[1]{Sydney Institute of Agriculture, The University of Sydney, NSW 2006}
+
+
+%
+% \author[1]{First Author}
+% \author[2]{Second Author}
+% \affil[1]{Address of first author}
+% \affil[2]{Address of second author}
+% \corrauthor[1]{First Author}{f.author@email.com}
+
+% 
+
+\begin{abstract}
+This is the detailed reply to reviewers for the paper" Detecting the
+impact of land cover change on observed rainfall." Peerj article number
+35847
+% Dummy abstract text. Dummy abstract text. Dummy abstract text. Dummy abstract text. Dummy abstract text. Dummy abstract text. Dummy abstract text. Dummy abstract text. Dummy abstract text. Dummy abstract text. Dummy abstract text.
+\end{abstract}
+
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{proposition}{Proposition}[section]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}[section]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{solution}{Solution}
+\begin{document}
+
+\flushbottom
+\maketitle
+\thispagestyle{empty}
+
+\section{Response to reviewers}\label{response-to-reviewers}
+
+\subsection{Reviewer 1 (John Boland)}\label{reviewer-1-john-boland}
+
+Comments for the Author I think the authors should continue to
+investigate this topic as one of the case studies - the Queensland one -
+proved probably inconclusive. They should also try and see if they can
+find instances of increase of land cover and increased rainfall.
+
+\textbf{reply from the authors} We would love to expand this study with
+more case studies, but we have come to realise that this is not that
+easy. This study also shows this, with the Qeensland location being
+inconclusive, despite reported significant land use change. There are
+several requirements for a good study area:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  It needs to be large enough to capture the effect of landuse on
+  rainfall within the area;\\
+\item
+  It needs to have a drastic enough landuse change to be observable
+  above the rainfall variation;\\
+\item
+  It needs to have a long enough climate data time series both prior and
+  post landuse change.
+\end{enumerate}
+
+Such locations with land use changes are not easy to find. The obvious
+locations have always been Amazonia and sub-Saharan Africa, where also
+most of the modelling studies have taken place. The problem with the
+sub-Saharan location is that the land use change is quite long ago and
+local data difficult to obtain. The problem with the Amazonian location
+is that this area is well-known for the feedback and we felt that we
+could not add much to this work. The recent bushfires in California and
+Colorado could potentially be a good location, but at the moment there
+is insufficient ``post event data''. We have added some additional
+sentences at the end of the discussion (line 485ff)
+
+Minor points:
+
+Line 50 - problem with El Nin \textasciitilde{}o
+
+\textbf{reply} fixed by using UTF-8 encoding
+
+Line 97 - problem with Koppen
+
+\textbf{reply} fixed by using UTF-8 encoding
+
+Queensland study area - did not have much tree cover initially.
+
+\textbf{reply} Indeed that is one of the problems with this location.
+
+Line 216 - I would have thought Spearman would be more appropriate
+
+\textbf{reply} We are working with continuous data which has been
+centered, detrended and deaseasonalised and is therefore normally
+distributed and therefore Pearson's correlation is appropriate. However,
+in the analysis we simply used the cross correlation analysis (which is
+based on Pearson's). We have rewritten this part of the paper to explain
+that we simply focus on the cross correlation at lag 0.: ``The
+cross-correlations between the deseasonalised and detrended rainfall and
+the climatic indices were tested, and the strongests indicators at lag 0
+were identified for the model.''
+
+Line 306 - below??
+
+\textbf{reply} Agree that was a mistake, it was supposed to refer to
+Table 1. We have fixed this. Table 1 simply shows an example
+calculation.
+
+Lines 360-361 - something wrong with figure reference
+
+\textbf{reply} Indeed, error in the coding. It is supposed to refer to
+Figure 9
+
+\subsection{Reviewer 2 (Anonymous)}\label{reviewer-2-anonymous}
+
+Basic reporting Line 34, maximum temperature at what height? surface
+temperature?
+
+\textbf{reply} It was modelled surface temperature (p2, L22711, McAlpine
+et al. 2007).
+
+Line 39, ``in both space and time'', omit ``in''
+
+\textbf{reply} We think ``in'' is appropriate, we are talking about
+variation in both space and time.
+
+Line 41, better to add more details/examples about ``those complex set
+of interactions''
+
+\textbf{reply} We added ``outlined below'' as this sentence relates to
+the text in the next paragraph.
+
+Line 48, ``On the longer time scale'', compare to daily which is not
+mentioned in previous sentence. This paragraph is comparing local
+vs.~larger scale, not on the time scale
+
+\textbf{reply} We agree, but it is in both time and space. We added into
+line 43: ``Locally, and on a shorter, daily time scale, there are two
+main sources that generate rainfall:''
+
+Line 54, should this topic sentence and this paragraph not restricted to
+``predict Australian rainfall''? but rainfall at any locations?
+
+\textbf{reply} The sentence and comment about ``Australian rainfall''
+relates to the previous paragraph and to the Westra and Sharma paper. We
+have reworded the subsequent sentence: ``\ldots{}annual precipitation
+variance. More generally, some of\ldots{}''
+
+Line 90, either use ``the largest'' or ``the worst'', they mean the same
+thing
+
+\textbf{reply} accepted
+
+Figure 3, no (a) and (b) were labeled in the graph, or use (left and
+right).
+
+\textbf{reply} accepted
+
+Table 1, extra space between row ``2002: and row''2005"
+
+\textbf{reply} This is automatically inserted in the article via the
+Latex and PeerJ article template as part of the knitr package as there
+is a jump in the years. It is to indicate the gap left by leaving out
+the years 2003 and 2004.
+
+Experimental design Line 92, ``..due to the drought and cold
+condition'', the reference for that scientific conclusion is from News,
+a reference from a scientific journal would be more appropriate
+
+\textbf{reply} We agree that this would be preferavle, however, there is
+no scientific journal paper to help us out here. We have changed the
+word ``reported'' into ``suggested'' to de-emphasise the importance of
+the finding.
+
+Line 113, please include scientific name (Latin) for those tree species.
+
+\textbf{reply} accepted included \emph{Eucalyptus pauciflora},
+\emph{Eucalyptus dalrympleana} and \emph{Eucalyptus delegatensis}
+
+Line 115, previous sentence authors mentioned about great height, so
+here better to add details of height. ``\ldots{}20 years to mature
+(\textasciitilde{}? m)''
+
+\textbf{reply} accepted and added a reference (Buckley et al. 2012).
+
+Line 115-116, changing subjects. ``Land clearing'' is the subject, but
+not for the rest of the sentence.
+
+\textbf{reply} Agreed We changed the sentence to read: ``This region is
+vulnerable to fires and drought, however land clearing is not a major
+issue.''
+
+Line 125, add more details, t test for the averaged precipitation before
+(1979-2003) and after (2004-2015) the disturbance? Or move this sentence
+to the section of ``statistical analysis'' in below
+
+\textbf{reply} Agreed, sentence removed, as it is repeated in the
+``statistical analysis''.
+
+Line 208, ``, this variable was included'' what variable? subject
+changes within a sentence, rewrite
+
+\textbf{reply}Correct, the actual sentence is an error from an earlier
+version. The new text in the section now reads: ``A further complicating
+factor is the influence of the''millenium drought" over the study period
+and in particular the change to wet conditions in 2010 - 2011 (Dijk and
+Viney 2013). Therefore, the spatially averaged monthly rainfall in the
+Murray Darling Basin (MDB, downloaded from
+\href{http://www.bom.gov.au/web01/ncc/www/cli_chg/timeseries/rain/allmonths/mdb/latest.txt}{the
+Bureau of Meteorology}) was used to explain the year-on-year variation
+in the rainfall in the regions. Since both regions at least partly
+overlap with the MDB, the average rainfall for the entire basin was
+assumed to be a useful explaining variable."
+
+Line 225-231, those paragraphs are results, do authors need them to be
+here for explaining a further step analysis? or should be moved down to
+Result section
+
+\textbf{reply} We agree that these figures are a bit much at this point
+and we have moved this to the ``supplementary data'' section.
+
+Line 236-246, those two paragraphs sound like a discussion? should it be
+moved down to Discussion section?
+
+\textbf{reply} Not really, in these two paragraphs we argue why we
+should include seasonal and long term trends in the model. Following
+Serinaldi, Kilsby, and Lombardo (2018), we believe that it is important
+to base statistical trend detection on a clear theory about all the
+trends included in the model. We therefore believe that these two
+paragraphs should stay in the methodology section of the paper. We have
+however shortened the text to: ``Rainfall in Australia shows strong
+seasonal patterns (Holper 2011; Australian Bureau of Statistics 2012).
+As a result a seasonal component of rainfall has a periodic pattern
+which should be included in the model. In addition, long term trends in
+the regional rainfall in some parts of Australia are significant (Hughes
+2003; Gallant, Hennessy, and Risbey 2007; Chowdhury and Beecham 2010).
+The presence of long term trends can be confused with the outcome of a
+step change in rainfall. As a result a linear trend term was implemented
+in the model to remove any long term effects.''
+
+Line 287-301, should these two paragraphs be combined with each
+individual analysis below? I don't see any reason to give a summary
+first and then introducing each analysis
+
+\textbf{reply} Agreed, on reflection, it is better to integrate these
+paragraphs and to drop the subheadings in the section.
+
+Validity of the findings\\
+Line 363-367, those are not key findings and should be moved to Method
+section.
+
+\textbf{reply} Agreed, we removed the section from the results, but also
+did not insert in the methods, because we also agree that this is more
+valid in supplementary material. However, as we supply the full script
+of the analysis with the paper and the data via the guithub repository
+we believe that this is not relevant to include.
+
+Line 377-382, except the first sentence, the rest should be moved down
+to the discussion section
+
+\textbf{reply} Agreed, however, we wanted to highlight that the long
+term trend was maintained. The part was modified to: ``There were
+generally no statistically significant long term trends in both regions.
+However, the trend term was kept in the regression model to ensure the
+detection of step change was not due to a possible long term trend (even
+if this was not significant).''
+
+Line 386, ``..compared to the number in QLD region''
+
+*reply** agreed
+
+Line 394, put the key findings as the subheading text instead of ``step
+trend test'' would be better
+
+\textbf{reply} agreed subheading text changed to: ``Stronger step trend
+in NSW/VIC compared to QLD''
+
+Line 395-398, those sentences are illustrating how to read the figure,
+should be put in the figure caption, not here in the Result section
+
+\textbf{reply} agreed, text removed and added to the figure caption.
+
+Line 400, what is a ``reasonable relationship''? authors should use more
+statistically sound words to describe the results.
+
+\textbf{reply} agreed, we have used the word qualitatively to emphasise
+that this is simply a visual comparison. The new text now
+reads:``Qualitatively the locations where changes in tree cover occurred
+in the NSW/VIC area (Figure 5) seem to agree with the patterns in the Z'
+scores. However, a direct relationship would not necesssarily be
+expected as movement of air masses could mean that actual changes of
+rainfall are observed close by, but not necessarily exactly at areas
+with changes of landcover.''
+
+Line 404, a difference of what?
+
+\textbf{reply} agreed, the sentence was rewritten: ``For the QLD region
+(left panel) there are only a few significant Z' scores which matches
+the earlier significance in the landcover variable in the full
+regresion.''
+
+Line 411, if authors knew it was difficult to see, why not regraph the
+data to make it easy to see?
+
+\textbf{reply} It is difficult to make the figure more clear as there
+are a lot of data and there is a wide spread in the distribution. As a
+result, we dropped the figure from the paper and only described the
+statistical analysis in the text. The new text now reads: ``The rainfall
+regression residuals without the landcover variable for the two regions
+(before-change since 1979 and after-change) were also compared using a
+simple t-test. The mean rainfall residuals were significantly different
+(\(p < 0.05\)). between the''before" and ``after'' periods in both
+regions."
+
+Line 421-429, All those sentences read like Method to me
+
+\textbf{reply} Agreed, moved to the methods section.
+
+Line 439 and 440, ``strongest evidence'' ``weak evidence''? could it be
+more statistically described? like p value or with how much variance
+explained?
+
+\textbf{reply} Not really, these are summary statements related to the
+overview presented in the summary Table 3. However, to make this link
+clearer, we have inserted references to this table in the text and also
+reworded the text slightly.
+
+Line 476, the discussion point of ``recovery'' is worth to expand. Not
+only the evolution model from Figure 3 which only illustrates the
+mass/area, the species composition might be changed too. And ties into
+the evapotranspiration rate.
+
+\textbf{reply} Agreed, we added a sentence to address this issue: ``Not
+only does this refer to a change in the total biomass, but this could
+also include a change in the species composition as a result of the
+disturbance.''
+
+Line 526, ``Possible future work could focus on a non-drought period..''
+I think research on lands with disturbance(e.g.~fire, drought, etc) is
+also important even though it is hard to study as reported from this
+study.
+
+\textbf{reply} We are not sure about this comment. The study
+specifically covered a fire affected area (NSW/VIC) and a following
+drought period. The problem was that here those two effects were
+combined, so we needed to disentangle the effects. Our suggestion for a
+future study is to look at a disturbance where the following period is
+not a drought, but a wet period, as we might be able to see a greater
+effect on the rainfall. The hypothesis in that case would be that if
+there is increased moisture in the atmosphere and rootzone, this might
+result in increased feedback.
+
+Comments for the Author This paper uses sophisticated statistical
+approaches to identify impacts of changes in land cover on rainfall from
+1979 to 2015 in two regions in Australia. Results show lands under
+historical bushfire had significant changes in precipitation, but not
+for lands with tree clearing. I am sure this paper adds an important
+value to the community. However, this paper has a very detailed Method
+section which includes some results and discussion. Some part of the
+Method section also includes a summary test first and then introducing
+each analysis. This would cause repetitive sentences. For example, line
+303 ``As indicated, the step trend test is a modified version of the
+Mann-Whitney U statistic (Hirsch and Gilroy 1985).'', this sentence is
+repeating line 289 in the summary. I think the summary is not necessary
+and should be merged to each analysis. I suggested authors to reorganize
+the whole paper and keep the sections simple and clear (not overwritten
+with details not necessary for readers to understand the
+analysis/paper). Or if authors think those sentences in the Method
+section are necessary, put them in the appendix, so the main body of
+this paper can be simplified. I understand authors trying to describe
+all their trails, thoughts and steps in analyzing those data in this
+paper. This is my personal opinion. I will let the editor decide the
+format of this paper.
+
+\textbf{reply} Thank you for your detailed comments which helped improve
+the paper. The paper is indeed quite ``heavy'' on the methods, but this
+is because we wanted to use several methods to make sure we were
+identifying an effect and not just a ``chance'' occurrence. We agree
+with most of your comments and as indicated have made several changes to
+hopefully improve the flow of the paper. In addition, based on your
+comments we removed three of the figures: the rainfall histogram figure
+(figure 7 in the reviewed manuscript), the gam resiudal analysis (Figure
+10 in the reviewed paper) and removed the rainfall residual boxplots
+(figure 14 in the reviewed paper). In addition, the correlation plots
+with the climate indices were moved to the supplementary data including
+the table of data sources and the appendix was removed.
+
+\subsection{Reviewer 3 (Hongkai Gao)}\label{reviewer-3-hongkai-gao}
+
+Basic reporting No comments Experimental design No comments Validity of
+the findings No comments Comments for the Author In this paper, Vervoort
+and his colleagues reported their finding about the impact of land cover
+change on observed rainfall. The analysis is very comprehensive. And I
+learned a lot from this manuscript. The authors used statistic approach
+to analyze observed data, to detect the change of precipitation after
+forest cleaning and bushfires. They found different influences after two
+changes. The methods are quite reliable, and conclusions can be trusted.
+I think this paper has great potential to be a high-cited paper. But the
+paper still needs to be further improved before publication.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Not only the statistically analysis, but also the physically meaning
+  should be further discussed. Theoretically, the change of vegetation
+  will impact on ET, especially in dry seasons, because land cover
+  change will impact on the root zone storage capacity, which provides
+  an important buffer to increase resilience to drought (Gao et al.,
+  2014). This should impact on downwind precipitation.
+\item
+  Several important papers, on the impact of land cover on
+  precipitation, are still missed in the reference list (e.g.~Keys et
+  al., 20142).
+\end{enumerate}
+
+Gao, H. , Hrachowitz, M. , Schymanski, S. J. , Fenicia, F. ,
+Sriwongsitanon, N. , \& Savenije, H. H. G. . (2014). Climate controls
+how ecosystems size the root zone storage capacity at catchment scale.
+Geophysical Research Letters, 41(22), 7916-7923. Keys, P. W. , Van, d.
+E. R. J. , Gordon, L. J. , Hoff, H. , Nikoli, R. , \& Savenije, H. H. G.
+. (2012). Analyzing precipitationsheds to understand the vulnerability
+of rainfall dependent regions. Biogeosciences, 9(2), 733-746.
+
+\textbf{reply} Thank you for the suggested papers which we have read
+with interest. The Keys et al (2012) paper is an interesting modelling
+study that builds on earlier modelling studies and globally focussed. In
+relation to our current study, this paper is not as relevant. While we
+mention in our discussion that there will be a spatial distance between
+the source of moisture from evaporation and the rainfall. For individual
+storms we can do moisture backtracking, but for the monthly data we used
+this is difficult unless we do extensive modelling based on a whole new
+set of assumptions. In our study we have focussed on data and the
+analysis of actual data rather than using a modelling approach. We tried
+to choose our regions large enough to be able to capture the spatial
+distance, but as indicated this is not quantified (as this cannot be
+simply quantified) from the data.
+
+We also read the Gao et al. (2014) paper with interest. This paper deals
+with simulation of the rootzone depth and suggests that rootzone storage
+capacity is dynamically adapted ecologically to rainfall availability
+and other climate factors.\\
+We are unsure how this relates to our current research which deals with
+the impact of landuse on local rainfall. We understand that a change in
+landuse impacts the storage and this might impact ET. However, while
+this might be a further explanation of the decrease in rainfall due to
+landuse change, it cannot be directly derived from the rainfall data
+without further modelling.
+
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\hypertarget{ref-ABS2012}{}
+Australian Bureau of Statistics. 2012. ``Geography and Climate -
+Australia's Climate.''
+
+\hypertarget{ref-buckley2012}{}
+Buckley, ThomasN, TarrynL Turnbull, Sebastian Pfautsch, Mana Gharun, and
+MarkA Adams. 2012. ``Differences in Water Use Between Mature and
+Post-Fire Regrowth Stands of Subalpine Eucalyptus Delegatensis R.
+Baker.'' Journal Article. \emph{Forest Ecology and Management} 270:
+1--10.
+doi:\href{https://doi.org/10.1016/j.foreco.2012.01.008}{10.1016/j.foreco.2012.01.008}.
+
+\hypertarget{ref-Chowdhury2010}{}
+Chowdhury, R. K., and S. Beecham. 2010. ``Australian Rainfall Trends and
+Their Relation to the Southern Oscillation Index.'' \emph{Hydrological
+Processes} 24 (4). John Wiley \& Sons, Ltd.: 504--14.
+\url{http://dx.doi.org/10.1002/hyp.7504}.
+
+\hypertarget{ref-vanDijk2013}{}
+Dijk, Beck van, Albert I. J. M., and Neil R. Viney. 2013. ``The
+Millennium Drought in Southeast Australia (2001--2009): Natural and
+Human Causes and Implications for Water Resources, Ecosystems, Economy,
+and Society.'' \emph{Water Resources Research} 49 (2): 1040--57.
+doi:\href{https://doi.org/10.1002/wrcr.20123}{10.1002/wrcr.20123}.
+
+\hypertarget{ref-Gallant2007}{}
+Gallant, Ailie J. E., Kevin J. Hennessy, and James Risbey. 2007.
+``Trends in Rainfall Indices for Six Australian Regions: 1910 - 2005.''
+\emph{Australian Meteorological Magazine} 56: 223--39.
+
+\hypertarget{ref-Holper2011}{}
+Holper, Paul N. 2011. \emph{Climate Change, Science Information Paper:
+Australian Rainfall-Past, Present and Future}. Canberra: CSIRO.
+
+\hypertarget{ref-Hughes2003}{}
+Hughes, Lesley. 2003. ``Climate Change and Australia: Trends,
+Projections and Impacts.'' \emph{Austral Ecology} 28 (4). Blackwell
+Science Pty: 423--43.
+\url{http://dx.doi.org/10.1046/j.1442-9993.2003.01300.x}.
+
+\hypertarget{ref-McAlpine2007}{}
+McAlpine, C. A., J. Syktus, R. C. Deo, P. J. Lawrence, H. A. McGowan, I.
+G. Watterson, and S. R. Phinn. 2007. ``Modeling the Impact of Historical
+Land Cover Change on Australia's Regional Climate.'' \emph{Geophysical
+Research Letters} 34 (22).
+\href{\%3CGo\%20to\%20ISI\%3E://000251345100005}{\textless{}Go to ISI\textgreater{}://000251345100005}.
+
+\hypertarget{ref-serinaldi2018}{}
+Serinaldi, Francesco, Chris G. Kilsby, and Federico Lombardo. 2018.
+``Untenable Nonstationarity: An Assessment of the Fitness for Purpose of
+Trend Tests in Hydrology.'' Journal Article. \emph{Advances in Water
+Resources} 111: 132--55.
+doi:\href{https://doi.org/https://doi.org/10.1016/j.advwatres.2017.10.015}{https://doi.org/10.1016/j.advwatres.2017.10.015}.
+
+
+
+\end{document}

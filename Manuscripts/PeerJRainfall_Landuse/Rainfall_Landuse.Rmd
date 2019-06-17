@@ -13,17 +13,20 @@ author:
 affiliation:
   - code: 1
     address: Sydney Institute of Agriculture, The University of Sydney, NSW 2006
-abstract: >
- Analysis of observational data to pinpoint impact of land cover change on local rainfall are difficult due to multiple environmental factors that cannot be strictly controlled. In this study we use a statistical approach to identify the relationship between removal of tree cover and rainfall with data from best available sources for two large areas in Australia. Gridded rainfall data between 1979 and 2015 was used for the areas, while large scale (exogenous) effects were represented by mean rainfall across a much larger area and climatic indicators, such as Southern Oscillation Index and Indian Ocean Dipole. Both general additive modelling and step trend tests were used for the analysis. 
-  For a region in south central Queensland, the reported change in tree clearing between 2002 - 2005 did not result in strong statistically significant precipitation changes. On the other hand, results from a bushfire affected region on the border of New South Wales and Victoria suggests significant changes in the rainfall due to changes in tree cover. This indicates the method works better when a abrupt change in the data can be clearly identified. The results from the step trend test also mainly identified a positive relationship between the tree cover and the rainfall at p < 0.1 at the NSW/Victoria region. High rainfall variability and possible regrowth could have impacted the results in the Queensland region.
+abstract: > 
+ Analysis of observational data to pinpoint impact of land cover change on local rainfall is difficult due to multiple environmental factors that cannot be strictly controlled. In this study we use a statistical approach to identify the relationship between removal of tree cover and rainfall with data from best available sources for two large areas in Australia. Gridded rainfall data between 1979 and 2015 was used for the areas, while large scale (exogenous) effects were represented by mean rainfall across a much larger area and climatic indicators, such as Southern Oscillation Index and Indian Ocean Dipole. Both generalised additive modelling and step trend tests were used for the analysis. 
+  For a region in south central Queensland, the reported change in tree clearing between 2002 - 2005 did not result in strong statistically significant precipitation changes. On the other hand, results from a bushfire affected region on the border of New South Wales and Victoria suggests significant changes in the rainfall due to changes in tree cover. This indicates the method works better when an abrupt change in the data can be clearly identified. The results from the step trend test also mainly identified a positive relationship between the tree cover and the rainfall at p < 0.1 at the NSW/Victoria region. High rainfall variability and possible regrowth could have impacted the results in the Queensland region.
 header-includes: >
-  \usepackage{lipsum}
-  \usepackage{textcomp, rotating}
+ \usepackage{lipsum}
+ \usepackage{textcomp, rotating}
+ \usepackage[normalem]{ulem}
 bibliography: reflist_chap3.bib
+csl: peerj.csl
 date: "`r Sys.Date()`"
-output: 
-  rticles::peerj_article:
-    base_format: bookdown::pdf_document2 # bookdown::pdf_document2 # for using \@ref()
+output:
+  bookdown::pdf_book:
+    base_format: rticles::peerj_article # for using bookdown features like \@ref()
+  rticles::peerj_article: default
 ---
 ```{r packages, echo=F, warnings=F, message=F, eval=T}
 suppressWarnings(require(knitr))
@@ -51,19 +54,20 @@ suppressWarnings(require(kableExtra))
 
 ```{r setup, warning=F, message=F, echo =F}
 # root dir
-knitr::opts_knit$set(root.dir = 
-                       "E:/cloudstor/chun/chun/manuscripts/PeerJRainfall_Landuse")
+knitr::opts_knit$set(root.dir =
+      # "E:/cloudstor/chun/chun/manuscripts/PeerJRainfall_Landuse")
+      "C:/users/rver4657/owncloud/chun/chun/manuscripts/PeerJRainfall_Landuse")
 ```
 
-# Introduction {-}
-
+Introduction {-}
+========================
 Land use and land cover changes can lead to changes in the local climate. Empirical and modelling studies have found that cloud types and rainfall are correlated to large scale vegetation cover changes, such as deforestation in the Amazon and in the Sahel [@Chagnon2005;@Pinto2009; @Wang2009; @Mei2010; @kucharski_further_2013; @pitman_scale_2016] and afforestation in south Israel [@Otterman1990; @Ben-Gai1998]. Using airborne measurements in Western Australia, @Junkermann2009 showed a significantly higher level of aerosols over an agricultural area compared to an adjacent area with natural vegetation. They suggested that a modification of aerosol concentrations due to deforestation could have contributed to a reduction of local rainfall, as more, but smaller rain droplets were observed. @Nair2011 reported from the Bunny Fence Experiment in Western Australia that local land use change altered the synoptic west coast trough dynamics and surface roughness, and this resulted in an observed rainfall decrease. Maximum temperatures were also found to be sensitive to land cover change in eastern Australia [@McAlpine2007]. 
 
-Overall the number of empirical studies analyzing changes to rainfall due to land cover change from observational data is limited. Most of the studies mentioned previously were either model simulations, or comparisons of modelled data with observations. This is because there are some fundamental experimental difficulties in both space (where does evaporated water reappear as rainfall?) and in time (how much time does it take for land cover change effects to appear or disappear?). In addition, in many areas across the globe, rainfall variability is related to a complex set of interactions, of which land use change might only be a minor component.
+Overall the number of empirical studies analyzing changes to rainfall due to land cover change from observational data is limited. Most of the studies mentioned previously were either model simulations, or comparisons of modelled data with observations. This is because there are some fundamental experimental difficulties in both space (where does evaporated water reappear as rainfall?) and time (how much time does it take for land cover change effects to appear or disappear?). In addition, in many areas across the globe, rainfall variability is related to a complex set of interactions (outlined below), of which land use change might only be a minor component.
 
-Locally, there are two main sources that generate rainfall: moisture from advective atmospheric transport; and local evapotranspiration [@Eltahir1996; @Bosilovich2006; @Dirmeyer2009; @Gimeno2010]. The local evapotranspiration component is the component considered to be affected by land use change [@Eltahir1996]. According to @Trenberth1999, the contribution of advective moisture partially depends on the availability of external moisture and atmospheric transport. On the longer time scale, such as monthly and annually, large scale atmospheric dynamics are affected by large scale climate drivers. For example, many studies have reported significant relationships between rainfall in large parts of Australia and the El Niño-Southern Oscillation (ENSO) [@Verdon2004; @Risbey2009; @Speer2011]. In contrast, local ET is determined by local land surface characteristics, which influence local scale atmospheric dynamics and hence the amount of rainfall, including contribution from both main sources. 
+Locally, and on a shorter, daily time scale, there are two main sources that generate rainfall: moisture from advective atmospheric transport; and local evapotranspiration [@Eltahir1996; @Bosilovich2006; @Dirmeyer2009; @Gimeno2010]. The local evapotranspiration component is the component considered to be affected by land use change [@Eltahir1996]. According to @Trenberth1999, the contribution of advective moisture partially depends on the availability of external moisture and atmospheric transport. On the longer time scale, such as monthly and annually, large scale atmospheric dynamics are affected by large scale climate drivers. For example, many studies have reported significant relationships between rainfall in large parts of Australia and the El Niño-Southern Oscillation (ENSO) [@Verdon2004; @Risbey2009; @Speer2011]. In contrast, local ET is determined by local land surface characteristics, which influence local scale atmospheric dynamics and hence the amount of rainfall, including contribution from both main sources. 
 
-Although climate drivers demonstrate some capability to predict Australian rainfall, there is still a large amount of unexplained variance. @Westra2010 pointed out that models based on global sea surface temperature anomalies can only predict up to 14.7\% of annual precipitation variance. Some of the remaining variance could be due to land surface processes as suggested in studies predicting local rainfall [e.g. @Ma2011; @Zeng2012; @pitman_scale_2016; @saha_investigating_2016]. However, most are based on modelling experiments and few empirical observational studies have been reported. However, @Pitman2004 found a good match between observations and simulated rainfall changes in southwest Western Australia, forced by land cover change. @Timbal2006 were able to reproduce the rainfall decline in south west Australia by including land cover influence. In addition, local land use change might not be a primary, but is likely to be a secondary cause of rainfall change [@Nicholls2006]. 
+Although climate drivers demonstrate some capability to predict Australian rainfall, there is still a large amount of unexplained variance. @Westra2010 pointed out that models based on global sea surface temperature anomalies can only predict up to 14.7\% of annual precipitation variance. More generally, some of the remaining variance could be due to land surface processes as suggested in studies predicting local rainfall [e.g. @Ma2011; @Zeng2012; @pitman_scale_2016; @saha_investigating_2016]. However, most are based on modelling experiments and few empirical observational studies have been reported. However, @Pitman2004 found a good match between observations and simulated rainfall changes in southwest Western Australia, forced by land cover change. @Timbal2006 were able to reproduce the rainfall decline in south west Australia by including land cover influence. In addition, local land use change might not be a primary, but is likely to be a secondary cause of rainfall change [@Nicholls2006]. 
 
 Therefore, the aim of this study is to use a statistical approach on rainfall data at regional scales to investigate the cause and effect relationship between land cover change and local rainfall, which is demonstrated in many modelling studies. More specifically, we hypothesize that a step change in land cover on the surface will cause a step change in the rainfall. To demonstrate this we study changes in observed rainfall over time at a Queensland and NSW/Victoria location where there are possible step changes in land cover change due to land clearing and bush fires. The methodology uses statistical approaches to identify changes in rainfall, which are subsequently associated with land cover change through spatial comparison.
 
@@ -79,7 +83,7 @@ In Australia, significant tree cover change has mainly occurred in the north eas
 include_graphics("figures/map_selreg.png")
 ```
   
-Two regions were selected where significant tree cover change since 2000 was reported. The first region is located in south central Queensland (QLD) partly covering the north of the Murray Darling Basin (MDB) (site 1 in Figure \@ref(fig:selreg)). High rates of land clearing have been reported in this region during the early 2000s [@SLATS2004]. The second study region is located at the border of New South Wales and Victoria (NSW/VIC), and includes the Snowy Mountain ranges (site 2 in Figure \@ref(fig:selreg)). Severe bush fires occurred in this area  in early 2003 (see Figure \@ref(fig:bushfire)). The 2003 bush fires were the largest and the worst in the last 60 years [@Fire2011]. Two thirds of Kosciuszko national park was heavily burned and regrowth was reported to be slow due to drought and cold conditions [@ABC2003], and the type of species in this region. However, in the longer term, after an early high transpiration period a recovery of pre-fire evapotranspiration would be expected [@Kuzcera1987]. For the purpose of this study, significant tree cover loss has happened in both study areas in the last decade, either permanently or temporarily.  
+Two regions were selected where significant tree cover change since 2000 was reported. The first region is located in south central Queensland (QLD) partly covering the north of the Murray Darling Basin (MDB) (site 1 in Figure \@ref(fig:selreg)). High rates of land clearing have been reported in this region during the early 2000s [@SLATS2004]. The second study region is located at the border of New South Wales and Victoria (NSW/VIC), and includes the Snowy Mountain ranges (site 2 in Figure \@ref(fig:selreg)). Severe bush fires occurred in this area  in early 2003 (see Figure \@ref(fig:bushfire)). The 2003 bush fires were the largest in the last 60 years [@Fire2011]. Two thirds of Kosciuszko national park was heavily burned and regrowth was suggested to be slow due to drought and cold conditions [@ABC2003], and the type of species in this region. However, in the longer term, after an early high transpiration period a recovery of pre-fire evapotranspiration would be expected [@Kuzcera1987]. For the purpose of this study, significant tree cover loss has happened in both study areas in the last decade, either permanently or temporarily.  
 
 ```{r bushfire, fig.cap = "Location of bushfires occurring in January 2003, in and around the NSW/VIC study region, as shown by the red pixels. The map shows the large area in the Kosciuszko national park that has been burned. Some locations in the southwest of the Australian Capital Territory (ACT) have also experienced intensive bushfires.", out.width="90%", echo=F}
 include_graphics("figures/bushfire_nswvic.png")
@@ -90,11 +94,11 @@ The two regions have different characteristics. The QLD region is partially gras
 
 The land use and land cover characteristics in the two regions are also different. In the Queensland region, the tree cover is sparse over most of the area. The MODIS satellite tree cover data (discussed in more detail in section 3) shows that tree cover in this region is generally below 20\% of total ground area. Grazing is the main activity in this region, with over 90\% of land used by the grazing industry [@ABARES2010]. Our starting assumption is that the main cause of the EVI  decline over large part of the region is due to land clearing. Tree cover has been cleared at a massive scale over the last decade, especially during 2002 - 2004. The reports from the Queensland Statewide Land Cover and Trees Study (SLATS) [e.g. @SLATS2001; @SLATS2017] were used to investigate the time and location of the land clearing in the QLD region.
 
-The Kosciuszko national park is within the NSW/VIC region. Here tree cover is denser with open or even closed forest (the tree cover distribution is bimodal at 10 - 20\% and 60 - 70\%). The dominant species in the alpine area are Snow Gum and large stand species such as Alpine Ash and Mountain Gum in the sub-alpine area. These trees can reach a great height but they take long time to grow. For example, Alpine Ash would need about 20 years to mature. Although land clearing is not a major issue in this region, it is vulnerable to fires and drought. The MODIS burned area product, MCD45A1 [@Roy2002; @Roy2005; @Roy2008], was used to locate bush fires areas in the NSW/VIC region, with a grid resolution of 500 m. MCD45A1 provides monthly burning information on all pixels, which helps to pinpoint an abrupt event. 
+The Kosciuszko national park is within the NSW/VIC region. Here tree cover is denser with open or even closed forest (the tree cover distribution is bimodal at 10 - 20\% and 60 - 70\%). The dominant species in the alpine area are Snow Gum (*Eucalyptus Pauciflora*)and large stand species such as Alpine Ash (*Eucalyptus delegatensis*) and Mountain Gum (*Eucalyptus dalrympleana*) in the sub-alpine area. These trees can reach a great height but they take long time to grow. For example, Alpine Ash (*Eucalyptus delegatensis*) would need about 20 years to mature (40 - 45 m, @buckley2012). This region is vulnerable to fires and drought, however land clearing is not a major issue. The MODIS burned area product, MCD45A1 [@Roy2002; @Roy2005; @Roy2008], was used to locate bush fires areas in the NSW/VIC region, with a grid resolution of 500 m. MCD45A1 provides monthly burning information on all pixels, which helps to pinpoint an abrupt event. 
 
 Due to the difference in nature of the land cover change in the two regions, the post-change vegetation status is hypothesized to be different as well (see Figure \@ref(fig:figure3-tc-simple)). 
 
-```{r figure3-tc-simple, fig.cap= "The expected evolution of the land surface after trees have been removed in (a) the QLD region and (b) the NSW/VIC region.", out.width="90%", echo=F}
+```{r figure3-tc-simple, fig.cap= "The expected evolution of the land surface after trees have been removed in (left) the QLD region and (right) the NSW/VIC region.", out.width="90%", echo=F}
 include_graphics("figures/tc_simple.png")
 ```
 
@@ -277,7 +281,7 @@ dev.off()
 
 ```
 
-The overall hypothesis is that the effect of 2003 - 2004 land clearings in the QLD region and the 2003 bush fires in the NSW/VIC region cause a step change in the local rainfall. The actual tree cover change during this time at the pixel level was derived from the 15-year MODIS data (discussed below). The difference of tree cover before and after the land disturbance was tested using a Student's t-test. As the length of the tree cover data is shorter than available rainfall data, earlier land clearing in the QLD region cannot be identified spatially, hence they are excluded from the analysis.
+The overall hypothesis is that the effect of 2003 - 2004 land clearings in the QLD region and the 2003 bush fires in the NSW/VIC region cause a step change in the local rainfall. The actual tree cover change during this time at the pixel level was derived from the 15-year MODIS data (discussed below). As the length of the tree cover data is shorter than available rainfall data, earlier land clearing in the QLD region cannot be identified spatially, hence they are excluded from the analysis.
 
 Data {#Data}
 ==============
@@ -414,7 +418,7 @@ include_graphics("figures/Rainfall_resid.png")
 
 ## Regression model {#reg_model}
 
-As highlighted in the introduction, the Australian climate is influenced by sea surface temperatures in the tropical Pacific and Indian Oceans, as well as pressure systems in the Southern Ocean [@BoM2012].  @Risbey2009 compared five large-scale drivers, including ENSO (measured by SOI and the Tropical Pacific Sea surface temperatures (SSTs)), IOD, SAM, MJO (Madden-Julian oscillation) and blocking, in relation to Australian rainfall variability. The MJO is a large scale eastward-propagating wave-like disturbance located around equatorial latitudes [@Risbey2009]. They identified SOI as the most important index among all climate indices tested for broad parts of Australia (including QLD and NSW/VIC) in almost any season. In this study, four climate indices were selected from the main climatic indicators (see section [Data]) and used as the explanatory variables in the model for each study region. A further complicating factor is the influence of the "millenium drought" over the study period and in particular the change to wet conditions in 2010 - 2011 [@vanDijk2013]. Therefore, the spatially averaged monthly rainfall in the Murray Darling Basin (MDB, downloaded from [the Bureau of Meteorology](http://www.bom.gov.au/web01/ncc/www/cli_chg/timeseries/rain/allmonths/mdb/latest.txt)) was used to explain the year-on-year variation in the rainfall in the regions. As climate alone are unlikely able to fully explain the temporal variation in rainfall in the regions, including the drought [@vanDijk2013; @Westra2010], this variable was included. Since both regions at least partly overlap with the MDB, the average rainfall for the entire basin was assumed to be a useful explaining variable.
+As highlighted in the introduction, the Australian climate is influenced by sea surface temperatures in the tropical Pacific and Indian Oceans, as well as pressure systems in the Southern Ocean [@BoM2012].  @Risbey2009 compared five large-scale drivers, including ENSO (measured by SOI and the Tropical Pacific Sea surface temperatures (SSTs)), IOD, SAM, MJO (Madden-Julian oscillation) and blocking, in relation to Australian rainfall variability. The MJO is a large scale eastward-propagating wave-like disturbance located around equatorial latitudes [@Risbey2009]. They identified SOI as the most important index among all climate indices tested for broad parts of Australia (including QLD and NSW/VIC) in almost any season. In this study, four climate indices were selected from the main climatic indicators (see section [Data]) and used as the explanatory variables in the model for each study region. A further complicating factor is the influence of the "millenium drought" over the study period and in particular the change to wet conditions in 2010 - 2011 [@vanDijk2013]. Therefore, the spatially averaged monthly rainfall in the Murray Darling Basin (MDB, downloaded from [the Bureau of Meteorology](http://www.bom.gov.au/web01/ncc/www/cli_chg/timeseries/rain/allmonths/mdb/latest.txt)) was used to explain the year-on-year variation in the rainfall in the regions. Since both regions at least partly overlap with the MDB, the average rainfall for the entire basin was assumed to be a useful explaining variable.
 
 
 ```{r climateData, echo=F, eval=F}
@@ -526,7 +530,7 @@ dev.off()
 
   
 # autocorrelation in rainfall
-acf_df <- data_frame(lag = 1:12, 
+acf_df <- tibble(lag = 1:12, 
                      acf_Qld = acf(qld_mean$Means,
                       lag.max=12,main="QLD")$acf[2:13,1,1],
                      acf_NSW = acf(nsw_mean$Means,
@@ -663,47 +667,27 @@ dev.off()
 ```
 
 Correlations between rainfall and each climate index were analysed. Rainfall in each study region was first deseasonalised and detrended using the seasonal decomposition function `ds` in the package `deseasonalise` in R [@Rstats2018]. Using detrended data gives a better indication of the underlying correlation by removing the underlying correlation in the data [@Smith2012]. 
-The cross-correlations between the deseasonalised and detrended rainfall and the climatic indices were tested using the Pearson's product moment correlation method, assuming the relationships are linear. Although the optimal technique for exploring the correlation with each index could be different as described in @Risbey2009, the Pearson's method was applied to all indices for consistency. Because the PDO describes the multi-decadal SST with lower frequency [@MacDonald2005; @Zanchettin2008; @Kamruzzaman2011], instead of 37-year rainfall data, a longer period (115 years, from 1900 to 2015) was used to estimate the correlation with PDO, up to lag 24. For the other indices, the 37-year data was used.  
+The cross-correlations between the deseasonalised and detrended rainfall and the climatic indices were tested, and the strongests indicators at lag 0 were identified for the model.  Because the PDO describes the multi-decadal SST with lower frequency [@MacDonald2005; @Zanchettin2008; @Kamruzzaman2011], instead of 37-year rainfall data, a longer period (115 years, from 1900 to 2015) was used to estimate the correlation with PDO, up to lag 24. For the other indices, the 37-year data was used.  
 
-```{r cor-rain-qld, fig.cap="Cross-correlation of six climate indices and rainfall in QLD study region. For the PDO analysis, 108-year rainfall data (1900 - 2008) are used. Otherwise, 36-year rainfall data are used. The correlation with NINO 3 is not shown as it is very similar to but weaker than for NINO 3.4.", out.width="90%", echo=F}
-include_graphics("figures/cor_qld.png")
-```
+Rainfall in Australia shows strong seasonal patterns [@Holper2011; @ABS2012]. As a result a seasonal component of rainfall has a periodic pattern which should be included in the model. In addition, long term trends in the regional rainfall in some parts of Australia are significant [@Hughes2003; @Gallant2007; @Chowdhury2010]. The presence of long term trends can be confused with the outcome of a step change in rainfall. As a result a linear trend term was implemented in the model to remove any long term effects.
 
-```{r cor-rain-nsw, fig.cap="Cross-correlation of six climate indices and rainfall in NSW/VIC study region.", out.width="90%", echo=F}
-include_graphics("figures/cor_nswvic.png")
-```
-
-Based on the correlation between the climatic indices and rainfall in the regions (as shown in Figure \@ref(fig:cor-rain-qld) and Figure \@ref(fig:cor-rain-nsw)), it can be concluded that:
-\begin{itemize}
-  \setlength{\itemsep}{0cm}
-  \setlength{\parskip}{0cm}
-  \item In QLD, the correlation between rainfall and SOI at zero time lags is the strongest across all indices, outweighing the other ENSO indicators. IOD and PDO have a weak influence in QLD.
-  \item In NSW/VIC, again the SOI has the strongest correlation with rainfall, followed by the IOD. For both, the strongest correlations occur at the zero time lags. 
-  \item In both cases PDO had the weakest correlations, and this factor was not further considered as a predictor.
-  \item In general, for the better correlated indices, strongest correlations occured at zero time lags.
-\end{itemize}
-The above findings are consistent with previous studies. Although some indices are serially correlated with rainfall up to several months, the lag zero events have the greatest correlation coefficients. Using multiple climatic index series was generally found most useful in rainfall prediction [e.g. @Risbey2009; @Kamruzzaman2011]. 
-
-Rainfall in Australia shows strong seasonal patterns [@Holper2011; @ABS2012]. For example, the north part of the country is summer rainfall dominant with a dry winter, while most of the southern part has a winter rainfall regime. This character is driven by the movement of subtropical high pressure systems which dominate the Australian climate [@BoM2012a]. These characteristic summer and winter rainfall patterns mean that the seasonal component of rainfall has a periodic pattern which should be included in the model.
-
-Long term trends in the regional rainfall in some parts of Australia are significant [@Hughes2003; @Gallant2007; @Chowdhury2010]. In the northern and eastern parts of the continent, increasing rainfall is reported over the last century [@Hughes2003]. The presence of such long term trends may be confused with the outcome of a step change in rainfall. As a result a linear trend term was implemented in the model to remove any long term effect.
-
-We assumed all the factors are additive smooth components in determining rainfall following @Kamruzzaman2011. In this case, the rainfall model is a generalised additive model (GAM) [@Hastie1986] with a log link function `g()` and assuming the residuals are gamma distributed (see Figure \@ref(fig:hist-rain)). This means all predictors are modelled as smooth functions, in this case using the shrinkage version of the cubic regression splines [@Wood2011]. All splines were limited to 3 knots in flexibility [@Wood2011], to reduce the risk of overfitting.
+We assumed all the factors are additive smooth components in determining rainfall following @Kamruzzaman2011. In this case, the rainfall model is a generalised additive model (GAM) [@Hastie1986] with a log link function `g()` and assuming the residuals are gamma distributed. We used the shrinkage version of the cubic regression splines [@Wood2011] as smooth function. All splines were limited to 3 knots in flexibility [@Wood2011], to reduce the risk of overfitting.
 \vspace{0.5cm}
 \begin{equation}
 \begin{array}{lll}
-g(E(\mathbf{R}_r)) = &\beta_0 + s_1(\mathbf{MDB_{monthlyRain}} + s_2(\mathbf{SOI}) + s_3(\mathbf{IOD}) + \\
-&s_4(\mathbf{Nino3.4}) + s_5(\mathbf{Nino4}) + s_6(\mathbf{Season}) + \\
-           &\beta_1\mathbf{Trend} + \boldsymbol{\epsilon}_r
+g(E(\mathbf{R}_r)) = &\beta_0 + s_1(\mathbf{MDB_{monthlyRain}}) + s_2(\mathbf{SOI}) + s_3(\mathbf{IOD}) + \\
+&s_4(\mathbf{Nino3.4}) + s_5(\mathbf{Nino4}) + s_6(\mathbf{PDO}) + \\
+&s_7(\mathbf{Season}) + \beta_1\mathbf{Trend} + \boldsymbol{\epsilon}_r
 \end{array}
 (\#eq:model)
 \end{equation}
-The bold letters represent the time series vectors.  The region is indicated by $r$, while $\beta_u$ ($_u$=0, 1) are the fitted coefficients in the model. $s_v$ ($_v$=1, 2, 3,...) are the smooth penalized cubic regression spline functions on the climatic indices and the season. MDB~monthlyRain~ is the spatially averaged monthly rainfall across the Murray Darling Basin. Apart from dropping PDO as a predictor, all other climate indices were included, allowing the model to select the appropriate predictors.
+The bold letters represent the time series vectors.  The region is indicated by $r$, while $\beta_u$ ($_u$=0, 1) are the fitted coefficients in the model. $s_v$ ($_v$=1, 2, 3,...) are the smooth penalized cubic regression spline functions on the climatic indices and the season. MDB~monthlyRain~ is the spatially averaged monthly rainfall across the Murray Darling Basin. 
 
-A possible linear long term trend in the rainfall data is modelled by \textbf{Trend} = 1,2,3...n, where n is the total number of months in the time series. \textbf{Season} is the seasonal component.
-The climatic terms are also modelled with smooth functions. The effect of large scale drivers on Australian rainfall is more likely to be seasonal [@Murphy2008; @Schepen2012], and the smooth spline function is more flexible in reproducing the variability in impacts of the climatic indices.
+The variable \textbf{Trend} = 1,2,3...n, where n is the total number of months in the time series is the possible long term trend in the data, while \textbf{Season} is the seasonal component.
+The climatic terms are also modelled with smooth functions as the effect of large scale drivers on Australian rainfall can be seasonal [@Murphy2008; @Schepen2012].
 
-```{r hist-rain, fig.cap="Distribution of monthly rainfall in (a) QLD and (b) NSW/VIC. Using a Kolmogorov-Smirnov test with shape = 1 and 2.4  for QLD and NSW/VIC respectively, rainfall in both regions can be modelled as a gamma distribution.", echo=F, out.width="90%"}
+```{r hist-rain, fig.cap="Distribution of monthly rainfall in (a) QLD and (b) NSW/VIC. Using a Kolmogorov-Smirnov test with shape = 1 and 2.4  for QLD and NSW/VIC respectively, rainfall in both regions can be modelled as a gamma distribution.", echo=F, eval=F, out.width="90%"}
+# removed after review
 include_graphics("figures/hist_rainfall.png")
 ```
 
@@ -725,9 +709,9 @@ Therefore in both regions, land cover is "trees" for the period before land cove
 \vspace{0.5cm}
 \begin{equation}
 \begin{array}{lll}
-g(E(\mathbf{R}_r)) = &\beta'_0 + s'_1(\mathbf{MDB_{monthlyRain}} + \\
+g(E(\mathbf{R}_r)) = &\beta'_0 + s'_1(\mathbf{MDB_{monthlyRain}}) + \\
   &s'_2(\mathbf{SOI}) + s'_3(\mathbf{IOD}) + \\
-  &s'_4(\mathbf{Nino3.4}) + s'_5(\mathbf{Nino4}) + s'_6\mathbf{Season} + \\
+  &s'_4(\mathbf{Nino3.4}) + s'_5(\mathbf{Nino4}) + s'_6\mathbf{PDO} + s'_7\mathbf{Season} + \\
   &\beta'_1\mathbf{Trend} + \beta'_2\mathbf{LC} + \boldsymbol{\epsilon'}_r
 \end{array}
 (\#eq:model2)
@@ -1014,7 +998,7 @@ rsq_nsw <- unlist(lapply(1:length(coef.rain30.nswvic),
                     summary(coef.rain30.nswvic[[x]])$r.sq,NA)))
 
 # show histogram
-plot_df <- data_frame(`r.squared` = c(rsq_qld,rsq_nsw),
+plot_df <- tibble(`r.squared` = c(rsq_qld,rsq_nsw),
                       state = c(rep("QLD", length(rsq_qld)),
                                 rep("NSW/VIC", length(rsq_nsw))))
 
@@ -1043,7 +1027,7 @@ resid_qld <- lapply(1:length(coef.rain30.qld4), function(x) if(summary(coef.rain
 # ## calculate mean residual
   test <- do.call(cbind,resid_qld)
   qld.resid.mean <- apply(test,1, mean,na.rm=T)
-  residuals <- data_frame(Dates = seq.Date(as.Date("1979-01-01"),
+  residuals <- tibble(Dates = seq.Date(as.Date("1979-01-01"),
                              length = length(qld.resid.mean),
                                            by = "month"),
                           QLD = qld.resid.mean)
@@ -1085,9 +1069,9 @@ dev.off()
 
 ## Step trend test
 
-To support the regression analysis, a Mann-Whitney Rank-Sum step trend test was used to detect changes in rainfall as a result of vegetation cover change. This specific nonparametric statistical test was modified from the Mann-Whitney U test by @Hirsch1985 and can identify a step change in data which is cross-correlated. The gridded rainfall dataset used in this study has a high spatial correlation between neighbouring pixels due to the underlying interpolation method. The advantages of using the Rank-Sum test are: (1) it does not depend on assumptions of the data distribution; (2) it is not restricted to datasets with no missing data; (3) it is robust and not as easily influenced by outliers and negative numbers [@Hirsch1985]. However, the test has less power than parametric tests.
+To support the regression analysis, a Mann-Whitney Rank-Sum step trend test was used to detect changes in rainfall as a result of vegetation cover change. This specific nonparametric statistical test was modified from the Mann-Whitney U test by @Hirsch1985 and can identify a step change in data which is cross-correlated. In this case, this is important as the gridded rainfall dataset has a high spatial correlation between neighbouring pixels. The advantages of using the Rank-Sum test are: (1) it does not depend on assumptions of the data distribution; (2) it is not restricted to datasets with no missing data; (3) it is robust and not as easily influenced by outliers and negative numbers [@Hirsch1985]. However, the test has less power than parametric tests. As a nonparametric rank-based test, it  depends on the ranks of the data. 
 
-The rainfall residuals from the regression model in Equation \@ref(eq:model2) were used for the step trend test. To detect a step change, using deseasonalised and detrended data is important [@Hirsch1985]. Furthermore, as rainfall can only be partially attributed to local sources and conditions, other effects are introduced by large scale dynamics and changes in climatic factors. The assumption is that the regression model should remove these effects, and additionally deseasonalise and detrend the rainfall data. As a result, the local landuse effects are amplified in the remaining residuals. The  test, described in the following sub section, subsequently associates trends in the rainfall residuals with tree cover changes.
+The rainfall residuals from the regression model in Equation \@ref(eq:model2) were used. The assumption is that the regression model deseasonalises and detrends the rainfall data  [@Hirsch1985], amplifying the local landuse effects. For each month, rainfall residuals of each year were ranked in an ascending order. The ranking of January rainfall in a sample pixel k in QLD is illustrated in Table \@ref(tab:exampleRank). 
 
 ```{r Residual_Analysis, eval=F, echo=F}
 ## predicting model: land cover is category variable
@@ -1162,7 +1146,7 @@ plot_df %>%
 # stack the residuals
 
 # # create a boxplot with the annual residuals from 1998
-# resplot_df <- data_frame(Date = rep(ymd(paste(nsw_30[[1]],
+# resplot_df <- tibble(Date = rep(ymd(paste(nsw_30[[1]],
 #                                               "01", sep="-")),
 #                         length(residual_nswvic)+length(residual_qld)),
 #                           residuals = c(unlist(residual_nswvic),
@@ -1182,7 +1166,7 @@ plot_df %>%
 
 # residuals before and after change
 # create a boxplot with the annual residuals from 1998
-resplot_df <- data_frame(Date = rep(ymd(rainNSW_t[[1]][1:444]),
+resplot_df <- tibble(Date = rep(ymd(rainNSW_t[[1]][1:444]),
           length(residual_nswvic) + length(residual_qld)),
           residuals = c(unlist(residual_nswvic),                                               unlist(residual_qld)),
           State = c(rep("NSW/VIC",
@@ -1303,30 +1287,24 @@ plot_df %>%
 
 ```
 
-### Mann-Whitney rank-sum statistic
 
-As indicated, the step trend test is a modified version of the Mann-Whitney U statistic [@Hirsch1985]. As a nonparametric rank-based test, the Mann-Whitney test does not use the exact values of rainfall but depends on the ranks of the data. For each month, rainfall residuals of each year were ranked in an ascending order. The ranking of January rainfall in a sample pixel k in QLD is illustrated below:
 
-```{r exampleRank, echo=F}
-table <- data_frame(Year = c(1998 , 1999 , 2000 , 2001 ,
-                             2002 , 2005 , 2006),
+```{r exampleRank, echo=F, warning = F}
+table <- tibble(Year = c(1998, 1999, 2000, 2001,
+                             2002, 2005, 2006),
                     `Rainfall residuals` =c(-0.3, -60.9, -16.1,
-                                                      -71.7, 111.1,
-                                             -7.2, -60.5),
-                    Rank= c(6, 2, 4,
-                                                               1, 7, 5, 3))
+                                            -71.7, 111.1,-7.2,
+                                            -60.5),
+                    Rank= c(6, 2, 4, 1, 7, 5, 3))
 colnames(table)[3] <- paste("Rank","$R'_{1k}$")
 kable(table, caption="Example of ranking rainfall residuals",
-             booktabs=T)
+             booktabs=T, escape=F)
 
 ```
 
-\noindent Therefore, the smallest or most negative value has rank 1 and the largest value has the maximum rank.
+The before and after period in the data formed two groups of samples. The split point of the two periods was based on the timing of the vegetation cover changes. In the QLD region, changes occurred anytime during 2003 and 2004. In contrast to the previous method, the time period covering the land cover change  was excluded, as the nonparametric test allows missing data and the power of the test is greater if data of the change period is ignored [@Hirsch1985]. As a result, the post change period was 2005 - 2015 for the Queensland location.
 
-The before and after period in the data formed two groups of samples. The split point of the two periods was based on the timing of the vegetation cover changes. In the QLD region, changes occurred anytime during 2003 and 2004. In contrast to the previous method, the time period covering the land cover change  was excluded, as the nonparametric test allows missing data. @Hirsch1985 also pointed out that the power of the test is higher if the data of the change period is ignored. Hence 2003 and 2004 were excluded from the analysis. As a result, the post change period was 2005 - 2015 for the Queensland location.
-
-In the case of NSW/VIC, the bushfires broke out in early January 2003. The change was within a relatively short period of the year. Therefore the post change period in this region still started in January 2003. Following @Hirsch1985, the pre change period was set to five years (1998 - 2002) in both regions. The length of the post change period is also difficult for the NSW/VIC region, as the regrowth would at some point have impacted the local effects.
-
+In the case of NSW/VIC, the bushfires broke out in early January 2003. The change was within a relatively short period of the year. Therefore the post change period in this region still started in January 2003. The pre change period was set to five years (1998 - 2002) in both regions. 
 
 The rank of rainfall in month j year i in pixel k is denoted as $R'_{ijk}$. The sum of ranks of rainfall in month j in pixel k before the known intervention is:
 \begin{equation}
@@ -1344,9 +1322,7 @@ $n_2$ is the number of years after the change. Hence the expected value of the r
 \end{equation}
 where m is the number of months which is 12 in the case of a full year.
 
-### Step trend test
-
-Instead of completing the Mann-Whitney U-test, @Hirsch1985 applied a standard normal Z test to the rank-sum statistics. As highlighted, this modified test accounts for serial temporal autocorrelation and spatial cross correlation in the data. In the case here, the deseasonalised and detrended data shows little autocorrelation in the time series but possesses strong cross correlation between neighbouring pixels, i.e. $R>0.99$.
+Here the deseasonalised and detrended data shows little autocorrelation in time, but possesses strong cross correlation between neighbouring pixels, i.e. $R>0.99$.
 
 The sum of $W_{jk}$ for a block of $ns$ pixels over the whole year, $\sum_{j=1}^{12}\sum_{k=1}^{ns}W_{jk}$, has mean
 \begin{equation}
@@ -1369,8 +1345,8 @@ The statistic of the step trend test is then defined as
 \end{equation}
 The above statistic is written for a 12 month period. By changing the value 12, it can also be used to test seasonal rainfall change or for other customized periods.
 
-```{r Zscore, echo=F}
-table2 <- data_frame(" "= c("$Z'>0$  and rainfall decreases after change",
+```{r Zscore, echo=F, warning = F}
+table2 <- tibble(" "= c("$Z'>0$  and rainfall decreases after change",
     "$Z'<0$ and rainfall increases post change",
     "$Z'=0$ and rainfall does not change"))
 kable(table2, 'latex',
@@ -1378,10 +1354,11 @@ kable(table2, 'latex',
       booktabs=T, escape=F)
 ```
 
-The null hypothesis ($H_0$) in this study is that there was no change in rainfall due to land surface intervention. The results of the step trend test can be interpreted according to the sign of the Z' score (see Table \@ref(tab:Zscore), Chapter 23, P887 [@Hipel1994]). Z' is normally distributed similar to the standard normal statistics Z. Hence it can be compared to a standard normal distribution to determine the p value.
+The null hypothesis ($H_0$) in this study is that there was no change in rainfall due to land surface intervention. The results of the step trend test can be interpreted according to the sign of the Z' score (see Table \@ref(tab:Zscore), Chapter 23, P887 [@Hipel1994]), and is normally distributed similar to the standard normal statistics Z. 
 
+As part of the analysis, the "field significance" of the Z' score test was considered to improve the interpretion of the step change at regional scales from multiple local tests [@Wilks2006; @Westra2013]. Here, the bootstrapping resampling method from @Westra2013 was used to evaluate the field significance. This means the spatial structure of the pixels was maintained, but the order of the years and months was changed by random resampling. For each resampling, the test statistic identifies the percentage of the pixels with a significant positive or negative step change for the step trend test. The test statistics on 1000 resampled replicates were used to develop the distribution of these percentage values.
 
-```{r steptrend_ns4, echo=F, eval=F}
+```{r steptrend_ns4, echo=F, eval=F, warning = F}
 ## perform step test on the data using ns = 4
 ## function to calculate the step trend statistic (Hirsch, 1985)
 stepTrend2 <- function(x,y,i, endyear=2015){
@@ -1557,7 +1534,7 @@ nsw_orign.z.new <- length(subset(nswvic.z.new,nswvic.z.new<=-1.0))/
 
 ```
 
-```{r bootstrap_ns1, echo=F, eval=F}
+```{r bootstrap_ns1, echo=F, eval=F, warning = F}
 ## 4 cell step trend
 # this was run on the HPC
 NSW_zvalues <- readRDS("../../processed data/NSW_zvalues.RDS")
@@ -1612,70 +1589,63 @@ dev.off()
 Results
 ===========
 
-## Tree cover change
+## Tree cover change  
 
-The pixels, where the tree cover change based on the MOD44B data was significant ($p \leq 0.05$) in each study region, are shown in Figure \@ref(fig:tctrend) for the NSW/VIC region  (left panel) and the QLD region (right panel). In the QLD region there actually has generally been an increase in tree cover after the clearing of native vegetation stopped. In the NSW/VIC region, much of the tree loss between 2002 and 2003 was concentrated in the Snowy Mountains close to the border of NSW and VIC, which is also evident in the figure. Tree cover loss occurred in large parts of the QLD region between 2002 and 2005, but this tree loss was spatially less concentrated. 
+The pixels, where the tree cover change based on the MOD44B data was significant ($p \leq 0.05$) in each study region, are shown in Figure \@ref(fig:tctrend) for the NSW/VIC region  (left panel) and the QLD region (right panel). In the QLD region there actually has generally been an increase in tree cover after the clearing of native vegetation stopped. In the NSW/VIC region, much of the tree loss between 2002 and 2003 was concentrated in the Snowy Mountains close to the border of NSW and VIC, which is also evident in the figure. Tree cover loss occurred in large parts of the QLD region between 2002 and 2005, but this tree loss was spatially less concentrated.  
+
 ```{r tctrend, fig.cap ="The maps show significant changes in tree cover identified from the MOD44B data between 2003 and 2015 in the NSW/VIC region (right) and the Qld region (left). The amount of change was calculated as the difference in tree cover before and after the specified land cover intervention and it is shown as the percentage of the ground area. Green colour indicates an increase in tree cover, while red colour indicates a decrease in tree cover.", echo=F, out.width="90%"}
 include_graphics("figures/tc_figs.png")
 ```
 
 
-## Regression Model and significance of Vegetation Cover Changes
+## Regression Model
 
-```{r rsqmodel, fig.cap = "The distribution of the variance explained (adjusted $r^2$ ) by the full regression model", echo=F, out.width="90%"}
+The correlation between the climatic indices and rainfall in the regions (See the supplementary material with this paper) indicated that for both regions the PDO had the weakest correlations, and this factor was therefore dropped as a predictor. Although some indices are serially correlated with rainfall up to several months, the lag zero events have the greatest correlation coefficients. Furthermore, using multiple climatic index series was generally found most useful in rainfall prediction [e.g. @Risbey2009; @Kamruzzaman2011]. 
+
+
+```{r rsqmodel, fig.cap = "The distribution of the variance explained (adjusted $r^2$ ) by the full regression model", echo=F, out.width="70%"}
 include_graphics("figures/rsq_fullmodel.png")
 
 ```
 
-Generally the regression model only explains a limited amount of the rainfall variability (Figure \@reg(fig:rsqmodel)). The model in Equation \@ref(eq:model2) accounts for an average around 33\% of the variation in the NSW/VIC region and about 50% of the variation in the QLD region as indicated by the adjusted $r^2$. The adjusted $r^2$ is the coefficient of determination, a measurement of the amount of variability predicted by the model adjusting for the number of explanatory terms. The residual analysis shows that the assumptions of the regression model are generally met (Figure \@ref(fig:residuals)). The standardised residual plots, however, show some funnelling for the NSW/VIC regions, suggesting non constant variance. The residual patterns are consistent for all pixels within each region.
+Generally the regression model only explains a limited amount of the rainfall variability (Figure \@ref(fig:rsqmodel)). The model in Equation \@ref(eq:model2) accounts for an average around 33\% of the variation in the NSW/VIC region and about 50% of the variation in the QLD region as indicated by the adjusted $r^2$. The adjusted $r^2$ is the coefficient of determination, a measurement of the amount of variability predicted by the model adjusting for the number of explanatory terms. 
 
 In terms of predictors of the local rainfall in the model, logically, the average rainfall across the larger Murray Darling Basin is highly significant. This confirms that this variable is a good reflection of the year on year variability in the rainfall.
 The model also confirms the importance of the climate drivers and the seasonality in Australian rainfall, as many of these variables were significant. Even at the grid level, the seasons and several of the climatic indices were significant ($p \leq 0.05$) everywhere in both regions. The climate drivers (at lag zero) accounted, on average, for 6.5\% of the rainfall variability in both the QLD region and the NSW/VIC region (see Figure \@ref(fig:rsq) for the distribution of adjusted $r^2$ in these two regions). These figures are within the upper bound of seasonal rainfall predictability by a SST anomaly field reported by @Westra2010.
-
-```{r residuals, fig.cap ="The residual analysis of a sample pixel in the QLD region (top) and NSW/VIC region (bottom).", echo=F, out.width="90%"}
-include_graphics("figures/gam_check.png")
-```
 
 ```{r rsq, fig.cap = "The performance of the regression model if rainfall is only modelled by the climate drivers. It shows the percentage of rainfall variability that can be explained by the climate drivers for the Qld and NSW/VIC region", echo=F, out.width="70%"}
 include_graphics("figures/soi_explhistogram.png")
 
 ```
 
-
-There were generally no statistically significant long term trends in both regions. However, this result might not prove or disprove the existence a long term trend in rainfall. The overall time period is fairly short [@Koutsoyiannis2007] and more pixels in NSW/VIC could indicate a significant step change if the long term trend effect is not removed by the model. As trend free data is an important requirement for the step trend test, the trend term was kept in the regression model to ensure the detection of step change was not due to a possible long term trend.
+There were generally no statistically significant long term trends in both regions. However, the trend term was kept in the regression model to ensure the detection of step change was not due to a possible long term trend (even if this was not significant).
 
 ```{r LCp, fig.cap = "The spatial distribution of significance of land cover step change variable in the GAM model predicting changes in rainfall in the both regions. The left graph relates to the Qld region, while the right hand plot reflects the NSW/VIC region. The outlines of relevant Australian states and the Murray Darling Basin are indicated in grey.  The p value reported is for the land cover variable in the model.", echo=F, out.width="90%"}
 include_graphics("figures/Cp_30yrs.png")
 ```
 
-The land cover variable in the model (Equation \@ref(eq:model2)) aims to identify a step change in the rainfall before and after the observed change in land cover. The  variable was mainly significant ($p \leq 0.05$) for the rainfall estimates in some areas in NSW/VIC, as shown in Figure \@ref(fig:LCp) (right panel). However, the number of pixels where the landcover variable was significant was much greater in NSW/VIC compared to the QLD region. There was also some relationship between the areas of bushfires in Figure \@ref(fig:bushfire). Only a very small area with a significant step change due to the land cover changes was found in rainfall in the QLD region (left panel)
+The land cover variable in the model (Equation \@ref(eq:model2)) aims to identify a step change in the rainfall before and after the observed change in land cover. The  variable was mainly significant ($p \leq 0.05$) for the rainfall estimates in some areas in NSW/VIC, as shown in Figure \@ref(fig:LCp) (right panel). However, the number of pixels where the landcover variable was significant was much greater in NSW/VIC compared to the number in the QLD region. There was also some relationship between the areas of bushfires in Figure \@ref(fig:bushfire). Only a very small area with a significant step change due to the land cover changes was found in rainfall in the QLD region (left panel)
 
 More generally, the model for NSW/VIC suggests that the land cover variable has a positive impact on rainfall in both regions. The fitted coefficients for the Land cover change variable were consistently positive for the "tree" part of the series. It implies that rainfall was higher when the surface was covered by trees.
 
-## Step Trend Test
+## Stronger step trend in NSW/VIC compared to QLD
 
 ```{r steptest30, fig.cap="Spatial distribution of the step trend test Z' statistics in the two study sites. The panel on the left is for the QLD region, while the panel of the right is for NSW/VIC. Warm colours (yellow, orange and red) are for positive Z' values which indicate decreasing rainfall trend due to the land surface change. Cold colours (light blue to blue) are for negative Z' values which indicate increasing rainfall trend. The deeper the colour, the more significant the statistic.", echo = F, out.width="90%"}
 include_graphics("figures/step_new.png")
 ```
 
-The spatial step trend test based on the regression residuals without the landcover variable generates Z' scores. The results for the Qld region (left) and NSWVIC region (right)  are shown in Figure \@ref(fig:steptest30). This figure provides two types of information: the sign and the significance level. The sign indicates the direction of the step change in the residuals of the regression, as listed in Table \@ref(tab:Zscore). In both regions there are areas of positive Z' values which imply a decrease in rainfall, but this is stronger in the NSW/VIC area than in the QLD area. For the NSW/VIC area there appears to be a reasonable relationship between the locations where changes in tree cover are observed (Figure \@ref(fig:tctrend)) and the patterns in the Z' score. However, there is not necessarily a direct relationship as movement of air masses could mean that actual changes of rainfall are observed close by, but not necessarily exactly at areas with changes of landcover.
-There is once again a difference between the left panel and the right panel, indicating only a few significant of Z' scores in the QLD region wich matches the earlier significance in the landcover variable in the full regresion. In the QLD region, only 0.2\% of the pixels obtained a positive Z' score with p $<$ 0.1. In the NSW/VIC region 3.7\% of pixels have a positive Z' score with p $<$ 0.1. In general it is only a small proportion of both study regions.
+In both regions there are areas of positive Z' values which imply a decrease in rainfall (Figure \@ref(fig:steptest30)), but this is stronger in the NSW/VIC area than in the QLD area. Qualitatively the locations where changes in tree cover occurred in the NSW/VIC area (Figure \@ref(fig:tctrend)) seem to agree with the patterns in the Z' scores. However, a direct relationship would not necesssarily be expected as movement of air masses could mean that actual changes of rainfall are observed close by, but not necessarily exactly at areas with changes of landcover.
+For the QLD region (left panel) there are only a few significant Z' scores which matches the earlier significance in the landcover variable in the full regresion. In the QLD region, only 0.2\% of the pixels obtained a positive Z' score with p $<$ 0.1. In the NSW/VIC region 3.7\% of pixels have a positive Z' score with p $<$ 0.1. In general it is only a small proportion of both study regions.
 
-```{r meandiff, fig.cap ="Boxplots of annual rainfall residuals (estimated based on Equation 2 before and after the land cover intervention during 1979 - 2015 in the study regions. On average, the after period has a significantly lower annual rainfall residual in NSW/VIC, but a signifcantly higher annual rainfall residual in the Qld study area", echo=F, out.width="70%"}
-
-include_graphics("figures/ResidualBoxplotchange.png")
-```
-
-The rainfall regression residuals without the landcover variable for the two regions (before-change since 1979 and after-change) were also compared (Figure \@ref(fig:meandiff)) using a simple t-test. From the boxplots it is difficult to see that there were significantly different ($p < 0.05$) mean rainfall residual values between the "before" and "after" periods in both regions.  For the Queensland locations, the mean monthly rainfall residuals were slightly lower  ($p < 0.05$) after the change in landcover ($~ 0.45 mm/month$). For the NSW/VIC locations there was larger decrease in the mean monthly rainfall residual ($p < 0.05$) post change ($~ 1.5 mm/month$).
-
-The choice of the number of pixels averaged in the step trend test ($ns$) has some impact on the test results [@Hirsch1985]. The cases of $ns = 1$ and $ns = 9$ were also tested. The results for $ns = 1$ showed a lower number of significant pixels (at $p< 0.10$) compared to the $ns = 4$ test. The results from the $ns = 9$ test was not different from the $ns = 4$ test. We therefore decided to stay with $ns = 4$. The power of the test does not change much after $ns = 4$, as shown by @Hirsch1985.
-
-As part of the analysis, the "field significance" of the Z' score test was considered to improve the interpretion of the step change at regional scales from multiple local tests [@Wilks2006; @Westra2013]. Here, the bootstrapping resampling method from @Westra2013 was used to evaluate the field significance. This means the spatial structure of the pixels was maintained, but the order of the years and months was changed by random resampling. For each resampling, the test statistic identifies the percentage of the pixels with a significant positive or negative step change for the step trend test. The test statistics on 1000 resampled replicates were used to develop the distribution of these percentage values, and the observed fraction of significant Z' scores (at $p < 0.1$) is plotted on the distribution (Figure \@ref(fig:fieldsig)). The results support the earlier Z' score results. Only the percentage significant positive Z' scores, indicating a decrease in rainfall for the NSW/VIC region as a result in a decrease in tree cover, falls on the tail of the field significance distribution, while all the others are well within the distribution. This suggests that the percentage of significant positive Z' scores in the NSW/VIC region is least likely due to a unique series of rainfall years, but is most likely due to changes in landcover. In other words, in the NSW/VIC region it is most likely that the change in landcover (decrease in tree cover) caused a decrease in the rainfall. 
 
 ```{r fieldsig, fig.cap ="Field significance results showing the distribution of percentage of significant Z' scores for the resampled series (blue bars), and the precentage significant Z' scores for the original series of rainfall years (red circle)", echo=F, out.width="70%"}
 include_graphics("figures/bt4_hist.png")
 ```
 
+
+The rainfall regression residuals without the landcover variable for the two regions (before-change since 1979 and after-change) were also compared using a simple t-test. The mean rainfall residuals were significantly different ($p < 0.05$) between the "before" and "after" periods in both regions.  For the Queensland locations, the mean monthly rainfall residuals were slightly lower  ($p < 0.05$) after the change in landcover ($~ 0.45 mm/month$). For the NSW/VIC locations there was larger decrease in the mean monthly rainfall residual ($p < 0.05$) post change ($~ 1.5 mm/month$).
+
+The observed fraction of significant Z' scores (at $p < 0.1$) is plotted on the results of the bootstrap distribution (Figure \@ref(fig:fieldsig)). The results support the earlier Z' score results. Only the percentage significant positive Z' scores, indicating a decrease in rainfall for the NSW/VIC region as a result in a decrease in tree cover, falls on the tail of the field significance distribution, while all the others are well within the distribution. This suggests that the percentage of significant positive Z' scores in the NSW/VIC region is least likely due to a unique series of rainfall years, but is most likely due to changes in landcover. In other words, in the NSW/VIC region it is most likely that the change in landcover (decrease in tree cover) caused a decrease in the rainfall.   
 
 Discussion
 =============
@@ -1694,19 +1664,25 @@ kable(table,caption="Summary table of all tests on the two regions ", 'latex',
   #kableExtra::landscape()
 ```
 
-Overall the summary table of the results indicates that the effects of land clearing or bushfire on rainfall are consistent across the range of different statistical tests. In all cases, the data for the NSW/VIC region indicates the strongest evidence that the reduction in tree cover (the land cover change) resulted in a local decrease in rainfall. In contrast the data for the QLD region only indicates weak evidence that the loss of trees due to land clearing resulted in reduction in the rainfall.
+Overall the summary table (Table \@ref(tab:summarytable)) of the results indicates that the effects of land clearing or bushfire on rainfall are consistent across the range of different statistical tests. In all cases, the data for the NSW/VIC region indicates statistical evidence that the reduction in tree cover (the land cover change) resulted in a local decrease in rainfall. In contrast, the data for the QLD region indicates lower statistical evidence that the loss of trees due to land clearing resulted in reduction in the rainfall (Table \@ref(tab:summarytable)).
 
-Generally, empirical studies on LCC-precipitation interaction are conducted within an area with known land surface intervention [e.g. @Otterman1990; @Durieux2003; @Negri2004; @Sato2007]. However, these locations are rare and difficult to isolate from real landscape change. Modelling studies are abundant [e.g. @Chagnon2005; @Pinto2009; @Wang2009], but these are generally not directly linked to observed data. In this study we tested the effect of land cover change across a broad region, which included locations where changes were known to occur or have occured. The advantage of the current approach is that long time series of land cover data are not required. This is advantageous as this type of that is currently not always available. Furthermore, it does not assume a specific relationship between vegetation cover change and rainfall but allows the data to show this relationship, by applying the analysis to a broader area outside the boundary of the vegetation cover change. This approach is expected to provide a way to reduce the risk of a false positive paradox, by comparing results between areas with and without vegetation cover change.
+Generally, empirical studies on LCC-precipitation interaction are conducted within an area with known land surface intervention [e.g. @Otterman1990; @Durieux2003; @Negri2004; @Sato2007]. However, these locations are rare and difficult to isolate from real landscape change. Modelling studies are abundant [e.g. @Chagnon2005; @Pinto2009; @Wang2009], but these are generally not directly linked to observed data. In this study we tested the effect of land cover change across a broad region, which included locations where changes were known to occur or have occured. The advantage of the current approach is that long time series of land cover data are not required. Furthermore, it does not assume a specific relationship between vegetation cover change and rainfall but allows the data to show this relationship, by applying the analysis to a broader area outside the boundary of the vegetation cover change. This approach is expected to provide a way to reduce the risk of a false positive paradox, by comparing results between areas with and without vegetation cover change.
 
-Overall the results suggest that at least for the NSW/VIC region that a decrease in tree cover causes a decrease in rainfall (Figure \@ref(fig:tctrend)). However, there are several possible complicating factors in the data that require discussion.
+Overall the results suggest that at least for the NSW/VIC region, a decrease in tree cover causes a decrease in rainfall. However, there are several possible complicating factors in the data that require discussion.
 
 ## Rainfall variability
 
-Rainfall in Australia is highly variable from year to year, and the time period in this study included a severe drought [@vanDijk2013], as well as the drought breaking years 2010 and 2011. The purpose of using the regression model is to remove the year to year and month to month variability in rainfall and therefore strengthen the land cover signal in the residuals. We used the spatially averaged monthly rainfall timeseries for the larger Murray Darling Basin (Figure \@ref(fig:selreg)) to remove the general variability. However, overall the model does not explain more than 50\% (QLD) and 30\% (NSW/VIC) of the rainfall variability, and only around 7\% on average is due to the climate drivers (Figure \@ref(fig:rsq)) . And while this is consistent with the literature e.g. @Westra2010, this means some variation due to external factors could still be left in the residuals. Rainfall is generally considered a stochastic process [e.g. @Fowler2005;@Cowpertwait2009;@Burton2010] and some of the variability could either be a different response to a combination of climate factors (as interactions were not tested in the model), or a non-stationary response to the climate drivers. The severe bushfires in 2003 were also triggered by the extreme drought conditions during the millenium drought [@vanDijk2013]. Although the effect of the drought on the overall rainfall quantities has been accounted for in part by the model, a further delayed or cumulative effect of the drought could be feeding into the local land-atmosphere interaction. As a result, the rainfall feedback to the vegetation cover change could be weak under the dry conditions between 2001 and 2009, and this could have affected the result.
+Rainfall in Australia is highly variable from year to year, and the time period in this study included a severe drought [@vanDijk2013], as well as the drought breaking years 2010 and 2011. The purpose of using the regression model is to remove the year to year and month to month variability in rainfall and therefore strengthen the land cover signal in the residuals. We used the spatially averaged monthly rainfall timeseries for the larger Murray Darling Basin (Figure \@ref(fig:selreg)) to remove the general variability. However, overall the model does not explain more than 50\% (QLD) and 30\% (NSW/VIC) of the rainfall variability (Figure \@ref(fig:rsqmodel)), and only around 7\% on average is due to the climate drivers (Figure \@ref(fig:rsq)). And while this is consistent with the literature e.g. @Westra2010, this means some variation due to external factors could still be left in the residuals. Rainfall is generally considered a stochastic process [e.g. @Fowler2005;@Cowpertwait2009;@Burton2010] and some of the variability could either be a different response to a combination of climate factors (as interactions were not tested in the model), or a non-stationary response to the climate drivers. The severe bushfires in 2003 were also triggered by the extreme drought conditions during the millenium drought [@vanDijk2013]. Although the effect of the drought on the overall rainfall quantities has been accounted for in part by the model, a further delayed or cumulative effect of the drought could be feeding into the local land-atmosphere interaction. As a result, the rainfall feedback to the vegetation cover change could be weak under the dry conditions between 2001 and 2009, and this could have affected the result.
+
+The fact that no significant long trend was identified, may not disprove a long term trend in rainfall, as overall time period is fairly short [@Koutsoyiannis2007]. Removing the long term trend could mean more pixels in NSW/VIC would indicate a significant step change.
 
 ## Vegetation dynamics
 
-The second possible effect is the dynamic nature of the vegetation clearing and recovery, especially for the QLD region. Although land clearing has occurred at a high rate and broad scale in Queensland [@SLATS2017], the clearing does not have a clear start and end point. QLD has a long history of land clearing. According to the series of SLATS reports on land cover changes in QLD released by the Queensland government, land clearing continued in and around the study region between 1988 - 2008. Major broad scale and high rate clearings occurred in 1999 - 2000 and 2002 - 2004 (Figure \@ref(fig:slat)). And even though there was a decrease in land clearing post 2005, it is difficult to define a clear cut change in the tree cover in this region. The specific vegetation class in the Queensland area is also well-known for rapid regrowth and "thickening" in favourable conditions [@Gowen2016], and this could explain the increase in vegetation cover in 2015 in the Qld area (Figure \@ref(fig:tctrend)). In particular the favourable rainfall years of 2010 and 2011 would have boosted regrowth, increasing evapotranspiration and therefore decreasing the effect of the rainfall change. 
+The second possible effect is the dynamic nature of the vegetation clearing and recovery, especially for the QLD region. Not only does this refer to a change in the total biomass, but this could also include a change in the species composition as a result of the disturbance.
+
+Although land clearing has occurred at a high rate and broad scale in Queensland [@SLATS2017], the clearing does not have a clear start and end point. QLD has a long history of land clearing. According to the series of SLATS reports on land cover changes in QLD released by the Queensland government, land clearing continued in and around the study region between 1988 - 2008. Major broad scale and high rate clearings occurred in 1999 - 2000 and 2002 - 2004 (Figure \@ref(fig:slat)). And even though there was a decrease in land clearing post 2005, it is difficult to define a clear cut change in the tree cover in this region. 
+
+The specific vegetation class in the Queensland area is also well-known for rapid regrowth and "thickening" in favourable conditions [@Gowen2016], and this could explain the increase in vegetation cover in 2015 in the Qld area (Figure \@ref(fig:tctrend)). This again, could also be related to a change in the vegetation composition further complicating the analysis. In particular the favourable rainfall years of 2010 and 2011 would have boosted regrowth, increasing evapotranspiration and therefore decreasing the effect of the rainfall change. 
 
 ```{r slat, fig.cap="Woody vegetation clearing rate in QLD for the two major bioregions in the study area. The data were obtained from SLATS (2017), and clearly indicate a sharp decrease in the clearing rate after 2005.", echo=F, out.width="90%"}
 include_graphics("figures/slats.png")
@@ -1720,10 +1696,19 @@ The rainfall data used in this study is gridded. This data set is robust and con
 
 ## General approach
 
-Parametric tests are generally more powerful than nonparametric test in detecting a trend, when the data is normally distributed [@Onoz2003; @Kundzewicz2004]. As a non-parametric test, the step trend test has the advantage of being distribution free and having no restriction on missing data [@Hirsch1985]. This is particularly useful in rainfall analysis since rainfall data is usually highly skewed. On the other hand, the disadvantages of non-parametric tests, such as being limited to hypothesis testing and being weaker in power, also hold for the step trend test [@Whitley2002].
+Parametric tests are generally more powerful than nonparametric test in detecting a trend, when the data is normally distributed [@Onoz2003; @Kundzewicz2004]. As a non-parametric test, the step trend test has the advantage of being distribution free and having no restriction on missing data [@Hirsch1985]. On the other hand, the disadvantages of non-parametric tests, such as being limited to hypothesis testing and being weaker in power, also hold for the step trend test [@Whitley2002].
 
-Overall, the current study provides a statistical data based approach, building on several lines of evidence to  reject the null hypothesis (no step change in rainfall occurs as a result of tree cover loss) at least for the NSW/VIC region. Limited by the available data, the time frame under study included a long lasting drought period [@Holper2011; @vanDijk2013]. The strong impact of this prolonged drought might have suppressed the land-atmosphere interaction and modified the cause and effect relationship between rainfall and vegetation cover change. This could be one of the reasons that the land cover change effects on the local climate found in other studies [e.g. @Gorgen2006; @McAlpine2007] do not appear in the QLD region.
-Possible future work could focus on a non-drought period, or using a different series of land cover data, possibly on another continent. The recent large bushfires on the US continent come to mind as a possible candidate study once sufficient post event data is collected. Wile the power of the test can be improved with the longer length of the post-intervention period [@Hirsch1985], the dynamic nature of vegetation regrowth in this case study also affects this effect.
+Overall, the current study provides a statistical data based approach, building on several lines of evidence to  reject the null hypothesis (no step change in rainfall occurs as a result of tree cover loss) at least for the NSW/VIC region. Limited by the available data, the time frame under study had to include a long lasting drought period [@Holper2011; @vanDijk2013]. The strong impact of this prolonged drought might have suppressed the land-atmosphere interaction and modified the cause and effect relationship between rainfall and vegetation cover change. This could be one of the reasons that the land cover change effects on the local climate found in other studies [e.g. @Gorgen2006; @McAlpine2007] do not appear in the QLD region.
+
+Future research will include additional areas to further test the approach in this study. However, such areas are not easy to find. There are several requirements for a good study area:
+
+1. It needs to be large enough to capture the effect of landuse on rainfall within the area;  
+2. It needs to have a drastic enough landuse change to be observable above the rainfall variation;  
+3. It needs to have a long enough climate data time series both prior and post landuse change.  
+
+The obvious locations have always been Amazonia and sub-Saharan Africa, where also most of the modelling studies have taken place [@kucharski_further_2013; @pitman_scale_2016]. The problem with the sub-Saharan location is that the land use change is quite long ago and local data is difficult to obtain. The problem with the Amazonian location is that this area is well-known for the feedback and we felt that we could not add much to this work. We propose that it would better to focus on areas affected by bushfires, as we did with the NSW/VIC location. The recent bushfires in California and Colorado could potentially be good locations, but at the moment there is insufficient "post event data". Further work could also focus on identifying an area that has been impacted by land cover change, but does not include a significant drought period.
+
+While the power of the test can be improved with the longer length of the post-intervention period [@Hirsch1985], the dynamic nature of vegetation regrowth in this case study also affects this effect.
 A better approach might be to build a global study that investigates multiple locations where drastic landcover changes have taken place, which would also remove some of the climate variability effects due to the larger sample size.
 
 Conclusions
@@ -1731,33 +1716,7 @@ Conclusions
 
 In this study, we present a statistical approach to identify the impact of a change in land cover on local rainfall.The results, based on gridded rainfall data found,  that a reduction in vegetation cover is likely to have reduced local rainfall for a large area in NSW/VIC affected by bushfires. However, land clearing in QLD was unlikely to have reduced rainfall over the same time period.
 
-Drought may have had a pronounced impact on the land surface condition during the study period, also leading to significant reduction in vegetation cover and extreme events such as bushfires. The lack of rainfall and associated high temperatures may mask the impact on rainfall of a step change in the vegetation cover. Hence, the signal of Land Cover Change feedback on rainfall is probably weaker under such regional dry conditions, as the impact of Land Cover Change on rainfall is mainly through changes in moisture convergence [@Gorgen2006; @Pitman2007].
-
-
-appendix
-==============
-*Summary of Data*
-
- \begin{sidewaystable}
- \caption{Summary of data.}
-  \label{tab:ch3Data}
- \begin{tabular}{lllll}
-  \hline
-  \textbf{Data} & \textbf{Source} & \multicolumn{2}{c}{\textbf{Resolution}} & \textbf{Analysis period} \\\cline{3-4}
-  & & Temporal & Spatial & \\\hline
-  Percent tree cover & MOD44B & Annual &	250m & 2000-2010\\
-  Trend of vegetation cover change  &	DLCD (2009)	& Onetime & 250m	& Trend of Apr 2000 - Apr 2008\\
-  Rainfall &	AWAP gridded rainfall data &	Monthly &	0.05\textdegree$\times$0.05\textdegree & Jan 1979- Dec 2008\\
-  SOI	& BoM	& Monthly &	N/A &	Jan 1979- Dec 2008\\
-  NINO 3, 3.4, 4 &	IRI/LDEO data library	& Monthly	& N/A	& Jan 1979- Dec 2008\\
-  PDO	& NOAA & Monthly	& N/A	& Jan 1979- Dec 2008\\
-  IOD	& POAMA-2 dataset	& Monthly	& N/A	& Jan 1979- Dec 2008\\
-  \hline
-  \end{tabular}
-\end{sidewaystable}
-
-
-\newpage
+Drought may have had a pronounced impact on the land surface condition during the study period, such asleading to significant reduction in vegetation cover and extreme events such as bushfires. The lack of rainfall and associated high temperatures may mask the impact on rainfall of a step change in the vegetation cover. Hence, the signal of Land Cover Change feedback on rainfall is probably weaker under such regional dry conditions, as the impact of Land Cover Change on rainfall is mainly through changes in moisture convergence [@Gorgen2006; @Pitman2007].
 
 References {#references .unnumbered}
 ==========
