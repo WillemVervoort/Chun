@@ -31,6 +31,8 @@ output:
 knitr::opts_knit$set(root.dir =
       # "E:/cloudstor/chun/chun/manuscripts/PeerJRainfall_Landuse")
       "C:/users/rver4657/owncloud/chun/chun/manuscripts/PeerJRainfall_Landuse")
+knitr::opts_knit$set('figcap.prefix','Figure S')
+knitr::opts_knit$set('tabcap.prefix','Table S')
 ```
 
 ```{r packages, echo=F, warnings=F, message=F, eval=T}
@@ -92,12 +94,12 @@ Cross correlations Rainfall and Climate Indices
 
 These figures were moved to the supplementary data in the review process. 
 
-```{r cor-rain-qld, fig.cap="Cross-correlation of six climate indices and rainfall in QLD study region. For the PDO analysis, 108-year rainfall data (1900 - 2008) are used. Otherwise, 36-year rainfall data are used. The correlation with NINO 3 is not shown as it is very similar to but weaker than for NINO 3.4.", out.width="90%", echo=F}
-include_graphics("figures/cor_qld.png")
+```{r cor-rain-qld, fig.cap="Cross-correlation of six climate indices and rainfall in QLD study region. Bars in the plot indicate the strength of the cross-correlation at different lags. For the PDO analysis, 108-year rainfall data (1900 - 2008) are used. Otherwise, 36-year rainfall data are used. The correlation with NINO 3 is not shown as it is very similar to but weaker than for NINO 3.4.", out.width="90%", echo=F}
+include_graphics("figures/FigS1.png")
 ```
 
-```{r cor-rain-nsw, fig.cap="Cross-correlation of six climate indices and rainfall in NSW/VIC study region.", out.width="90%", echo=F}
-include_graphics("figures/cor_nswvic.png")
+```{r cor-rain-nsw, fig.cap="Cross-correlation of six climate indices and rainfall in NSW/VIC study region. Bars in the plot indicate the strength of the cross-correlation at different lags. For the PDO analysis, 108-year rainfall data (1900 - 2008) are used. Otherwise, 36-year rainfall data are used. The correlation with NINO 3 is not shown as it is very similar to but weaker than for NINO 3.4.", out.width="90%", echo=F}
+include_graphics("figures/FigS2.png")
 ```
 
 Based on the correlation between the climatic indices and rainfall in the regions (as shown in Figure \@ref(fig:cor-rain-qld) and Figure \@ref(fig:cor-rain-nsw)), it can be concluded that:
@@ -116,16 +118,16 @@ Further figures
 
 These two figures highlight the GAM residual analysis for a sample pixel. Residuals for other pixels were similar across the regions analysed.
 
-```{r residuals, fig.cap ="The residual analysis of a sample pixel in the QLD region (top) and NSW/VIC region (bottom).", echo=F, eval=T, out.width="90%"}
+```{r residuals, fig.cap ="The residual analysis of the Generalised additive modelling  indicating how well the residuals follow the regression assumptions. Results are shown for a sample pixel in the QLD region (top) and NSW/VIC region (bottom). Residuals are fairly normal as seen from the histogram and the qqplot, but show some scattering in the variance.", echo=F, eval=T, out.width="90%"}
 # removed after review
-include_graphics("figures/gam_check.png")
+include_graphics("figures/FigS3.png")
 ```
 
 This figure indicates a boxplot of the annual rainfall residuals across the regions.
 
 ```{r meandiff, fig.cap ="Boxplots of annual rainfall residuals (estimated based on Equation 2 before and after the land cover intervention during 1979 - 2015 in the study regions. On average, the after period has a significantly lower annual rainfall residual in NSW/VIC, but a significantly higher annual rainfall residual in the Qld study area", echo=F, eval=T, out.width="70%"}
 # figure dropped after review
-include_graphics("figures/ResidualBoxplotchange.png")
+include_graphics("figures/FigS4.png")
 ```
 
 
