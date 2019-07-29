@@ -26,13 +26,12 @@ output:
     base_format: rticles::peerj_article # for using bookdown features like \@ref()
   rticles::peerj_article: default
 ---
+\renewcommand{\figurename}{Figure S}
 ```{r setup, warning=F, message=F, echo =F}
 # root dir
 knitr::opts_knit$set(root.dir =
       # "E:/cloudstor/chun/chun/manuscripts/PeerJRainfall_Landuse")
       "C:/users/rver4657/owncloud/chun/chun/manuscripts/PeerJRainfall_Landuse")
-knitr::opts_knit$set('figcap.prefix','Figure S')
-knitr::opts_knit$set('tabcap.prefix','Table S')
 ```
 
 ```{r packages, echo=F, warnings=F, message=F, eval=T}
