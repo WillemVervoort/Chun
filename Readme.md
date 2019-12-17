@@ -1,6 +1,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This repository contains the code related to the paper: Detecting the impact of land cover change on observed rainfall by Chun Liang, Floris Ogtrop and R. Willem Vervoort. In review at PeerJ
+This repository contains the code related to the paper: Detecting the impact of land cover change on observed rainfall by Chun Liang, Floris Ogtrop and R. Willem Vervoort. 
+
+Liang CX, van Ogtrop FF, Vervoort RW. 2019. Detecting the impact of land cover change on observed rainfall. PeerJ 7:e7523 https://doi.org/10.7717/peerj.7523
 
 The Manuscript folder is of most interest, there is a PeerJ subfolder that has the Rmarkdown file (including all the analysis code) for the submitted paper.
 
